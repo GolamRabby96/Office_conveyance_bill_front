@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  background-color: rgba(233, 231, 231, 0.863);
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+h3 {
+  font-size: 1.2375rem;
+  color: #000000;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  color: black;
+  margin: 0;
+  padding: 0;
+}
+
+a:hover {
+  color: #0d6efd;
+  font-weight: 700;
+
+}
+
+table,
+tr {
+  border: 2px solid rgba(80, 67, 67, 0.107);
+}
+
+table,
+tr:hover {
+  border: 2px solid rgb(17 113 230 / 58%);
+}
+
+.form-check-input[type=checkbox] {
+  border-radius: .25em;
+  width: 18px;
+  height: 18px;
+  border: 3px solid #000bff;
+}
+
+.CheckBoxModify {
+  color: #000bff;
+}
+
+p,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+i {
+  font-size: 0.8rem;
+  color: #000000;
+}
+
+.CT {
+  font-family: cursive;
+}
+
+.desktopView {
+  display: none;
+}
+
+.form-select {
+  cursor: pointer !important;
+}
+
+/* --------------Landing Page CSS-------------------- */
+.headerCover {
+  margin-top: 100px;
+}
+
+.bill-history-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(212, 241, 217);
+  border-radius: 4px;
+  padding: 5px 10px;
+}
+
+.billing-month-select select {
+  border: 1px solid rgb(228, 228, 228);
+}
+
+.add-button-bottom {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  margin: 30px;
+  border-radius: 50%;
+  /* border: 3px solid #73AD21; */
+  /* background-color: rgb(183, 238, 185); */
+}
+
+.add-button-bottom svg{
+  text-align: center;
+  font-size: 36px;
+  border: 1px solid rgb(253, 253, 253);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.add-button-bottom svg:hover{
+  transition: all 1s ease;
+  color: rgb(65, 5, 230);
+  font-weight: 700;
+  border: 1px solid rgb(4, 0, 255);
+}
+
+
+
+
+
+/* -------------------Add Conveyance Bill------------------------- */
+.inputFormCss {
+  background-color: rgb(255, 255, 255);
+  padding: 5px;
+  border: 1px solid rgb(212, 212, 212);
+}
+.form-control {
+  background-color: #98f5f8ef;
+  color: #000;
+}
+.submitButton{
+  display: flex;
+  justify-content: end;
+  align-items: end;
+}
+.submitButton button{
+  background-color: #9afd18;
+  border-radius: 100px;
+  box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.submitButton button:hover {
+  background-color: #18fdcb;
+  box-shadow: rgba(24, 207, 39, 0.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
+  transform: scale(1.05) rotate(-1deg);
+}
+
+.fromMiddleSeparetion{
+  border: 1px solid rgb(202, 200, 200);
+  border-radius: 8px;
+  margin-left: 1px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 15px;
+}
+
+.fromMidleSeparetionHeder{
+  font-family: cursive;
+}
+.fromMidleSeparetionHeder h5{
+  display: inline-block;
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgb(88, 88, 88);
+}
+
+.selectedDate{
+  display: flex;
+  align-items: center;
+}
