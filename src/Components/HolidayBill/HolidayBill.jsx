@@ -1,5 +1,7 @@
 import React from "react";
 import { BsPlusCircleDotted } from "react-icons/bs";
+import { FaEdit } from "react-icons/fa";
+
 
 export const HolidayBill = () => {
     return (
@@ -31,7 +33,7 @@ export const HolidayBill = () => {
                                     <th scope="col">Dinner Bill</th>
                                     <th scope="col">Total Amount</th>
                                     <th scope="col">Remarks</th>
-                                    <th scope="col"></th>
+                                    <th scope="col">Edit</th>
                                 </tr>
                             </thead>
                             <thead>
@@ -69,7 +71,7 @@ export const HolidayBill = () => {
                                     <td>-</td>
                                     <td>300</td>
                                     <td>-</td>
-                                    <td>Edit</td>
+                                    <td className='editButton'><FaEdit /></td>
                                 </tr>
                                 <tr>
                                     <td scope="row">15/04/2025</td>
@@ -86,7 +88,7 @@ export const HolidayBill = () => {
                                     <td>-</td>
                                     <td>300</td>
                                     <td>-</td>
-                                    <td>Edit</td>
+                                    <td className='editButton'><FaEdit /></td>
                                 </tr>
                                 <tr>
                                     <td scope="row">15/04/2025</td>
@@ -103,7 +105,7 @@ export const HolidayBill = () => {
                                     <td>-</td>
                                     <td>300</td>
                                     <td>-</td>
-                                    <td>Edit</td>
+                                    <td className='editButton'><FaEdit /></td>
                                 </tr>
                                 <tr>
                                     <td scope="row">15/04/2025</td>
@@ -120,7 +122,7 @@ export const HolidayBill = () => {
                                     <td>-</td>
                                     <td>300</td>
                                     <td>-</td>
-                                    <td>Edit</td>
+                                    <td className='editButton'><FaEdit /></td>
                                 </tr>
                                 <tr>
                                     <td scope="row">15/04/2025</td>
@@ -137,7 +139,7 @@ export const HolidayBill = () => {
                                     <td>-</td>
                                     <td>300</td>
                                     <td>-</td>
-                                    <td>Edit</td>
+                                    <td className='editButton'><FaEdit /></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -145,7 +147,7 @@ export const HolidayBill = () => {
 
 
                     {/* ------------------------------------------- */}
-                    <div className="add-button-bottom" > 
+                    <div className="add-button-bottom" >
                         <BsPlusCircleDotted />
                     </div>
                 </div>

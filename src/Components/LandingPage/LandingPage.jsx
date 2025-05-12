@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import secureLocalStorage from 'react-secure-storage';
 import { CgLayoutGrid } from 'react-icons/cg';
-import manimage from '../Images/man.jpg'
+import manimage from '../../images/not.png'
 
 export const LandingPage = () => {
     const navigat = useNavigate();

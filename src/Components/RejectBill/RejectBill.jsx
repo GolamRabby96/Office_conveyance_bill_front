@@ -1,81 +1,59 @@
-import React, { useState } from 'react'
-import { BsPlusCircleDotted } from "react-icons/bs";
+import moment from "moment";
+import React, { useEffect, useState } from "react";
+import secureLocalStorage from "react-secure-storage";
+import { AiTwotoneDelete } from "react-icons/ai";
 import { FaEdit } from "react-icons/fa";
-import moment from 'moment';
-import secureLocalStorage from 'react-secure-storage';
-import { IoExitSharp } from "react-icons/io5";
-import { CgLayoutGrid } from "react-icons/cg";
+import { Link } from "react-router-dom";
 
-
-export const ConveyanceBill = () => {
-    const userData = JSON.parse(secureLocalStorage.getItem('userInfo') || '[]');
-    const [conveyanceData, SetConveyanceBill] = useState([]);
-    const [formData, SetFormData] = useState({});
+export const RejectBill = () => {
+    const getUser = JSON.parse(secureLocalStorage.getItem('userInfo') || '[]');
+    const [conveyanceData, setConveyanceData] = useState([]);
+    const [reLoad, setReload] = useState(false);
 
     console.log(conveyanceData);
 
-    const handleFormData = (e) => {
-        const newData = { ...formData };
-        newData[e.target.name] = e.target.value;
-        SetFormData(newData);
+
+    useEffect(() => {
+        handlePendingData()
+    }, [reLoad])
+
+    const handlePendingData = async () => {
+        const responce = await fetch(`http://localhost:5000/api/rejectList/${getUser.user_id}`, {
+            credentials: 'include'
+        });
+        if (!responce.ok) {
+            throw new Error(`HTTP error! status:${responce.status}`);
+        }
+        const data = await responce.json();
+        setConveyanceData(data.data);
     }
 
-    const handleConveyanceData = async (e) => {
-        e.preventDefault();
 
-        fetch(`http://localhost:5000/api/getConveyance/${userData.user_id}`, {
-            method: "POST",
+
+
+
+
+    const handleRejectBill = (id) => {
+        console.log('this is id chekc',id);
+
+        fetch(`http://localhost:5000/api/deleteConveyance/${id}`, {
+            method: 'DELETE',
             headers: { "Content-Type": "application/json" },
-            credentials: 'include',
-            body: JSON.stringify(formData),
+            credentials: 'include'
         })
             .then((res) => res.json())
             .then((data) => {
-                SetConveyanceBill(data.data)
-                console.log('-----------------------------------', data);
+                alert('process done');
+                setReload(!reLoad);
             })
-            .catch((error) => {
-                console.log(error.message);
-            });
     }
-
 
     return (
         <>
-            <div className='container-fluid headerCover'>
+            <div className="container-fluid headerCover">
                 <div className="row">
-
-                    <div className="col-md-12">
-                        <form onSubmit={handleConveyanceData} className="bill-history-bar shadow rounded p-3">
-                            <h5>Conveyance Bill</h5>
-                            <div className='billing-month-select'>
-                                <select onChange={handleFormData} name="month" id="month" className='mx-2 px-2 rounded'>
-                                    <option value="">Chosse Month</option>
-                                    <option value="January">January</option>
-                                    <option value="February">February</option>
-                                    <option value="March">March</option>
-                                    <option value="April">April</option>
-                                    <option value="May">May</option>
-                                    <option value="June">June</option>
-                                    <option value="July">July</option>
-                                    <option value="August">August</option>
-                                    <option value="September">September</option>
-                                    <option value="October">October</option>
-                                    <option value="November">November</option>
-                                    <option value="December">December</option>
-                                </select>
-                                <select onChange={handleFormData} name="year" id="year" className='rounded'>
-                                    <option value="">Chosse Year</option>
-                                    <option value="2025">2025</option>
-                                    <option value="2026">2026</option>
-                                    <option value="2027">2027</option>
-                                </select>
-                                <button type='submit' className='btn btn-sm bg-info px-2 mx-2 shadow'>Filter</button>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div className="col-md-12 mt-5 rounded">
+                    <div className="col-md-12 rounded">
+                        <p className="btn btn-info mb-3 shadow px-5">Reject Bill</p>
                         <table class="table table-bordered shadow tableCss">
                             <thead>
                                 <tr>
@@ -89,7 +67,9 @@ export const ConveyanceBill = () => {
                                     <th scope="col" className="dinnerAmount">Dinner Bill</th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
-                                    <th scope="col">Next</th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <thead>
@@ -110,9 +90,10 @@ export const ConveyanceBill = () => {
                                     <th scope="col" className="text-center overtimeAmount">Amount</th>
                                     <th scope="col" className="text-center dinnerAmount">Amount</th>
                                     <th scope="col" className="text-start">Remarks</th>
+                                    <th scope="col" className="text-start">Reject Note</th>
                                     <th scope="col" className="text-start">Total</th>
-                                    <th scope="col">Approver</th>
-
+                                    <th scope="col" className="text-center">Edit</th>
+                                    <th scope="col" className="text-center">Del</th>
 
                                 </tr>
                             </thead>
@@ -137,29 +118,48 @@ export const ConveyanceBill = () => {
                                             <td>{con.overtime_hour}</td>
                                             <td className="text-center overtimeAmount">{con.overtime_amount}/=</td>
 
-
                                             <td className="text-center dinnerAmount">{con.Dinner_amount}/=</td>
-
-
+                                            
                                             <td className="text-start">{con.remarks} </td>
+                                            <td className="text-start rejectBillNote">{con.reject_note} </td>
                                             <td className="text-start">{con.conveyance_amount + con.holiday_amount + con.overtime_amount + con.Dinner_amount}/=</td>
-                                            <td className='rejectButton'>{con.next_responsible_person}</td>
+                                            <td className='rejectButton'><Link to={`/editConveyance/${con._id}`}><FaEdit type="button" ></FaEdit></Link></td>
+                                            <td className='acceptButton'  data-bs-toggle="modal" data-bs-target={`#modal-${con._id}`}><AiTwotoneDelete /></td>
                                         </tr>
                                     ))
                                 }
                             </tbody>
                         </table>
                     </div>
-
-
-                    {/* ------------------------------------------- */}
-                    <div className="add-button-bottom" >
-                        <BsPlusCircleDotted />
-                    </div>
                 </div>
+
+                <>
+                    {/* <!--Reject Modal --> */}
+                    {
+                        conveyanceData?.map((con, i) => (
+
+                            <div class="modal fade" id={`modal-${con._id}`} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" key={`modal-${con._id}`}>
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5 text-danger" id="exampleModalLabel">Are you sure !</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div className="col-md-12 col-sm-12 mb-2">
+                                                <p className="bg-danger text-center rounded shadow text-white">Kindly confirm if you would like this to be removed.</p>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Not now</button>
+                                            <button type="button" onClick={()=>handleRejectBill(con._id)} class="btn btn-danger shadow" data-bs-dismiss="modal">Confirmed</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                </>
             </div>
         </>
     )
 }
-
-export default ConveyanceBill

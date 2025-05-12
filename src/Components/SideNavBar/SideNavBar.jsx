@@ -1,62 +1,105 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
-import { GrTicket } from "react-icons/gr";
-import { PiTicketDuotone } from "react-icons/pi";
-import { DiGoogleAnalytics } from "react-icons/di";
-import { HiMiniUserGroup } from "react-icons/hi2";
-import { MdGroupAdd } from "react-icons/md";
-import { IoMdLogOut } from "react-icons/io";
+import { Link } from 'react-router-dom';
 import secureLocalStorage from 'react-secure-storage';
-import { MdOutlineAirplaneTicket } from "react-icons/md";
-import { TbPasswordFingerprint } from "react-icons/tb";
-import { PiMapPinSimpleAreaFill } from "react-icons/pi";
-import { FaHome } from "react-icons/fa";
-import { GoSidebarCollapse } from "react-icons/go";
-import { GoSidebarExpand } from "react-icons/go";
-import { CgLayoutGrid } from 'react-icons/cg';
+import { UserContext } from '../../App';
+import { GiClockwork } from "react-icons/gi";
+import { FaOpencart } from "react-icons/fa6";
+import { IoIosPeople } from "react-icons/io";
+import { PiMapPinSimpleAreaLight } from "react-icons/pi";
+import { FaPeoplePulling } from "react-icons/fa6";
+import { TbGitBranchDeleted } from "react-icons/tb";
+
 
 export const SideNavBar = () => {
+    const { loggedInUser, setLoggedInUser } = useContext(UserContext);
     const [menubarVisible, setMenubarCondition] = useState(true);
 
-    console.log('please check the condition', menubarVisible)
+    const getUser = JSON.parse(secureLocalStorage.getItem('userInfo') || '[]');
+    const [conveyanceData, setConveyanceData] = useState([]);
+    const [approvedId, setApprovedId] = useState([]);
 
-    // <GoSidebarExpand />
+    console.log(approvedId);
+
+    useEffect(() => {
+        // handlePendingData()
+    }, [])
+
+    const handlePendingData = async () => {
+        // const responce = await fetch(`http://localhost:5000/api/pendingList/${getUser.user_id}`, {
+        //     credentials: 'include'
+        // });
+        // if (!responce.ok) {
+        //     throw new Error(`HTTP error! status:${responce.status}`);
+        // }
+        // const data = await responce.json();
+        // setConveyanceData(data?.data.length);
+        // console.log(data?.data);
+        // console.log(data?.data.length);
+    }
+
+    const handleLogOut = () => {
+        console.log("Called");
+        secureLocalStorage.setItem("userInfo", JSON.stringify({
+            isLoggedIn: false,
+        }));
+        setLoggedInUser({
+            isLoggedIn: false
+        })
+    }
+
 
     return (
         <>
             <aside id={`sidebar${menubarVisible}`}>
-                <nav class="navbar bg-body-tertiary fixed-top">
-                    <div class="container-fluid">
-                        <a class="navbar-brand" href="#">ADN HCB</a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
+                <nav className="navbar bg-body-tertiary fixed-top">
+                    <div className="container-fluid">
+                        <a className="navbar-brand" href="#">ADN HCB</a>
+                        <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                            <span className="navbar-toggler-icon"></span>
                         </button>
-                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                            <div class="offcanvas-header">
-                                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Rabby Hasan-1010822</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        <div className="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                            <div className="offcanvas-header">
+                                <h5 className="offcanvas-title" id="offcanvasNavbarLabel">{loggedInUser.user_name}-{loggedInUser.user_id}</h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
-                            <div class="offcanvas-body">
-                                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <div className="offcanvas-body">
+                                <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
+                                    <li className="nav-item">
+                                        <Link className="nav-link active" aria-current="page" to="/pendingList">Pending List</Link>
                                     </li>
-                                    <li class="nav-item">
-                                        <Link class="nav-link" to="/conveyance">Conveyance Bill</Link>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="/conveyance"><GiClockwork /> Conveyance/Holiday Bill</Link>
                                     </li>
-                                    <li class="nav-item">
-                                        <Link class="nav-link" to="/holiday">HoliDay/OverTime</Link>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="/holiday"><FaOpencart /> Others Bill</Link>
                                     </li>
-                                    <hr/>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <hr />
+                                    <li className="nav-item dropdown">
+                                        <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             Add Bill
                                         </a>
-                                        <ul class="dropdown-menu">
-                                            <li><Link class="dropdown-item" to="/add-conveyance">Add Conveyance Bill</Link></li>
-                                            <li><Link class="dropdown-item" to="/add-holiday">Add Holiday Bill</Link></li>
+                                        <ul className="dropdown-menu">
+                                            <li><Link className="dropdown-item" to="/add-conveyance">Add Conveyance Bill</Link></li>
+                                            <li><Link className="dropdown-item" to="/add-holiday">Add Others Bill</Link></li>
                                         </ul>
+                                    </li>
+                                    <hr />
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="/addMember"><FaPeoplePulling /> Add Member</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="/addZone"><PiMapPinSimpleAreaLight /> Add Zone</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="/teamMember"><IoIosPeople /> Team Member</Link>
+                                    </li>
+                                    <hr />
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="/rejectBill"><TbGitBranchDeleted /> Reject List</Link>
+                                    </li>
+                                    <hr />
+                                    <li className="nav-item">
+                                        <p className="nav-link text-danger" onClick={handleLogOut}>_Log Out</p>
                                     </li>
                                 </ul>
                             </div>

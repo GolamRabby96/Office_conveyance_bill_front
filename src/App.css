@@ -18,7 +18,7 @@
 body {
   font-family: 'Poppins', sans-serif;
   margin: 0;
-  background-color: rgba(233, 231, 231, 0.863);
+  background-color: rgb(240, 237, 237);
   background-repeat: no-repeat;
   background-position: center bottom;
   background-size: cover;
@@ -47,12 +47,13 @@ a:hover {
 
 table,
 tr {
-  border: 2px solid rgba(80, 67, 67, 0.107);
+  border: 1px solid rgba(29, 49, 233, 0.107);
+  font-size: 9px;
 }
 
 table,
 tr:hover {
-  border: 2px solid rgb(17 113 230 / 58%);
+  border: 2px solid rgba(230, 198, 17, 0.918);
 }
 
 .form-check-input[type=checkbox] {
@@ -99,7 +100,130 @@ i {
   cursor: pointer !important;
 }
 
+/* ---------------------------------- */
+/* -------- Common css ------------------------------------------------------------------------ */
+.divDesign {
+  background-color: rgba(255, 255, 255, 0.849);
+  margin: 20px;
+  padding: 0px 20px;
+  border-radius: 4px;
+  /* box-shadow: 0px 0px 35px 0px rgba(160, 161, 161, 0.5); */
+  box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.5);
+}
+
+.boxDesign {
+  background-color: rgba(255, 255, 255, 0.849);
+  border-radius: 4px;
+  box-shadow: 0px 9px 9px rgba(0, 0, 0, 0.5);
+}
+
+.headingBar {
+  border-bottom: 3px solid rgb(140, 140, 143);
+  display: inline-block;
+  border-radius: 20px;
+  padding: 0 15px;
+}
+
+.submitButton {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+}
+
+.submitButton button {
+  background-color: #9afd18;
+  border-radius: 100px;
+  box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset, rgba(44, 187, 99, .15) 0 1px 2px, rgba(44, 187, 99, .15) 0 2px 4px, rgba(44, 187, 99, .15) 0 4px 8px, rgba(44, 187, 99, .15) 0 8px 16px, rgba(44, 187, 99, .15) 0 16px 32px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.submitButton button:hover {
+  background-color: #18fdcb;
+  box-shadow: rgba(24, 207, 39, 0.35) 0 -25px 18px -14px inset, rgba(44, 187, 99, .25) 0 1px 2px, rgba(44, 187, 99, .25) 0 2px 4px, rgba(44, 187, 99, .25) 0 4px 8px, rgba(44, 187, 99, .25) 0 8px 16px, rgba(44, 187, 99, .25) 0 16px 32px;
+  transform: scale(1.05) rotate(-1deg);
+}
+
+
+.silimaButton {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+}
+
+.silimaButton button {
+  background-color: #18fd70;
+  border-radius: 4px;
+  box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset, rgba(44, 187, 99, .15) 0 1px 2px, rgba(44, 187, 99, .15) 0 2px 4px, rgba(44, 187, 99, .15) 0 4px 8px, rgba(44, 187, 99, .15) 0 8px 16px, rgba(44, 187, 99, .15) 0 16px 32px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
+  padding: 1px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.silimaButton button:hover {
+  background-color: #18fdcb;
+  box-shadow: rgba(24, 207, 39, 0.35) 0 -25px 18px -14px inset, rgba(44, 187, 99, .25) 0 1px 2px, rgba(44, 187, 99, .25) 0 2px 4px, rgba(44, 187, 99, .25) 0 4px 8px, rgba(44, 187, 99, .25) 0 8px 16px, rgba(44, 187, 99, .25) 0 16px 32px;
+  transform: scale(1.05) rotate(-1deg);
+}
+
+.page404 {
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('./images/not.png');
+}
+
+.tableCss {
+  font-size: 12px;
+}
+
+.conveyanceAmount {
+  background-color: rgba(124, 230, 92, 0.733) !important;
+}
+
+.holidayAmount {
+  background-color: rgba(92, 221, 230, 0.747) !important;
+}
+
+.overtimeAmount {
+  background-color: rgba(202, 92, 230, 0.822) !important;
+}
+
+.dinnerAmount {
+  background-color: rgba(230, 209, 92, 0.781) !important;
+}
+
+
+
+
+/* -------- Common css ------------------------------------------------------------------------ */
 /* --------------Landing Page CSS-------------------- */
+
+
+
 .headerCover {
   margin-top: 100px;
 }
@@ -108,7 +232,7 @@ i {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: rgb(212, 241, 217);
+  background-color: #81e776;
   border-radius: 4px;
   padding: 5px 10px;
 }
@@ -129,7 +253,7 @@ i {
   /* background-color: rgb(183, 238, 185); */
 }
 
-.add-button-bottom svg{
+.add-button-bottom svg {
   text-align: center;
   font-size: 36px;
   border: 1px solid rgb(253, 253, 253);
@@ -140,7 +264,7 @@ i {
   cursor: pointer;
 }
 
-.add-button-bottom svg:hover{
+.add-button-bottom svg:hover {
   transition: all 1s ease;
   color: rgb(65, 5, 230);
   font-weight: 700;
@@ -157,23 +281,26 @@ i {
   padding: 5px;
   border: 1px solid rgb(212, 212, 212);
 }
+
 .form-control {
   background-color: #98f5f8ef;
   color: #000;
 }
-.submitButton{
+
+.submitButton {
   display: flex;
   justify-content: end;
   align-items: end;
 }
-.submitButton button{
+
+.submitButton button {
   background-color: #9afd18;
   border-radius: 100px;
-  box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+  box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset, rgba(44, 187, 99, .15) 0 1px 2px, rgba(44, 187, 99, .15) 0 2px 4px, rgba(44, 187, 99, .15) 0 4px 8px, rgba(44, 187, 99, .15) 0 8px 16px, rgba(44, 187, 99, .15) 0 16px 32px;
   color: rgb(0, 0, 0);
   cursor: pointer;
   display: inline-block;
-  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
   padding: 7px 20px;
   text-align: center;
   text-decoration: none;
@@ -187,11 +314,11 @@ i {
 
 .submitButton button:hover {
   background-color: #18fdcb;
-  box-shadow: rgba(24, 207, 39, 0.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
+  box-shadow: rgba(24, 207, 39, 0.35) 0 -25px 18px -14px inset, rgba(44, 187, 99, .25) 0 1px 2px, rgba(44, 187, 99, .25) 0 2px 4px, rgba(44, 187, 99, .25) 0 4px 8px, rgba(44, 187, 99, .25) 0 8px 16px, rgba(44, 187, 99, .25) 0 16px 32px;
   transform: scale(1.05) rotate(-1deg);
 }
 
-.fromMiddleSeparetion{
+.fromMiddleSeparetion {
   border: 1px solid rgb(202, 200, 200);
   border-radius: 8px;
   margin-left: 1px;
@@ -200,16 +327,210 @@ i {
   padding: 15px;
 }
 
-.fromMidleSeparetionHeder{
+.fromMidleSeparetionHeder {
   font-family: cursive;
 }
-.fromMidleSeparetionHeder h5{
+
+.fromMidleSeparetionHeder h5 {
   display: inline-block;
   margin-bottom: 15px;
   border-bottom: 1px solid rgb(88, 88, 88);
 }
 
-.selectedDate{
+.selectedDate {
   display: flex;
   align-items: center;
+}
+
+.editButton {
+  text-align: center;
+}
+
+.editButton svg {
+  color: rgb(0, 81, 255);
+  cursor: pointer;
+}
+
+.editButton svg:hover {
+  transition: all 1s ease;
+  color: rgb(0, 13, 255);
+}
+
+
+.rejectButton svg {
+  color: rgb(162, 0, 255);
+  cursor: pointer;
+  text-align: center;
+  font-size: 18px;
+}
+
+.rejectButton svg:hover {
+  transition: all 0.5s ease;
+  color: rgb(255, 13, 0);
+}
+
+.acceptButton {
+  text-align: center;
+}
+
+.acceptButton svg {
+  color: rgb(6, 148, 101);
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.acceptButton svg:hover {
+  transition: all 1s ease;
+  color: rgb(255, 0, 200);
+}
+
+
+/* ---------------------Add Zone Section--------------------------- */
+
+
+
+
+.zoneList {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f0fcf1;
+  margin: 10px 5px;
+  padding: 0px 10px;
+  box-shadow: 0px 5px 5px gray;
+}
+
+.zoneList:hover {
+  background-color: rgba(161, 172, 8, 0.493);
+}
+
+.zoneList p {
+  padding: 4px;
+  font-family: sans-serif;
+}
+
+.zoneList span {
+  background-color: rgba(0, 255, 106, 0.563);
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: all 1s ease-in-out;
+}
+
+.zoneList span:hover {
+  background-color: rgba(255, 64, 0, 0.811);
+  color: rgb(255, 255, 255);
+  padding: 5px 20px;
+}
+
+
+
+/* // Member Section -----------------------  */
+.topBosheader {
+  display: inline-block;
+  margin-top: 20px;
+  border-bottom: 1px solid gray;
+  font-family: cursive;
+}
+
+
+
+.imageLogo {
+  width: 185px;
+}
+
+.loginBackgroupColor {
+  background-color: #eee;
+}
+
+.gradient-custom-2 {
+  /* fallback for old browsers */
+  background: #fccb90;
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, #069c0ce6, #30e496, #53e34b, #069c0ce6);
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, #069c0ce6, #30e496, #53e34b, #069c0ce6);
+}
+
+/* ----------------------Pending List-------------------------------- */
+.topRowDiv {
+  text-align: center;
+}
+
+.topRowDiv button {
+  width: 100%;
+  border: 1px solid rgb(173, 163, 163);
+  background: linear-gradient(to right, #aca9a4e6, #30e496, #53e34b, #b9b9b7e6);
+  border-radius: 8px;
+  box-shadow: 2px 2px 2px gray;
+  padding: 5px 0px;
+}
+
+.topRowDiv button:hover {
+  width: 100%;
+  border: 1px solid rgb(173, 163, 163);
+  background: linear-gradient(to right, #52d859e6, #c3e430, #c7e34b, #66d14be6);
+  border-radius: 8px;
+  box-shadow: 2px 2px 2px gray;
+  padding: 5px 0px;
+  transition: ease 1s all;
+}
+
+.rejectBillNote {
+  color: tomato !important;
+  font-weight: 900;;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 768px) {
+  .gradient-form {
+    height: 100vh !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .gradient-custom-2 {
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+  }
 }

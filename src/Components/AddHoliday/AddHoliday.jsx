@@ -12,7 +12,6 @@ export const AddHoliday = () => {
     const handleData = (e) => {
         const totalData = { ...collectData };
         totalData[e.target.name] = e.target.value;
-        // totalData.createdBy = loggedInUser.userName;
         SetData(totalData);
     }
 
