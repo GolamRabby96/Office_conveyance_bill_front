@@ -12,8 +12,6 @@ export const ConveyanceBill = () => {
     const [conveyanceData, SetConveyanceBill] = useState([]);
     const [formData, SetFormData] = useState({});
 
-    console.log(conveyanceData);
-
     const handleFormData = (e) => {
         const newData = { ...formData };
         newData[e.target.name] = e.target.value;
@@ -32,7 +30,6 @@ export const ConveyanceBill = () => {
             .then((res) => res.json())
             .then((data) => {
                 SetConveyanceBill(data.data)
-                console.log('-----------------------------------', data);
             })
             .catch((error) => {
                 console.log(error.message);
@@ -88,7 +85,7 @@ export const ConveyanceBill = () => {
                                     <th scope="col" colspan="3" className="overtimeAmount">Overtime</th>
                                     <th scope="col" className="dinnerAmount">Dinner Bill</th>
                                     <th scope="col"></th>
-                                    <th scope="col"></th>
+                                    <th scope="col">Total</th>
                                     <th scope="col">Next</th>
                                 </tr>
                             </thead>
@@ -110,7 +107,7 @@ export const ConveyanceBill = () => {
                                     <th scope="col" className="text-center overtimeAmount">Amount</th>
                                     <th scope="col" className="text-center dinnerAmount">Amount</th>
                                     <th scope="col" className="text-start">Remarks</th>
-                                    <th scope="col" className="text-start">Total</th>
+                                    <th scope="col" className="text-start">Amount</th>
                                     <th scope="col">Approver</th>
 
 
@@ -128,17 +125,17 @@ export const ConveyanceBill = () => {
                                             <td>{con.ticket_id}</td>
                                             <td class="text-start">{con.pop_or_customer_name}</td>
                                             <td>{con.transport}</td>
-                                            <td className="text-center conveyanceAmount">{con.conveyance_amount}/=</td>
+                                            <td className="text-center conveyanceAmount">{con.conveyance_amount > 0 ? con.conveyance_amount+"/=" : "-"}</td>
 
-                                            <td>{con.holiday_hour}</td>
-                                            <td className="text-center holidayAmount">{con.holiday_amount}/=</td>
+                                            <td>{con.holiday_hour ? con.holiday_hour+"H":"-"}</td>
+                                            <td className="text-center holidayAmount">{con.holiday_amount >0 ? con.holiday_amount +"/=" : "-"}</td>
 
                                             <td>{con.overtime_from}-{con.overtime_to}</td>
-                                            <td>{con.overtime_hour}</td>
-                                            <td className="text-center overtimeAmount">{con.overtime_amount}/=</td>
+                                            <td>{con.overtime_hour? con.overtime_hour+"H":"-"}</td>
+                                            <td className="text-center overtimeAmount">{con.overtime_amount >0 ? con.overtime_amount+"/=":"-"}</td>
 
 
-                                            <td className="text-center dinnerAmount">{con.Dinner_amount}/=</td>
+                                            <td className="text-center dinnerAmount">{con.Dinner_amount>0? con.Dinner_amount+"/=":"-"}</td>
 
 
                                             <td className="text-start">{con.remarks} </td>

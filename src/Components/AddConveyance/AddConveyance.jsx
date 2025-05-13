@@ -10,16 +10,9 @@ export const AddConveyance = () => {
     const [dateValue, setDate] = useState(new Date());
     const [collectData, SetData] = useState({});
 
-
-
-    // console.log(moment(dateValue).year());
-    console.log(collectData);
-
-
     const handleData = (e) => {
         const totalData = { ...collectData };
         totalData[e.target.name] = e.target.value;
-        // totalData.createdBy = loggedInUser.userName;
         SetData(totalData);
     }
 
@@ -103,6 +96,7 @@ export const AddConveyance = () => {
                             <option value="Barishal" >Bike</option>
                             <option value="Rajshahi" >Auto Rikshaw</option>
                             <option value="Uber" >Uber</option>
+                            <option value="Office Vehicle" >Office Vehicle</option>
                         </select>
                     </div>
                     <div className="col-md-3 col-sm-12 mt-5">
@@ -119,7 +113,7 @@ export const AddConveyance = () => {
                         </div>
                         {/* <div className="col-md-3 col-sm-12">
                             <label for="service_oid" className="form-label">From</label>
-                            <input onBlur={handleData} name="service_oid" type="text" className="form-control" id="inpservice_oidutEmail4" placeholder='From Time' />
+                            <input onBlur={handleData} name="service_oid" type="text" className="form-control" id="inpservice_oidutEmail4" placeholder='From Time' />cp
                         </div>
                         <div className="col-md-3 col-sm-12">
                             <label for="service_oid" className="form-label">To</label>

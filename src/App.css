@@ -48,7 +48,7 @@ a:hover {
 table,
 tr {
   border: 1px solid rgba(29, 49, 233, 0.107);
-  font-size: 9px;
+  font-size: 11px;
 }
 
 table,
@@ -182,6 +182,31 @@ i {
 }
 
 .silimaButton button:hover {
+  background-color: #18fdcb;
+  box-shadow: rgba(24, 207, 39, 0.35) 0 -25px 18px -14px inset, rgba(44, 187, 99, .25) 0 1px 2px, rgba(44, 187, 99, .25) 0 2px 4px, rgba(44, 187, 99, .25) 0 4px 8px, rgba(44, 187, 99, .25) 0 8px 16px, rgba(44, 187, 99, .25) 0 16px 32px;
+  transform: scale(1.05) rotate(-1deg);
+}
+
+.buttonCss {
+  background-color: #18fd70;
+  border-radius: 4px;
+  box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset, rgba(44, 187, 99, .15) 0 1px 2px, rgba(44, 187, 99, .15) 0 2px 4px, rgba(44, 187, 99, .15) 0 4px 8px, rgba(44, 187, 99, .15) 0 8px 16px, rgba(44, 187, 99, .15) 0 16px 32px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
+  padding: 1px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.sbuttonCss:hover {
   background-color: #18fdcb;
   box-shadow: rgba(24, 207, 39, 0.35) 0 -25px 18px -14px inset, rgba(44, 187, 99, .25) 0 1px 2px, rgba(44, 187, 99, .25) 0 2px 4px, rgba(44, 187, 99, .25) 0 4px 8px, rgba(44, 187, 99, .25) 0 8px 16px, rgba(44, 187, 99, .25) 0 16px 32px;
   transform: scale(1.05) rotate(-1deg);
@@ -477,10 +502,102 @@ i {
 
 .rejectBillNote {
   color: tomato !important;
-  font-weight: 900;;
+  font-weight: 900;
+  ;
+}
+
+/* -------- Complete View css ------------------------------------------------------------------------ */
+.complete-container-true {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  color: white;
+  background-color: rgba(255, 117, 71, 0.938);
+  transition: all 1s ease;
+}
+
+.complete-container-false {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100vh;
+  color: white;
+  background-color: rgba(255, 117, 71, 0.938);
+  transition: all 1s ease;
 }
 
 
+.side-view-component {
+  padding: 20px;
+}
+
+.main-view-component {
+  flex: 1;
+  background-color: white;
+  padding: 30px;
+}
+
+.complete-top-form {
+  background-color: #dbfd18be;
+}
+
+.billing-month-select select {
+  border: 1px solid rgb(228, 228, 228);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.complete-filter-select {
+  display: flex;
+  justify-content: space-around;
+}
+
+
+
+.goButton button {
+  margin-top: 15px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.complete-nav-arrow {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 20;
+  left: 250px;
+  background-color: tomato;
+  border-radius: 0px 8px 8px 0px;
+  transition: all 1s ease;
+
+}
+
+.complete-nav-arrow:hover {
+  background-color: #fdb418;
+  color: #000bff;
+  width: 31px;
+  height: 31px;
+}
+
+.complete-nav-arrow svg {
+  font-size: 24px;
+  padding: 5px 5px;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.complete-user-block {
+  overflow: scroll;
+  height: 100vh;
+}
+
+/* background-color: rgb(254 125 82 / 98%) !important; */
+/* -------- Complete View css End ------------------------------------------------------------------------ */
 
 
 

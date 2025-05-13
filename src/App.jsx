@@ -18,6 +18,7 @@ import { Pendinglist } from './Components/Pendinglist/Pendinglist';
 import { RejectBill } from './Components/RejectBill/RejectBill';
 import { CommonReject } from './Components/RejectBill/CommonReject';
 import { EditConveyanceBill } from './Components/RejectBill/EditConvenyanceBill';
+import { CompleteView } from './Components/CompleteView/CompleteView';
 
 export const UserContext = createContext();
 
@@ -62,6 +63,7 @@ function App() {
               <Route exact path="/pendingList" element={<Pendinglist />} />
               <Route exact path="/rejectBill" element={<CommonReject />} />
               <Route exact path="/editConveyance/:id" element={<EditConveyanceBill />} />
+              <Route exact path="/details-view" element={<CompleteView />} />
             </Route>
             {/* ------------------------------------------------------------------------------------------------- */}
 

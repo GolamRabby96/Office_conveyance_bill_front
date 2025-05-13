@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { SiAnsys } from "react-icons/si";
-import { PendingConveyance } from "./pendingConveyance";
-import { PendingHoliday } from "./pendingHoliday";
-import { PendingDaBill } from "./pendingDaBill";
-import { PendingTaBill } from "./pendingTaBill";
+import React, { useState } from 'react'
+import { PendingConveyance } from '../Pendinglist/pendingConveyance'
+import { PendingHoliday } from '../Pendinglist/pendingHoliday'
+import { PendingTaBill } from '../Pendinglist/pendingTaBill'
+import { PendingDaBill } from '../Pendinglist/pendingDaBill'
+import { CompleteConveyance } from './CompleteConveyance'
 
-export const Pendinglist = () => {
+export const MainViewComponent = () => {
     const [conveyanceVisible, setConveyance] = useState(true);
     const [holidayVisible, setHoliday] = useState(false);
     const [TaBill, setTa] = useState(false);
@@ -26,6 +26,7 @@ export const Pendinglist = () => {
         }
     }
 
+
     return (
         <>
             <div className="container-fluid headerCover">
@@ -33,6 +34,7 @@ export const Pendinglist = () => {
                     <div className="col ">
                         <button onClick={() => handleCondition('Conveyance')} >Conveyance & Holiday</button>
                     </div>
+
                     <div className="col">
                         <button onClick={() => handleCondition('TABILL')}>TA Bill</button>
                     </div>
@@ -43,14 +45,16 @@ export const Pendinglist = () => {
                         <button onClick={() => handleCondition('Holiday')}>Others Bills</button>
                     </div>
                 </div>
-                <>
-                    {conveyanceVisible && <PendingConveyance />}
-                    {holidayVisible && <PendingHoliday />}
-                    {TaBill && <PendingTaBill />}
-                    {DaBill && <PendingDaBill />}
 
-                </>
             </div>
+            <>
+                {conveyanceVisible && <PendingConveyance />}
+                {holidayVisible && <PendingHoliday />}
+                {TaBill && <PendingTaBill />}
+                {DaBill && <PendingDaBill />}
+
+            </>
+
         </>
     )
 }

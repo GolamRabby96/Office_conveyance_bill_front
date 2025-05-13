@@ -34,7 +34,7 @@ export const RejectBill = () => {
 
 
     const handleRejectBill = (id) => {
-        console.log('this is id chekc',id);
+        console.log('this is id chekc', id);
 
         fetch(`http://localhost:5000/api/deleteConveyance/${id}`, {
             method: 'DELETE',
@@ -109,22 +109,24 @@ export const RejectBill = () => {
                                             <td>{con.ticket_id}</td>
                                             <td class="text-start">{con.pop_or_customer_name}</td>
                                             <td>{con.transport}</td>
-                                            <td className="text-center conveyanceAmount">{con.conveyance_amount}/=</td>
+                                            <td className="text-center conveyanceAmount">{con.conveyance_amount > 0 ? con.conveyance_amount + "/=" : "-"}</td>
 
-                                            <td>{con.holiday_hour}</td>
-                                            <td className="text-center holidayAmount">{con.holiday_amount}/=</td>
+                                            <td>{con.holiday_hour ? con.holiday_hour + "H" : "-"}</td>
+                                            <td className="text-center holidayAmount">{con.holiday_amount > 0 ? con.holiday_amount + "/=" : "-"}</td>
 
                                             <td>{con.overtime_from}-{con.overtime_to}</td>
-                                            <td>{con.overtime_hour}</td>
-                                            <td className="text-center overtimeAmount">{con.overtime_amount}/=</td>
+                                            <td>{con.overtime_hour ? con.overtime_hour + "H" : "-"}</td>
+                                            <td className="text-center overtimeAmount">{con.overtime_amount > 0 ? con.overtime_amount + "/=" : "-"}</td>
 
-                                            <td className="text-center dinnerAmount">{con.Dinner_amount}/=</td>
-                                            
+
+                                            <td className="text-center dinnerAmount">{con.Dinner_amount > 0 ? con.Dinner_amount + "/=" : "-"}</td>
+
+
                                             <td className="text-start">{con.remarks} </td>
                                             <td className="text-start rejectBillNote">{con.reject_note} </td>
                                             <td className="text-start">{con.conveyance_amount + con.holiday_amount + con.overtime_amount + con.Dinner_amount}/=</td>
                                             <td className='rejectButton'><Link to={`/editConveyance/${con._id}`}><FaEdit type="button" ></FaEdit></Link></td>
-                                            <td className='acceptButton'  data-bs-toggle="modal" data-bs-target={`#modal-${con._id}`}><AiTwotoneDelete /></td>
+                                            <td className='acceptButton' data-bs-toggle="modal" data-bs-target={`#modal-${con._id}`}><AiTwotoneDelete /></td>
                                         </tr>
                                     ))
                                 }
@@ -152,7 +154,7 @@ export const RejectBill = () => {
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Not now</button>
-                                            <button type="button" onClick={()=>handleRejectBill(con._id)} class="btn btn-danger shadow" data-bs-dismiss="modal">Confirmed</button>
+                                            <button type="button" onClick={() => handleRejectBill(con._id)} class="btn btn-danger shadow" data-bs-dismiss="modal">Confirmed</button>
                                         </div>
                                     </div>
                                 </div>

@@ -115,7 +115,7 @@ export const PendingConveyance = () => {
                                 <th scope="col" colspan="3" className="overtimeAmount">Overtime</th>
                                 <th scope="col" className="dinnerAmount">Dinner Bill</th>
                                 <th scope="col"></th>
-                                <th scope="col"></th>
+                                <th scope="col">Total</th>
                                 <th scope="col"></th>
                                 <th scope="col"></th>
                             </tr>
@@ -138,7 +138,7 @@ export const PendingConveyance = () => {
                                 <th scope="col" className="text-center overtimeAmount">Amount</th>
                                 <th scope="col" className="text-center dinnerAmount">Amount</th>
                                 <th scope="col" className="text-start">Remarks</th>
-                                <th scope="col" className="text-start">Total</th>
+                                <th scope="col" className="text-start">Amount</th>
                                 <th scope="col" className="text-center">Reject</th>
                                 <th scope="col" className="text-center">
                                     <div>
@@ -160,21 +160,21 @@ export const PendingConveyance = () => {
                                         <td>{con.ticket_id}</td>
                                         <td class="text-start">{con.pop_or_customer_name}</td>
                                         <td>{con.transport}</td>
-                                        <td className="text-center conveyanceAmount">{con.conveyance_amount}/=</td>
+                                        <td className="text-center conveyanceAmount">{con.conveyance_amount > 0 ? con.conveyance_amount + "/=" : "-"}</td>
 
-                                        <td>{con.holiday_hour}</td>
-                                        <td className="text-center holidayAmount">{con.holiday_amount}/=</td>
+                                        <td>{con.holiday_hour ? con.holiday_hour + "H" : "-"}</td>
+                                        <td className="text-center holidayAmount">{con.holiday_amount > 0 ? con.holiday_amount + "/=" : "-"}</td>
 
                                         <td>{con.overtime_from}-{con.overtime_to}</td>
-                                        <td>{con.overtime_hour}</td>
-                                        <td className="text-center overtimeAmount">{con.overtime_amount}/=</td>
+                                        <td>{con.overtime_hour ? con.overtime_hour + "H" : "-"}</td>
+                                        <td className="text-center overtimeAmount">{con.overtime_amount > 0 ? con.overtime_amount + "/=" : "-"}</td>
 
 
-                                        <td className="text-center dinnerAmount">{con.Dinner_amount}/=</td>
+                                        <td className="text-center dinnerAmount">{con.Dinner_amount > 0 ? con.Dinner_amount + "/=" : "-"}</td>
 
 
                                         <td className="text-start">{con.remarks} </td>
-                                        <td className="text-start">{con.conveyance_amount+con.holiday_amount+con.overtime_amount+con.Dinner_amount}/=</td>
+                                        <td className="text-start">{con.conveyance_amount + con.holiday_amount + con.overtime_amount + con.Dinner_amount}/=</td>
                                         <td className='rejectButton' data-bs-toggle="modal" data-bs-target={`#modal-${con._id}`}><IoExitSharp type="button" onClick={() => setRejectId(con._id)} /></td>
                                         <td className='acceptButton'>
                                             <div>

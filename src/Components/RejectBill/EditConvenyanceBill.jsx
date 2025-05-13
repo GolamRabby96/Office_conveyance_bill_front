@@ -56,7 +56,7 @@ export const EditConveyanceBill = () => {
         })
             .then((res) => res.json())
             .then((data) => {
-                navigat('/pendingList')
+                navigat('/rejectBill')
             })
             .catch((error) => {
                 console.log(error.message);
