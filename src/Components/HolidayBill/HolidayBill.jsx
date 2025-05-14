@@ -22,14 +22,14 @@ export const HolidayBill = () => {
                         </div>
                     </div>
                     <div className="col-md-12 mt-5">
-                        <table class="table table-bordered">
+                        <table className="table table-bordered">
                             <thead>
                                 <tr>
                                     <th scope="col">Date</th>
                                     <th scope="col">Ticket Id</th>
                                     <th scope="col">Description of Works</th>
-                                    <th scope="col" colspan="4">Holiday</th>
-                                    <th scope="col" colspan="4">Overtime</th>
+                                    <th scope="col" colSpan="4">Holiday</th>
+                                    <th scope="col" colSpan="4">Overtime</th>
                                     <th scope="col">Dinner Bill</th>
                                     <th scope="col">Total Amount</th>
                                     <th scope="col">Remarks</th>

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import secureLocalStorage from "react-secure-storage";
 import { IoExitSharp } from "react-icons/io5";
 import { CgLayoutGrid } from "react-icons/cg";
+import { CombinedButton } from "../CombinedApproved/CombinedButton";
 
 export const PendingConveyance = () => {
     const getUser = JSON.parse(secureLocalStorage.getItem('userInfo') || '[]');
@@ -103,16 +104,16 @@ export const PendingConveyance = () => {
         <>
             <div className="row">
                 <div className="col-md-12 mt-5 rounded">
-                    <table class="table table-bordered shadow tableCss">
+                    <table className="table table-bordered shadow tableCss">
                         <thead>
                             <tr>
                                 <th scope="col"></th>
                                 <th scope="col"></th>
                                 <th scope="col"></th>
                                 <th scope="col"></th>
-                                <th scope="col" colspan="5" className="conveyanceAmount">Conveyance</th>
-                                <th scope="col" colspan="2" className="holidayAmount">Holiday</th>
-                                <th scope="col" colspan="3" className="overtimeAmount">Overtime</th>
+                                <th scope="col" colSpan="5" className="conveyanceAmount">Conveyance</th>
+                                <th scope="col" colSpan="2" className="holidayAmount">Holiday</th>
+                                <th scope="col" colSpan="3" className="overtimeAmount">Overtime</th>
                                 <th scope="col" className="dinnerAmount">Dinner Bill</th>
                                 <th scope="col"></th>
                                 <th scope="col">Total</th>
@@ -121,7 +122,7 @@ export const PendingConveyance = () => {
                             </tr>
                         </thead>
                         <thead>
-                            <tr className="text-center">
+                            <tr>
                                 <th scope="col" className="text-center">SL</th>
                                 <th scope="col">Date</th>
                                 <th scope="col">Preparer by</th>
@@ -151,14 +152,14 @@ export const PendingConveyance = () => {
                         <tbody>
                             {
                                 conveyanceData?.map((con, i) => (
-                                    <tr className="text-center" key={`modal-${con._id}`}>
+                                    <tr className="" key={`modal-${con._id}`}>
                                         <td className="text-center">{i + 1}</td>
-                                        <td >{moment(con.date).format('L')}</td>
+                                        <td >{moment(con.date).format('DD MM YY')}</td>
                                         <td>{con.preparer_by}-({con.preparer_Zone})</td>
                                         <td>{con.start_Time}-{con.end_time}</td>
                                         <td>{con.from_location}-{con.to_location}</td>
                                         <td>{con.ticket_id}</td>
-                                        <td class="text-start">{con.pop_or_customer_name}</td>
+                                        <td className="text-start">{con.pop_or_customer_name}</td>
                                         <td>{con.transport}</td>
                                         <td className="text-center conveyanceAmount">{con.conveyance_amount > 0 ? con.conveyance_amount + "/=" : "-"}</td>
 
@@ -178,7 +179,7 @@ export const PendingConveyance = () => {
                                         <td className='rejectButton' data-bs-toggle="modal" data-bs-target={`#modal-${con._id}`}><IoExitSharp type="button" onClick={() => setRejectId(con._id)} /></td>
                                         <td className='acceptButton'>
                                             <div>
-                                                <input onClick={() => handleFormData(con._id)} class="form-check-input" type="checkbox" checked={approvedId.includes(con._id) ? true : false} id={con._id} aria-label="..." role="button" />
+                                                <input onClick={() => handleFormData(con._id)} className="form-check-input" type="checkbox" checked={approvedId.includes(con._id) ? true : false} id={con._id} aria-label="..." role="button" />
                                             </div>
                                         </td>
                                     </tr>
@@ -199,28 +200,30 @@ export const PendingConveyance = () => {
                 {
                     conveyanceData?.map((con, i) => (
 
-                        <div class="modal fade" id={`modal-${con._id}`} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" key={`modal-${con._id}`}>
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Reject Note</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div className="modal fade" id={`modal-${con._id}`} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" key={`modal-${con._id}`}>
+                            <div className="modal-dialog">
+                                <div className="modal-content">
+                                    <div className="modal-header">
+                                        <h1 className="modal-title fs-5" id="exampleModalLabel">Reject Note</h1>
+                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body">
+                                    <div className="modal-body">
                                         <div className="col-md-12 col-sm-12 mb-2">
                                             <label for="reject_note" className="form-label">Describe the specifics of the rejection.</label>
                                             <textarea type="text" name="reject_note" className="form-control w-100" id="reject_note" placeholder='Details about rejection' onChange={(e) => setRejectionNote(e.target.value)} required />
                                         </div>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Not now</button>
-                                        <button type="button" onClick={handleRejectBill} class="btn btn-danger" data-bs-dismiss="modal">Reject</button>
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Not now</button>
+                                        <button type="button" onClick={handleRejectBill} className="btn btn-danger" data-bs-dismiss="modal">Reject</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     ))}
             </>
+            <CombinedButton />
+
         </>
     )
 }

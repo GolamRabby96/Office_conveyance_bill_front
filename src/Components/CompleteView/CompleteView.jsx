@@ -8,7 +8,7 @@ export const CompleteView = () => {
     const userData = JSON.parse(secureLocalStorage.getItem('userInfo') || '[]');
     const [conveyanceData, SetConveyanceBill] = useState([]);
     const [formData, SetFormData] = useState({});
-    const [navCondition, setNavCondition] =  useState(true);
+    const [navCondition, setNavCondition] = useState(true);
 
     const handleFormData = (e) => {
         const newData = { ...formData };
@@ -39,8 +39,8 @@ export const CompleteView = () => {
         <>
             <div className={`complete-container-${navCondition}`}>
                 <div className="side-view-component mt-5">
-                    <div onClick={()=>setNavCondition(!navCondition)} className='complete-nav-arrow'>
-                        {navCondition ? <TbArrowBarToLeft/>:<TbArrowBarToRight />}
+                    <div onClick={() => setNavCondition(!navCondition)} className='complete-nav-arrow'>
+                        {navCondition ? <TbArrowBarToLeft /> : <TbArrowBarToRight />}
                     </div>
                     <div className="mt-3">
                         <form onSubmit={handleConveyanceData} className="complete-top-form shadow rounded py-3 px-3">
@@ -77,88 +77,70 @@ export const CompleteView = () => {
                     <hr />
                     <hr />
                     <div className='complete-user-block'>
-                        <div className='bg-info p-2 my-2 rounded shadow'>
-                            <h6>rabby hasan</h6>
+                        <div onClick={() => setNavCondition(!navCondition)} className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
                             <p>Chuadanga</p>
                         </div>
-
-                        <div className='bg-info p-2 my-2 rounded shadow'>
-                            <h6>rabby hasan</h6>
+                        <div onClick={()=>setNavCondition(!navCondition)} className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
                             <p>Chuadanga</p>
                         </div>
-
-                        <div className='bg-info p-2 my-2 rounded shadow'>
-                            <h6>rabby hasan</h6>
+                        <div onClick={()=>setNavCondition(!navCondition)} className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
                             <p>Chuadanga</p>
                         </div>
 
 
 
-                        <div className='bg-info p-2 my-2 rounded shadow'>
-                            <h6>rabby hasan</h6>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
                             <p>Chuadanga</p>
                         </div>
-                        <div className='bg-info p-2 my-2 rounded shadow'>
-                            <h6>rabby hasan</h6>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
                             <p>Chuadanga</p>
                         </div>
-                        <div className='bg-info p-2 my-2 rounded shadow'>
-                            <h6>rabby hasan</h6>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
                             <p>Chuadanga</p>
                         </div>
-                        <div className='bg-info p-2 my-2 rounded shadow'>
-                            <h6>rabby hasan</h6>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
                             <p>Chuadanga</p>
                         </div>
-                        <div className='bg-info p-2 my-2 rounded shadow'>
-                            <h6>rabby hasan</h6>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
                             <p>Chuadanga</p>
                         </div>
 
-                        <div className='bg-info p-2 my-2 rounded shadow'>
-                            <h6>rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='bg-info p-2 my-2 rounded shadow'>
-                            <h6>rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='bg-info p-2 my-2 rounded shadow'>
-                            <h6>rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='bg-info p-2 my-2 rounded shadow'>
-                            <h6>rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='bg-info p-2 my-2 rounded shadow'>
-                            <h6>rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='bg-info p-2 my-2 rounded shadow'>
-                            <h6>rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='bg-info p-2 my-2 rounded shadow'>
-                            <h6>rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='bg-info p-2 my-2 rounded shadow'>
-                            <h6>rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='bg-info p-2 my-2 rounded shadow'>
-                            <h6>rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='bg-info p-2 my-2 rounded shadow'>
-                            <h6>rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='bg-info p-2 my-2 rounded shadow'>
-                            <h6>rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
 
                     </div>
 

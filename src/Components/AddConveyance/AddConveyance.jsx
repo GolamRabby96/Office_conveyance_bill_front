@@ -2,10 +2,12 @@ import moment from "moment";
 import React, { useState } from "react";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import { useNavigate } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
 
 
 export const AddConveyance = () => {
+    const navigate = useNavigate();
     const userData = JSON.parse(secureLocalStorage.getItem('userInfo') || "[]");
     const [dateValue, setDate] = useState(new Date());
     const [collectData, SetData] = useState({});
@@ -38,6 +40,7 @@ export const AddConveyance = () => {
             .then((data) => {
                 SetData({});
                 alert(data.message)
+                navigate('/conveyance')
             })
             .catch((error) => {
                 console.log(error.message);
@@ -88,7 +91,8 @@ export const AddConveyance = () => {
                     </div>
                     <div className="col-md-3 col-sm-12 mt-5">
                         <label for="transport" className="form-label">Transport</label>
-                        <select id="transport" name="transport" className="form-select" onBlur={handleData} required>
+                        <input onBlur={handleData} name="transport" type="text" className="form-control" id="transport" placeholder='Bus/CNG/Rickshaw/Office Vehicle' />
+                        {/* <select id="transport" name="transport" className="form-select" onBlur={handleData} required>
                             <option value="">Choose...</option>
                             <option value="Bus" >Bus</option>
                             <option value="CNG" >CNG</option>
@@ -97,11 +101,11 @@ export const AddConveyance = () => {
                             <option value="Rajshahi" >Auto Rikshaw</option>
                             <option value="Uber" >Uber</option>
                             <option value="Office Vehicle" >Office Vehicle</option>
-                        </select>
+                        </select> */}
                     </div>
                     <div className="col-md-3 col-sm-12 mt-5">
                         <label for="conveyance_amount" className="form-label">Conveyance Amount</label>
-                        <input onBlur={handleData} name="conveyance_amount" type="text" className="form-control" id="conveyance_amount" placeholder='Conveyance Amount'  />
+                        <input onBlur={handleData} name="conveyance_amount" type="text" className="form-control" id="conveyance_amount" placeholder='Conveyance Amount' />
                     </div>
 
 
@@ -109,7 +113,7 @@ export const AddConveyance = () => {
 
                     <div className="row fromMiddleSeparetion mt-3 ">
                         <div className="fromMidleSeparetionHeder">
-                            <h5>Holiday Section</h5>
+                            <h6>Holiday Section</h6>
                         </div>
                         {/* <div className="col-md-3 col-sm-12">
                             <label for="service_oid" className="form-label">From</label>
@@ -131,7 +135,7 @@ export const AddConveyance = () => {
 
                     <div className="row fromMiddleSeparetion">
                         <div className="fromMidleSeparetionHeder">
-                            <h5>OverTime Section</h5>
+                            <h6>OverTime Section</h6>
                         </div>
                         <div className="col-md-3 col-sm-12">
                             <label for="overtime_from" className="form-label">From</label>
@@ -154,7 +158,7 @@ export const AddConveyance = () => {
 
 
                     <div className="col-md-2 col-sm-12">
-                        <label for="Dinner_amount" className="form-label">Dinner Amaout</label>
+                        <label for="Dinner_amount" className="form-label">Dinner Amount</label>
                         <input onBlur={handleData} name="Dinner_amount" type="text" className="form-control" id="Dinner_amount" placeholder='Dinner Amaout' />
                     </div>
 

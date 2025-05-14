@@ -11,7 +11,7 @@ export const AddMember = () => {
     const [checkResponce, setCheckResponce] = useState(false);
     const [checkResponceButton, setCheckResponceButton] = useState(false);
 
-    console.log('-----------------------',checkResponce);
+    console.log('-----------------------', checkResponce);
 
     const handleFormData = (e) => {
         const newData = { ...formData };
@@ -37,7 +37,7 @@ export const AddMember = () => {
     }
 
     const handleZoneData = async (zData) => {
-        const response = await fetch(`http://localhost:5000/getSubZone/${zData}`, {
+        const response = await fetch(`http://localhost:5000/api/getSubZone/${zData}`, {
             credentials: 'include'
         });
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -75,17 +75,17 @@ export const AddMember = () => {
         }
     }
     const handleCheckPerson = async (e) => {
-        const response = await fetch(`http://localhost:5000/getUser/${e.target.value}`, {
+        const response = await fetch(`http://localhost:5000/api/getUser/${e.target.value}`, {
             credentials: 'include'
         });
-        if (!response.ok){
+        if (!response.ok) {
             setCheckResponce(false);
             throw new Error(`HTTP error! status: ${response.status}`);
-        } 
+        }
         const data = await response.json();
         if (data.data == false) {
             setCheckResponceButton(false);
-        } 
+        }
 
         if (data.data) {
             const nameData = data.data;
@@ -94,7 +94,7 @@ export const AddMember = () => {
             SetFormData(newData);
             setCheckResponce(true);
             setCheckResponceButton(true);
-        } 
+        }
     }
     setTimeout(function () {
         SetInfoMessage("");
@@ -116,13 +116,16 @@ export const AddMember = () => {
                 </div>
                 <div className="col-md-3 col-sm-12 mb-2">
                     <label for="inputPassword4" className="form-label">Designation</label>
-                    <select id="inputStatezone" name="user_designation" onBlur={handleFormData} className="form-select" required="true">
-                        <option value="">Choose . . . .</option>
-                        <option value="Fiber_Team">Fiber Team</option>
+                    <select id="user_designation" name="user_designation" className="form-select" onChange={handleFormData} required>
+                        <option value="">Choose...</option>
+                        <option value="Cable_Man" >Cable_Man</option>
                         <option value="Technician" >Technician</option>
+                        <option value="Asst_Manager" >Asst Manager</option>
                         <option value="Engineer" >Engineer</option>
+                        <option value="Sr_Engineer" >Sr. Engineer</option>
+                        <option value="Asst_Manager" >Asst Manager</option>
                         <option value="Manager" >Manager</option>
-                        <option value="GM" >GM</option>
+                        <option value="Sr_Manager" >Sr. Manager</option>
                         <option value="CTO" >CTO</option>
                     </select>
                 </div>
@@ -157,6 +160,7 @@ export const AddMember = () => {
                         <option value="">Choose...</option>
                         <option value="Architecture_&_Planning">Architecture & Planning</option>
                         <option value="Accounts">Accounts</option>
+                        <option value="Accounts">Audit</option>
                     </select>
                 </div>
                 <div className="col-md-3 col-sm-12 mb-2">
@@ -168,8 +172,10 @@ export const AddMember = () => {
                     <select id="inputStateacess" name="user_access_level" className="form-select" onChange={handleFormData} required="true">
                         <option value="">Choose...</option>
                         <option value="Team">Team</option>
+                        <option value="Supervisor">Supervisor</option>
+                        <option value="Unit_Head">Unit Head</option>
                         <option value="Admin">Admin</option>
-                        <option value="Super_Admin">Super_Admin</option>
+                        <option value="Accounts_Audit">Accounts_Audit</option>
                     </select>
                 </div>
 
@@ -179,7 +185,7 @@ export const AddMember = () => {
                     </div>
                 </div> :
                     <div className="submitButton">
-                       <h6>Fill-Up the Form First ! </h6>
+                        <h6>Fill-Up the Form First ! </h6>
                     </div>
                 }
             </form>

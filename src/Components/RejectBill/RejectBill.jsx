@@ -54,16 +54,16 @@ export const RejectBill = () => {
                 <div className="row">
                     <div className="col-md-12 rounded">
                         <p className="btn btn-info mb-3 shadow px-5">Reject Bill</p>
-                        <table class="table table-bordered shadow tableCss">
+                        <table className="table table-bordered shadow tableCss">
                             <thead>
                                 <tr>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
-                                    <th scope="col" colspan="5" className="conveyanceAmount">Conveyance</th>
-                                    <th scope="col" colspan="2" className="holidayAmount">Holiday</th>
-                                    <th scope="col" colspan="3" className="overtimeAmount">Overtime</th>
+                                    <th scope="col" colSpan="5" className="conveyanceAmount">Conveyance</th>
+                                    <th scope="col" colSpan="2" className="holidayAmount">Holiday</th>
+                                    <th scope="col" colSpan="3" className="overtimeAmount">Overtime</th>
                                     <th scope="col" className="dinnerAmount">Dinner Bill</th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
@@ -107,7 +107,7 @@ export const RejectBill = () => {
                                             <td>{con.start_Time}-{con.end_time}</td>
                                             <td>{con.from_location}-{con.to_location}</td>
                                             <td>{con.ticket_id}</td>
-                                            <td class="text-start">{con.pop_or_customer_name}</td>
+                                            <td className="text-start">{con.pop_or_customer_name}</td>
                                             <td>{con.transport}</td>
                                             <td className="text-center conveyanceAmount">{con.conveyance_amount > 0 ? con.conveyance_amount + "/=" : "-"}</td>
 
@@ -140,21 +140,21 @@ export const RejectBill = () => {
                     {
                         conveyanceData?.map((con, i) => (
 
-                            <div class="modal fade" id={`modal-${con._id}`} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" key={`modal-${con._id}`}>
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5 text-danger" id="exampleModalLabel">Are you sure !</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div className="modal fade" id={`modal-${con._id}`} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" key={`modal-${con._id}`}>
+                                <div className="modal-dialog">
+                                    <div className="modal-content">
+                                        <div className="modal-header">
+                                            <h1 className="modal-title fs-5 text-danger" id="exampleModalLabel">Are you sure !</h1>
+                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <div class="modal-body">
+                                        <div className="modal-body">
                                             <div className="col-md-12 col-sm-12 mb-2">
                                                 <p className="bg-danger text-center rounded shadow text-white">Kindly confirm if you would like this to be removed.</p>
                                             </div>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Not now</button>
-                                            <button type="button" onClick={() => handleRejectBill(con._id)} class="btn btn-danger shadow" data-bs-dismiss="modal">Confirmed</button>
+                                        <div className="modal-footer">
+                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Not now</button>
+                                            <button type="button" onClick={() => handleRejectBill(con._id)} className="btn btn-danger shadow" data-bs-dismiss="modal">Confirmed</button>
                                         </div>
                                     </div>
                                 </div>

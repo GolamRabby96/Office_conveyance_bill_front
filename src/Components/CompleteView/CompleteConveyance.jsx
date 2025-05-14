@@ -6,16 +6,16 @@ export const CompleteConveyance = () => {
         <>
             <div className="container">
                 <div className="row">
-                    <table class="table table-bordered shadow tableCss">
+                    <table className="table table-bordered shadow tableCss">
                         <thead>
                             <tr>
                                 <th scope="col"></th>
                                 <th scope="col"></th>
                                 <th scope="col"></th>
                                 <th scope="col"></th>
-                                <th scope="col" colspan="5" className="conveyanceAmount">Conveyance</th>
-                                <th scope="col" colspan="2" className="holidayAmount">Holiday</th>
-                                <th scope="col" colspan="3" className="overtimeAmount">Overtime</th>
+                                <th scope="col" colSpan="5" className="conveyanceAmount">Conveyance</th>
+                                <th scope="col" colSpan="2" className="holidayAmount">Holiday</th>
+                                <th scope="col" colSpan="3" className="overtimeAmount">Overtime</th>
                                 <th scope="col" className="dinnerAmount">Dinner Bill</th>
                                 <th scope="col"></th>
                                 <th scope="col">Total</th>

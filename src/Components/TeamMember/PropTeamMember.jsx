@@ -8,22 +8,21 @@ export const PropTeamMember = ({ team }) => {
     return (
 
         <div className='col-md-4 col-sm-12'>
-            <div class="card mb-5 boxDesign ">
-                <div class="card-footer bg-success text-white">
+            <div className="card mb-5 boxDesign ">
+                <div className="card-footer team-member-name-box">
                     Name : {team.user_name}
                 </div>
-                <ul class="list-group list-group-flush p-2">
-                    <li class="list-group-item">ID: {team.user_id}</li>
-                    <li class="list-group-item">Designation: {team.user_designation}</li>
-                    <li class="list-group-item">Zone: {team.user_zone}</li>
-                    <li class="list-group-item">Sub Zone: {team.sub_zone}</li>
-                    <li class="list-group-item">Next: {team.next_responsible_person}</li>
-                    <li class="list-group-item">Dpt: {team.user_department}</li>
-                    <li class="list-group-item">Next Id: {team.next_responsible_person_id}</li>
-                    <li class="list-group-item">Next Name: {team.next_responsible_person}</li>
-                    <li class="list-group-item">Access level: {team.user_access_level}</li>
+                <ul className="list-group list-group-flush p-2 team-member-list">
+                    <li className="list-group-item">ID: {team.user_id}</li>
+                    <li className="list-group-item">Designation: {team.user_designation}</li>
+                    <li className="list-group-item">Zone: {team.user_zone}</li>
+                    <li className="list-group-item">Sub Zone: {team.sub_zone}</li>
+                    <li className="list-group-item">Dpt: {team.user_department}</li>
+                    <li className="list-group-item">Next Name: {team.next_responsible_person}</li>
+                    <li className="list-group-item">Next Id: {team.next_responsible_person_id}</li>
+                    <li className="list-group-item">Access level: {team.user_access_level}</li>
                 </ul>
-                <div class="card-footer ">
+                <div className="card-footer ">
                     <div className="col-md-12 col-sm-12 ">
                         <div className="silimaButton">
                             <button type="submit" >Update Info</button>

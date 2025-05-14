@@ -16,7 +16,7 @@
 
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Times New Roman', Times, serif;
   margin: 0;
   background-color: rgb(240, 237, 237);
   background-repeat: no-repeat;
@@ -47,13 +47,13 @@ a:hover {
 
 table,
 tr {
-  border: 1px solid rgba(29, 49, 233, 0.107);
   font-size: 11px;
+  border: 1px solid rgba(230, 222, 222, 0.562);
 }
 
 table,
 tr:hover {
-  border: 2px solid rgba(230, 198, 17, 0.918);
+  border: 1px solid rgba(44, 41, 51, 0.918);
 }
 
 .form-check-input[type=checkbox] {
@@ -101,7 +101,7 @@ i {
 }
 
 /* ---------------------------------- */
-/* -------- Common css ------------------------------------------------------------------------ */
+/* -------------------------------------------------------------------------------------------- Common css ------------------------------------------------------------------------ */
 .divDesign {
   background-color: rgba(255, 255, 255, 0.849);
   margin: 20px;
@@ -244,8 +244,8 @@ i {
 
 
 
-/* -------- Common css ------------------------------------------------------------------------ */
-/* --------------Landing Page CSS-------------------- */
+/* --------------------------------------------------------------------------------------------------- Common css ------------------------------------------------------------------------ */
+/* -------------------------------------------------------------------------------------------Landing Page CSS-------------------- */
 
 
 
@@ -262,7 +262,12 @@ i {
   padding: 5px 10px;
 }
 
+.billing-month-select {
+  display: flex;
+}
+
 .billing-month-select select {
+
   border: 1px solid rgb(228, 228, 228);
 }
 
@@ -300,7 +305,7 @@ i {
 
 
 
-/* -------------------Add Conveyance Bill------------------------- */
+/* ------------------------------------------------------------------------------------------------------------Add Conveyance Bill------------------------- */
 .inputFormCss {
   background-color: rgb(255, 255, 255);
   padding: 5px;
@@ -356,7 +361,7 @@ i {
   font-family: cursive;
 }
 
-.fromMidleSeparetionHeder h5 {
+.fromMidleSeparetionHeder h6 {
   display: inline-block;
   margin-bottom: 15px;
   border-bottom: 1px solid rgb(88, 88, 88);
@@ -410,7 +415,7 @@ i {
 }
 
 
-/* ---------------------Add Zone Section--------------------------- */
+/* ---------------------------------------------------------------------------------------------------------------------Add Zone Section--------------------------- */
 
 
 
@@ -514,7 +519,7 @@ i {
   width: 250px;
   height: 100vh;
   color: white;
-  background-color: rgba(255, 117, 71, 0.938);
+  background-color: rgba(26, 189, 61, 0.781);
   transition: all 1s ease;
 }
 
@@ -525,10 +530,30 @@ i {
   width: 250px;
   height: 100vh;
   color: white;
-  background-color: rgba(255, 117, 71, 0.938);
+  background-color: rgba(26, 189, 61, 0.781);
   transition: all 1s ease;
 }
 
+.complete-user-block {
+  /* background-color: rgba(223, 129, 21, 0.185); */
+}
+
+.complete-user-list {
+  background-color: rgba(0, 0, 0, 0.479);
+  box-shadow: 0px 2px 5px rgba(4, 154, 214, 0.678) !important;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 1s ease;
+}
+
+.complete-user-list:hover {
+  background-color: rgba(82, 21, 90, 0.815);
+  box-shadow: 0px 2px 5px rgba(4, 18, 214, 0.678) !important;
+  font-size: 11px;
+}
 
 .side-view-component {
   padding: 20px;
@@ -596,8 +621,59 @@ i {
   height: 100vh;
 }
 
+
 /* background-color: rgb(254 125 82 / 98%) !important; */
-/* -------- Complete View css End ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------------ Complete View css End ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------------ TeamMember Start ------------------------------------------------------------------------ */
+.team-member-name-box {
+  background-color: rgba(27, 123, 187, 0.719);
+  color: rgb(0, 0, 0);
+  font-size: 13px;
+  font-weight: bolder;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.team-member-list {
+  font-size: 12px;
+}
+
+/* ------------------------------------------------------------------------------------------------------ TeamMember End ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------------ Combined start ------------------------------------------------------------------------ */
+.combined-button-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 0px 2px;
+  margin: 30px;
+  border-radius: 8px;
+  border: 3px solid #21ada1;
+  background: linear-gradient(to top, #d1d2d3e6, #30cfe4, #4bb8e3, #d6dcdde6);
+  cursor: pointer;
+  text-align: center;
+}
+
+.combined-button-bottom:hover {
+  background: linear-gradient(to right, #1d85a5e6, #30cfe4, #4bb8e3, #1d85a5e6);
+}
+
+.combined-button-bottom svg {
+  text-align: center;
+  font-size: 20px;
+  border: 1px solid rgb(253, 253, 253);
+  margin-right: 5px;
+  border-radius: 50%;
+  /* padding: 3px; */
+  cursor: pointer;
+}
+
+.combined-button-bottom svg:hover {
+  transition: all 1s ease;
+  color: rgb(65, 5, 230);
+  font-weight: 700;
+  border: 1px solid rgb(4, 0, 255);
+}
+
+/* ------------------------------------------------------------------------------------------------------ Combined End ------------------------------------------------------------------------ */
 
 
 
