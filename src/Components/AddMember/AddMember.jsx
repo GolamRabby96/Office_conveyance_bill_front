@@ -114,7 +114,21 @@ export const AddMember = () => {
                     <label for="inputPassword4" className="form-label">User Id</label>
                     <input type="text" name="user_id" className={`form-control idCurrection${flag}`} id="inputPassword4" placeholder='EX-1010822' onChange={(e) => { handleFormData(e); checkMemberId(e) }} required />
                 </div>
-
+                <div className="col-md-3 col-sm-12 mb-2">
+                    <label for="inputPassword4" className="form-label">Designation</label>
+                    <select id="user_designation" name="user_designation" className="form-select" onChange={handleFormData} required>
+                        <option value="">Choose...</option>
+                        <option value="Cable_Man" >Cable_Man</option>
+                        <option value="Technician" >Technician</option>
+                        <option value="Asst_Manager" >Asst Manager</option>
+                        <option value="Engineer" >Engineer</option>
+                        <option value="Sr_Engineer" >Sr. Engineer</option>
+                        <option value="Asst_Manager" >Asst Manager</option>
+                        <option value="Manager" >Manager</option>
+                        <option value="Sr_Manager" >Sr. Manager</option>
+                        <option value="CTO" >CTO</option>
+                    </select>
+                </div>
 
                 <div className="col-md-3 col-sm-12 mb-2">
                     <label for="inputStatezone" className="form-label">Zone</label>
