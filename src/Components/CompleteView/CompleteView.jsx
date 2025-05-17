@@ -81,73 +81,113 @@ export const CompleteView = () => {
                             <h6>Rabby hasan</h6>
                             <p>Chuadanga</p>
                         </div>
-                        <div onClick={()=>setNavCondition(!navCondition)} className='complete-user-list'>
+                        <div onClick={() => setNavCondition(!navCondition)} className='complete-user-list'>
                             <h6>Rabby hasan</h6>
                             <p>Chuadanga</p>
                         </div>
-                        <div onClick={()=>setNavCondition(!navCondition)} className='complete-user-list'>
+                        <div onClick={() => setNavCondition(!navCondition)} className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
+
+
+
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
+                        <div className='complete-user-list'>
                             <h6>Rabby hasan</h6>
                             <p>Chuadanga</p>
                         </div>
 
 
 
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
 
+
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
+                        <div className='complete-user-list'>
+                            <h6>Rabby hasan</h6>
+                            <p>Chuadanga</p>
+                        </div>
 
                     </div>
 
                 </div>
             </div>
-            <div className="">
-                <MainViewComponent />
+            <div onDoubleClick={()=> setNavCondition(!navCondition)} className='px-1'>
+                <MainViewComponent   />
             </div>
 
         </>

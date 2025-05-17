@@ -650,6 +650,7 @@ i {
   background: linear-gradient(to top, #d1d2d3e6, #30cfe4, #4bb8e3, #d6dcdde6);
   cursor: pointer;
   text-align: center;
+    z-index: -999;
 }
 
 .combined-button-bottom:hover {
@@ -671,6 +672,7 @@ i {
   color: rgb(65, 5, 230);
   font-weight: 700;
   border: 1px solid rgb(4, 0, 255);
+
 }
 
 /* ------------------------------------------------------------------------------------------------------ Combined End ------------------------------------------------------------------------ */

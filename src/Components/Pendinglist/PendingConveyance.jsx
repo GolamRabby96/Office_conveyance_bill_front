@@ -102,7 +102,7 @@ export const PendingConveyance = () => {
 
     return (
         <>
-            <div className="row">
+            <div className="row mb-5">
                 <div className="col-md-12 mt-5 rounded">
                     <table className="table table-bordered shadow tableCss">
                         <thead>
