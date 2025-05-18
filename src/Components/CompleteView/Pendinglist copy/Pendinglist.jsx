@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
-import { PendingConveyance } from '../Pendinglist/pendingConveyance'
-import { PendingHoliday } from '../Pendinglist/pendingHoliday'
-import { PendingTaBill } from '../Pendinglist/pendingTaBill'
-import { PendingDaBill } from '../Pendinglist/pendingDaBill'
-import { CompleteConveyance } from './CompleteConveyance'
+import React, { useState } from "react";
+import { SiAnsys } from "react-icons/si";
+import { PendingConveyance } from "./pendingConveyance";
+import { PendingHoliday } from "./pendingHoliday";
+import { PendingDaBill } from "./pendingDaBill";
+import { PendingTaBill } from "./pendingTaBill";
 
-export const MainViewComponent = ({transferData, reLoadComponent, setReloadComponent}) => {
+export const Pendinglist = () => {
     const [conveyanceVisible, setConveyance] = useState(true);
     const [holidayVisible, setHoliday] = useState(false);
     const [TaBill, setTa] = useState(false);
@@ -26,7 +26,6 @@ export const MainViewComponent = ({transferData, reLoadComponent, setReloadCompo
         }
     }
 
-
     return (
         <>
             <div className="container-fluid headerCover">
@@ -34,7 +33,6 @@ export const MainViewComponent = ({transferData, reLoadComponent, setReloadCompo
                     <div className="col ">
                         <button onClick={() => handleCondition('Conveyance')} >Conveyance & Holiday</button>
                     </div>
-
                     <div className="col">
                         <button onClick={() => handleCondition('TABILL')}>TA Bill</button>
                     </div>
@@ -45,16 +43,14 @@ export const MainViewComponent = ({transferData, reLoadComponent, setReloadCompo
                         <button onClick={() => handleCondition('Holiday')}>Others Bills</button>
                     </div>
                 </div>
+                <>
+                    {conveyanceVisible && <PendingConveyance />}
+                    {holidayVisible && <PendingHoliday />}
+                    {TaBill && <PendingTaBill />}
+                    {DaBill && <PendingDaBill />}
 
+                </>
             </div>
-            <>
-                {conveyanceVisible && <CompleteConveyance transferData={transferData} cmpt={true} reLoadComponent={reLoadComponent} setReloadComponent={setReloadComponent} />}
-                {holidayVisible && <PendingHoliday />}
-                {TaBill && <PendingTaBill />}
-                {DaBill && <PendingDaBill />}
-
-            </>
-
         </>
     )
 }

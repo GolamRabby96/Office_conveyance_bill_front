@@ -539,6 +539,7 @@ i {
 }
 
 .complete-user-list {
+  display: flex;
   background-color: rgba(0, 0, 0, 0.479);
   box-shadow: 0px 2px 5px rgba(4, 154, 214, 0.678) !important;
   padding: 10px;
@@ -547,12 +548,26 @@ i {
   font-size: 11px;
   cursor: pointer;
   transition: all 1s ease;
+  justify-content: space-between;
 }
 
 .complete-user-list:hover {
   background-color: rgba(82, 21, 90, 0.815);
   box-shadow: 0px 2px 5px rgba(4, 18, 214, 0.678) !important;
   font-size: 11px;
+}
+.complete-user-list > p{
+  line-height: 22px;
+}
+.complete-user-list > span{
+  background-color: tomato;
+  width: 20px;
+  height: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-align: center;
+  border-radius: 100%;
+  line-height: 20px;
 }
 
 .side-view-component {
@@ -619,6 +634,12 @@ i {
 .complete-user-block {
   overflow: scroll;
   height: 100vh;
+scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+
+.complete-user-block::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 

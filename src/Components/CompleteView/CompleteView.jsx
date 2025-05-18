@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import { MainViewComponent } from './MainViewComponent'
 import secureLocalStorage from 'react-secure-storage';
 import { TbArrowBarToRight } from "react-icons/tb";
@@ -9,6 +9,15 @@ export const CompleteView = () => {
     const [conveyanceData, SetConveyanceBill] = useState([]);
     const [formData, SetFormData] = useState({});
     const [navCondition, setNavCondition] = useState(true);
+    const [groupPropValue, setGroupValue] = useState({});
+    const [reLoadComponent, setReloadComponent] = useState(false);
+    const [transferData, setTransferData] = useState({});
+
+    console.log(reLoadComponent, formData.month);
+
+    useEffect(() => {
+        GetConveyanceData();
+    }, [reLoadComponent])
 
     const handleFormData = (e) => {
         const newData = { ...formData };
@@ -16,10 +25,30 @@ export const CompleteView = () => {
         SetFormData(newData);
     }
 
+    const GetConveyanceData = async (e) => {
+        if (formData.month && formData.year) {
+            fetch(`http://localhost:5000/api/groupConCollection`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: 'include',
+                body: JSON.stringify(formData),
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    SetConveyanceBill(data.data);
+                })
+                .catch((error) => {
+                    console.log(error.message);
+                });
+        }else{
+            console.log('input field is empty');
+        }
+    }
+
     const handleConveyanceData = async (e) => {
         e.preventDefault();
 
-        fetch(`http://localhost:5000/api/getConveyance/${userData.user_id}`, {
+        fetch(`http://localhost:5000/api/groupConCollection`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: 'include',
@@ -27,11 +56,16 @@ export const CompleteView = () => {
         })
             .then((res) => res.json())
             .then((data) => {
-                SetConveyanceBill(data.data)
+                SetConveyanceBill(data.data);
             })
             .catch((error) => {
                 console.log(error.message);
             });
+    }
+
+    const handleCurrentActiveData = (id)=>{
+        const sumData = {...formData, id:id}
+        setTransferData(sumData)
     }
 
 
@@ -77,117 +111,21 @@ export const CompleteView = () => {
                     <hr />
                     <hr />
                     <div className='complete-user-block'>
-                        <div onClick={() => setNavCondition(!navCondition)} className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div onClick={() => setNavCondition(!navCondition)} className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div onClick={() => setNavCondition(!navCondition)} className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-
-
-
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-
-
-
-
-
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-                        <div className='complete-user-list'>
-                            <h6>Rabby hasan</h6>
-                            <p>Chuadanga</p>
-                        </div>
-
+                        {
+                            conveyanceData?.map(con => (
+                                <div onClick={() => { setGroupValue(con.allData) , handleCurrentActiveData(con._id)}} className='complete-user-list'>
+                                    <h6>{con.preparer_by[0]}</h6>
+                                    <p>{con.preparer_Zone[0]}</p>
+                                    <span>{con.count}</span>
+                                </div>
+                            ))
+                        }
                     </div>
 
                 </div>
             </div>
-            <div onDoubleClick={()=> setNavCondition(!navCondition)} className='px-1'>
-                <MainViewComponent   />
+            <div onDoubleClick={() => setNavCondition(!navCondition)} className='px-1'>
+                <MainViewComponent transferData={transferData} reLoadComponent={reLoadComponent} setReloadComponent={setReloadComponent} />
             </div>
 
         </>
