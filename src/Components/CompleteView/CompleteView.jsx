@@ -13,8 +13,6 @@ export const CompleteView = () => {
     const [reLoadComponent, setReloadComponent] = useState(false);
     const [transferData, setTransferData] = useState({});
 
-    console.log(reLoadComponent, formData.month);
-
     useEffect(() => {
         GetConveyanceData();
     }, [reLoadComponent])
@@ -113,7 +111,7 @@ export const CompleteView = () => {
                     <div className='complete-user-block'>
                         {
                             conveyanceData?.map(con => (
-                                <div onClick={() => { setGroupValue(con.allData) , handleCurrentActiveData(con._id)}} className='complete-user-list'>
+                                <div key={con._id} onClick={() => { setGroupValue(con.allData) , handleCurrentActiveData(con._id)}} className='complete-user-list'>
                                     <h6>{con.preparer_by[0]}</h6>
                                     <p>{con.preparer_Zone[0]}</p>
                                     <span>{con.count}</span>

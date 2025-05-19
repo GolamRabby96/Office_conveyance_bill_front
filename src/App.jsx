@@ -19,6 +19,7 @@ import { RejectBill } from './Components/RejectBill/RejectBill';
 import { CommonReject } from './Components/RejectBill/CommonReject';
 import { EditConveyanceBill } from './Components/RejectBill/EditConvenyanceBill';
 import { CompleteView } from './Components/CompleteView/CompleteView';
+import { CombinedApproved } from './Components/CombinedApproved/CombinedApproved';
 
 export const UserContext = createContext();
 
@@ -64,6 +65,7 @@ function App() {
               <Route exact path="/rejectBill" element={<CommonReject />} />
               <Route exact path="/editConveyance/:id" element={<EditConveyanceBill />} />
               <Route exact path="/details-view" element={<CompleteView />} />
+              <Route exact path="/combinedView" element={<CombinedApproved />} />
             </Route>
             {/* ------------------------------------------------------------------------------------------------- */}
 

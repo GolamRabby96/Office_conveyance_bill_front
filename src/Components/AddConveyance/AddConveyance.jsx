@@ -86,8 +86,8 @@ export const AddConveyance = () => {
                     </div>
 
                     <div className="col-md-3 col-sm-12 mt-5">
-                        <label for="pop_or_customer_name" className="form-label">POP/Customer Name</label>
-                        <input onBlur={handleData} name="pop_or_customer_name" type="text" className="form-control" id="pop_or_customer_name" placeholder='POP/Customer Name' required />
+                        <label for="pop_or_customer_name" className="form-label">Distination</label>
+                        <input onBlur={handleData} name="pop_or_customer_name" type="text" className="form-control" id="pop_or_customer_name" placeholder='Purposes' required />
                     </div>
                     <div className="col-md-3 col-sm-12 mt-5">
                         <label for="transport" className="form-label">Transport</label>
