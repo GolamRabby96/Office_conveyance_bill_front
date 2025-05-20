@@ -64,17 +64,34 @@ export const SideNavBar = () => {
                             </div>
                             <div className="offcanvas-body">
                                 <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
+                                    <li className="nav-item dropdown">
+                                        <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Bill View
+                                        </a>
+                                        <ul className="dropdown-menu">
+                                            <Link className="dropdown-item"  to="/details-view">Split View</Link>
+                                            <Link className="dropdown-item" to="/combinedView">Summary View</Link>
+                                            <Link className="dropdown-item"  to="/pendingList">Pending List</Link>
+                                        </ul>
+                                    </li>
+
+                                    <li className="nav-item dropdown">
+                                        <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            My Bill
+                                        </a>
+                                        <ul className="dropdown-menu">
+                                            <Link className="dropdown-item" to="/conveyance"><GiClockwork /> Conveyance/Holiday Bill</Link>
+                                            {/* <Link className="dropdown-item" to="/holiday"><FaOpencart /> Others Bill</Link> */}
+                                        </ul>
+                                    </li>
+
+
+
                                     <li className="nav-item">
-                                        <Link className="nav-link active" aria-current="page" to="/details-view">Complete View</Link>
+
                                     </li>
                                     <li className="nav-item">
-                                        <Link className="nav-link active" aria-current="page" to="/pendingList">Pending List</Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link className="nav-link" to="/conveyance"><GiClockwork /> Conveyance/Holiday Bill</Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link className="nav-link" to="/holiday"><FaOpencart /> Others Bill</Link>
+
                                     </li>
                                     <hr />
                                     <li className="nav-item dropdown">
@@ -83,19 +100,23 @@ export const SideNavBar = () => {
                                         </a>
                                         <ul className="dropdown-menu">
                                             <li><Link className="dropdown-item" to="/add-conveyance">Add Conveyance Bill</Link></li>
-                                            <li><Link className="dropdown-item" to="/add-holiday">Add Others Bill</Link></li>
+                                            {/* <li><Link className="dropdown-item" to="/add-holiday">Add Others Bill</Link></li> */}
                                         </ul>
                                     </li>
                                     <hr />
-                                    <li className="nav-item">
-                                        <Link className="nav-link" to="/addMember"><FaPeoplePulling /> Add Member</Link>
+
+                                    <li className="nav-item dropdown">
+                                        <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Operations
+                                        </a>
+                                        <ul className="dropdown-menu">
+                                            <Link className="dropdown-item" to="/addMember"><FaPeoplePulling /> Add Member</Link>
+                                            <Link className="dropdown-item" to="/addZone"><PiMapPinSimpleAreaLight /> Add Zone</Link>
+                                            <Link className="dropdown-item" to="/teamMember"><IoIosPeople /> Team Member</Link>
+                                        </ul>
                                     </li>
-                                    <li className="nav-item">
-                                        <Link className="nav-link" to="/addZone"><PiMapPinSimpleAreaLight /> Add Zone</Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link className="nav-link" to="/teamMember"><IoIosPeople /> Team Member</Link>
-                                    </li>
+
+
                                     <hr />
                                     <li className="nav-item">
                                         <Link className="nav-link" to="/rejectBill"><TbGitBranchDeleted /> Reject List</Link>

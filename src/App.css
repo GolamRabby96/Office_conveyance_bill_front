@@ -512,6 +512,7 @@ i {
 }
 
 /* -------- Complete View css ------------------------------------------------------------------------ */
+
 .complete-container-true {
   position: fixed;
   top: 0;
@@ -641,7 +642,18 @@ scrollbar-width: none; /* Firefox */
 .complete-user-block::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
-
+.navbar-nav svg{
+  color: rgb(0, 38, 255);
+  font-weight: bolder;
+  font-size: 14px;
+  margin-right: 10px;
+}
+.navbar-nav svg:hover{
+  color: rgb(0, 0, 0);
+  font-weight: bolder;
+  font-size: 14px;
+  margin-right: 10px;
+}
 
 /* background-color: rgb(254 125 82 / 98%) !important; */
 /* ------------------------------------------------------------------------------------------------------ Complete View css End ------------------------------------------------------------------------ */
