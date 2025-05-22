@@ -29,13 +29,10 @@ export const CompleteConveyance = ({ transferData = [], cmpt, reLoadComponent, s
                 .then((res) => res.json())
                 .then((data) => {
                     SetConveyanceBill(data.data);
-                    console.log(data.data);
                 })
                 .catch((error) => {
                     console.log(error.message);
                 });
-        } else {
-            console.log('input field is empty');
         }
     }
 

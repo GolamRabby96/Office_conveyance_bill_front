@@ -15,8 +15,6 @@ export const RejectHolidayBill = () => {
     const [rejectNote, setRejectionNote] = useState('');
     const [rejectId, setRejectId] = useState('');
 
-    console.log(conveyanceData);
-
 
     useEffect(() => {
         handlePendingData()
@@ -31,7 +29,6 @@ export const RejectHolidayBill = () => {
         }
         const data = await responce.json();
         setConveyanceData(data.data);
-        console.log(data);
         let totaldata = [];
 
         data?.data.map(id => {
@@ -57,7 +54,6 @@ export const RejectHolidayBill = () => {
     }
 
     const handleAllSelectData = (condition) => {
-        console.log(condition);
         if (condition) {
             setApprovedId(totalID);
             setIschecked(condition);

@@ -5,12 +5,20 @@ import 'react-calendar/dist/Calendar.css';
 import { useNavigate } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
 
+import TimePicker from 'react-time-picker';
+import 'react-time-picker/dist/TimePicker.css';
+import 'react-clock/dist/Clock.css';
 
-export const AddConveyance = () => {
+
+
+const AddConveyance = () => {
     const navigate = useNavigate();
     const userData = JSON.parse(secureLocalStorage.getItem('userInfo') || "[]");
     const [dateValue, setDate] = useState(new Date());
     const [collectData, SetData] = useState({});
+    const [Tvalue, setTValue] = useState('10:00');
+
+    console.log(Tvalue);
 
     const handleData = (e) => {
         const totalData = { ...collectData };
@@ -28,7 +36,6 @@ export const AddConveyance = () => {
             ...collectData, date: date, month: month, year: year, preparer_by: userData.user_name, preparer_id: userData.user_id, preparer_Zone: userData.sub_zone, next_responsible_person: userData.next_responsible_person,
             next_responsible_person_id: userData.next_responsible_person_id
         };
-        console.log(totalData);
 
         fetch('http://localhost:5000/api/addConveyance', {
             method: "POST",
@@ -61,8 +68,17 @@ export const AddConveyance = () => {
                         <h6 className="text-success bold shadow px-5 py-2 h5 rounded"> Selected date : <span className="text-danger bolder">{moment(dateValue).format('L')}</span></h6>
                     </div>
                     <div className="col-md-3 col-sm-12 mt-5">
+
                         <label for="start_Time" className="form-label">Start Time</label>
-                        <input onBlur={handleData} name="start_Time" type="text" className="form-control" id="start_Time" placeholder='Start Time - 9.30 AM' required />
+                        <TimePicker
+                            onChange={setTValue}
+                            value={Tvalue}
+                            disableClock={false} // set to true if you don't want the analog clock
+                            className="form-control"
+                            format='h:mm a'
+                            amPmAriaLabel="Select AM/PM"
+                        />
+                        {/* <input onBlur={handleData} name="start_Time" type="text" className="form-control" id="start_Time" placeholder='Start Time - 9.30 AM' required /> */}
                     </div>
 
                     <div className="col-md-3 col-sm-12 mt-5">
@@ -178,3 +194,6 @@ export const AddConveyance = () => {
         </>
     )
 }
+
+
+export default AddConveyance;

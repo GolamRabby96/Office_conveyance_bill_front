@@ -13,7 +13,7 @@ export const PropTeamMember = ({ team }) => {
     const [checkResponce, setCheckResponce] = useState(false);
     const [checkResponceButton, setCheckResponceButton] = useState(false);
 
-    console.log(formData);
+
 
     const handleFormData = (e) => {
         const newData = { ...formData };
@@ -117,7 +117,7 @@ export const PropTeamMember = ({ team }) => {
     }, 6000);
     return (
 
-        <div className='col-md-4 col-sm-12'>
+        <div key={team._id} className='col-md-4 col-sm-12'>
             <div className="card mb-5 boxDesign ">
                 <div className="card-footer team-member-name-box">
                     Name : {team.user_name}
@@ -142,7 +142,7 @@ export const PropTeamMember = ({ team }) => {
                     </div>
                 </div>
             </div>
-            <div class="modal fade " id={team.user_id} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade " key={team._id} id={team.user_id} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -154,16 +154,16 @@ export const PropTeamMember = ({ team }) => {
                                 <form onSubmit={handleAddUserSubmit} className="row g-3 pb-2">
 
                                     <div className="col-md-6 col-sm-12 mb-2">
-                                        <label for="user_name" className="form-label">Name</label>
-                                        <input type="text" name="user_name" value={formData.user_name} className="form-control" id="user_name" placeholder='Team member name' onChange={handleFormData} required />
+                                        <label for={team.user_name} className="form-label">Name</label>
+                                        <input type="text" name="user_name" value={formData.user_name} className="form-control" id={team.user_name} placeholder='Team member name' onChange={handleFormData} required />
                                     </div>
                                     <div className="col-md-6 col-sm-12 mb-2">
-                                        <label for="inputPassword4" className="form-label">User Id</label>
-                                        <input type="text" name="user_id" value={formData.user_id} className={`form-control idCurrection${flag}`} id="inputPassword4" placeholder='EX-1010822' onChange={(e) => { handleFormData(e); checkMemberId(e) }} required />
+                                        <label for={team.user_id} className="form-label">User Id</label>
+                                        <input type="text" name="user_id" value={formData.user_id} className={`form-control idCurrection${flag}`} id={team.user_id} placeholder='EX-1010822' onChange={(e) => { handleFormData(e); checkMemberId(e) }} required />
                                     </div>
                                     <div className="col-md-6 col-sm-12 mb-2">
-                                        <label for="inputPassword4" className="form-label">Designation</label>
-                                        <select id="user_designation" name="user_designation" className="form-select" onChange={handleFormData} required>
+                                        <label for={team.user_designation} className="form-label">Designation</label>
+                                        <select id={team.user_designation} name="user_designation" className="form-select" onChange={handleFormData} required>
                                             <option value={formData.user_designation} className='text-info'>{formData.user_designation}</option>
                                             <option value="">Choose...</option>
                                             <option value="Cable_Man" >Cable_Man</option>
@@ -179,8 +179,8 @@ export const PropTeamMember = ({ team }) => {
                                     </div>
 
                                     <div className="col-md-6 col-sm-12 mb-2">
-                                        <label for="inputStatezone" className="form-label">Zone</label>
-                                        <select id="inputStatezone" name="user_zone" className="form-select" onChange={(e) => { handleFormData(e); handleZoneData(e.target.value) }} required="true">
+                                        <label for="user_zone" className="form-label">Zone</label>
+                                        <select id="user_zone" name="user_zone" className="form-select" onChange={(e) => { handleFormData(e); handleZoneData(e.target.value) }} required>
                                             <option value={formData.user_zone} className='text-info'>{formData.user_zone}</option>
                                             <option value="">Choose...</option>
                                             <option value="Dhaka" >Dhaka</option>
@@ -194,8 +194,8 @@ export const PropTeamMember = ({ team }) => {
                                         </select>
                                     </div>
                                     <div className="col-md-6 col-sm-12 mb-2">
-                                        <label for="inputStatesubzone" className="form-label">Sub-Zone</label>
-                                        <select id="inputStatesubzone" name="sub_zone" className="form-select" onChange={handleFormData}>
+                                        <label for="sub_zone" className="form-label">Sub-Zone</label>
+                                        <select id="sub_zone" name="sub_zone" className="form-select" onChange={handleFormData}>
                                             <option value={formData.sub_zone} className='text-info'>{formData.sub_zone}</option>
                                             <option value="">Choose...</option>
                                             {zoneData.length > 0 && zoneData.map(z => <option value={z.sub_zone}>{z.sub_zone}</option>)}
@@ -205,8 +205,8 @@ export const PropTeamMember = ({ team }) => {
 
 
                                     <div className="col-md-6 col-sm-12 mb-2">
-                                        <label for="inputStateacess" className="form-label">Department</label>
-                                        <select id="inputStateacess" name="user_department" className="form-select" onChange={handleFormData} required="true">
+                                        <label for="user_department" className="form-label">Department</label>
+                                        <select id="user_department" name="user_department" className="form-select" onChange={handleFormData} required>
                                             <option value={formData.user_department} className='text-info'>{formData.user_department}</option>
                                             <option value="">Choose...</option>
                                             <option value="Architecture_&_Planning">Architecture & Planning</option>
@@ -215,12 +215,12 @@ export const PropTeamMember = ({ team }) => {
                                         </select>
                                     </div>
                                     <div className="col-md-6 col-sm-12 mb-2">
-                                        <label for="user_name" className="form-label">Next Responsible Person</label>
-                                        <input type="text" name="next_responsible_person_id" onChange={(e) => { handleCheckPerson(e.target.value), handleFormData(e) }} value={team.next_responsible_person_id} className="form-control" id="user_name" placeholder='Responsible Member Id' required />
+                                        <label for="next_responsible_person_id" className="form-label">Next Responsible Person</label>
+                                        <input type="text" name="next_responsible_person_id" onChange={(e) => { handleCheckPerson(e.target.value), handleFormData(e) }} value={team.next_responsible_person_id} className="form-control" id="next_responsible_person_id" placeholder='Responsible Member Id' required />
                                     </div>
                                     <div className="col-md-6 col-sm-12 mb-2">
-                                        <label for="inputStateacess" className="form-label">Access Level ...</label>
-                                        <select id="inputStateacess" name="user_access_level" className="form-select" onChange={handleFormData} required="true">
+                                        <label for="user_access_level" className="form-label">Access Level ...</label>
+                                        <select id="user_access_level" name="user_access_level" className="form-select" onChange={handleFormData} required>
                                             <option value={formData.user_access_level} className='text-info'>{formData.user_access_level}</option>
                                             <option value="">Choose...</option>
                                             <option value="Team">Team</option>
@@ -232,7 +232,7 @@ export const PropTeamMember = ({ team }) => {
                                     </div>
                                     <div className="col-md-6 col-sm-12 mb-2">
                                         <label for="inputStateacess" className="form-label">Access Level ...</label>
-                                        <select id="inputStateacess" name="user_access_level" className="form-select" onChange={handleFormData} required="true">
+                                        <select id="inputStateacess" name="user_access_level" className="form-select" onChange={handleFormData} required>
                                             <option value={formData.user_access_level} className='text-info'>{formData.user_access_level}</option>
                                             <option value="">Choose...</option>
                                             <option value="Team">Team</option>

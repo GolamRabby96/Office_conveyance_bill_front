@@ -18,27 +18,7 @@ export const SideNavBar = () => {
     const [conveyanceData, setConveyanceData] = useState([]);
     const [approvedId, setApprovedId] = useState([]);
 
-    console.log(approvedId);
-
-    useEffect(() => {
-        // handlePendingData()
-    }, [])
-
-    const handlePendingData = async () => {
-        // const responce = await fetch(`http://localhost:5000/api/pendingList/${getUser.user_id}`, {
-        //     credentials: 'include'
-        // });
-        // if (!responce.ok) {
-        //     throw new Error(`HTTP error! status:${responce.status}`);
-        // }
-        // const data = await responce.json();
-        // setConveyanceData(data?.data.length);
-        // console.log(data?.data);
-        // console.log(data?.data.length);
-    }
-
     const handleLogOut = () => {
-        console.log("Called");
         secureLocalStorage.setItem("userInfo", JSON.stringify({
             isLoggedIn: false,
         }));

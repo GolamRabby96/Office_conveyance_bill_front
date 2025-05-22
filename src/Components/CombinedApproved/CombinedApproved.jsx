@@ -7,12 +7,11 @@ import { IoExitSharp } from "react-icons/io5";
 import { CgLayoutGrid } from "react-icons/cg";
 
 
-export const CombinedApproved = () => {
+const CombinedApproved = () => {
     const userData = JSON.parse(secureLocalStorage.getItem('userInfo') || '[]');
     const [conveyanceData, SetConveyanceBill] = useState([]);
     const [formData, SetFormData] = useState({});
 
-    console.log('-------------------------------',conveyanceData);
 
     const handleFormData = (e) => {
         const newData = { ...formData };
@@ -145,4 +144,6 @@ export const CombinedApproved = () => {
         </>
     )
 }
+
+export default CombinedApproved;
 

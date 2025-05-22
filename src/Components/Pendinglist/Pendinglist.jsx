@@ -5,7 +5,7 @@ import { PendingHoliday } from "./pendingHoliday";
 import { PendingDaBill } from "./pendingDaBill";
 import { PendingTaBill } from "./pendingTaBill";
 
-export const Pendinglist = () => {
+const Pendinglist = () => {
     const [conveyanceVisible, setConveyance] = useState(true);
     const [holidayVisible, setHoliday] = useState(false);
     const [TaBill, setTa] = useState(false);
@@ -54,3 +54,5 @@ export const Pendinglist = () => {
         </>
     )
 }
+
+export default Pendinglist ;

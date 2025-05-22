@@ -30,7 +30,6 @@ const AddZone = () => {
         });
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
-        console.log(data);
         const DhakaData = data.data.filter(t => t.zone_name == 'Dhaka');
         const KhulnaData = data.data.filter(t => t.zone_name == 'Khulna');
         const ChittagongData = data.data.filter(t => t.zone_name == 'Chittagong');
@@ -102,7 +101,7 @@ const AddZone = () => {
                 </div>
                 <div className="col-md-4 col-sm-12 mb-2">
                     <label for="inputStateteam" className="form-label">Select Zone</label>
-                    <select id="inputStateteam" className="form-select" name="zone_name" onChange={handleFormData} required="true">
+                    <select id="inputStateteam" className="form-select" name="zone_name" onChange={handleFormData} required>
                         <option value="">Choose...</option>
                         <option value="Dhaka" >Dhaka</option>
                         <option value="Khulna" >Khulna</option>

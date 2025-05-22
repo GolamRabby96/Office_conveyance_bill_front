@@ -7,7 +7,7 @@ import { IoExitSharp } from "react-icons/io5";
 import { CgLayoutGrid } from "react-icons/cg";
 
 
-export const ConveyanceBill = () => {
+const ConveyanceBill = () => {
     const userData = JSON.parse(secureLocalStorage.getItem('userInfo') || '[]');
     const [conveyanceData, SetConveyanceBill] = useState([]);
     const [formData, SetFormData] = useState({});

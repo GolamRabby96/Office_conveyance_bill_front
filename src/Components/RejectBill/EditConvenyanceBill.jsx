@@ -6,14 +6,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
 
 
-export const EditConveyanceBill = () => {
+const EditConveyanceBill = () => {
     const navigat = useNavigate();
     const userData = JSON.parse(secureLocalStorage.getItem('userInfo') || "[]");
     const { id } = useParams();
     const [dateValue, setDate] = useState(new Date());
     const [collectData, SetData] = useState({});
 
-    console.log(collectData);
     
     useEffect(() => {
         handleConveyanceBill();
@@ -184,3 +183,5 @@ export const EditConveyanceBill = () => {
         </>
     )
 }
+
+export default EditConveyanceBill ;

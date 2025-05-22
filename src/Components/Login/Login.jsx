@@ -13,7 +13,6 @@ const Login = () => {
     const [userInfo, setUserInfo] = useState({});
     const [messageInfo, SetMessageInfo] = useState("");
 
-    console.log(userInfo);
 
     const handleUserForm = (e) => {
         const data = { ...userInfo };
@@ -55,13 +54,13 @@ const Login = () => {
                     }));
                     SetMessageInfo(data.message);
                     navigate('/');
+                    window.location.reload();
                 } else {
                     SetMessageInfo(data.message);
                     alert("User ID or Password incorrect");
                 }
             })
             .catch((error) => {
-                console.log(error.message);
                 alert("User ID or Password incorrect");
             });
         e.target.reset();
@@ -92,7 +91,7 @@ const Login = () => {
 
                                             <div data-mdb-input-init className="form-outline mb-4">
                                                 <input onBlur={handleUserForm} type="text" name="user_id" className="form-control" id="user_id"
-                                                    placeholder="Enter your Job Id" required/>
+                                                    placeholder="Enter your Job Id" required />
                                                 <label className="form-label" for="form2Example11">Job ID</label>
                                             </div>
 

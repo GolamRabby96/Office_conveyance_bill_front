@@ -4,7 +4,7 @@ import secureLocalStorage from 'react-secure-storage';
 import { TbArrowBarToRight } from "react-icons/tb";
 import { TbArrowBarToLeft } from "react-icons/tb";
 
-export const CompleteView = () => {
+const CompleteView = () => {
     const userData = JSON.parse(secureLocalStorage.getItem('userInfo') || '[]');
     const [conveyanceData, SetConveyanceBill] = useState([]);
     const [formData, SetFormData] = useState({});
@@ -38,8 +38,6 @@ export const CompleteView = () => {
                 .catch((error) => {
                     console.log(error.message);
                 });
-        }else{
-            console.log('input field is empty');
         }
     }
 
@@ -129,3 +127,5 @@ export const CompleteView = () => {
         </>
     )
 }
+
+export default CompleteView ;

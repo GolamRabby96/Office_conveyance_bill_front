@@ -10,9 +10,6 @@ export const RejectBill = () => {
     const [conveyanceData, setConveyanceData] = useState([]);
     const [reLoad, setReload] = useState(false);
 
-    console.log(conveyanceData);
-
-
     useEffect(() => {
         handlePendingData()
     }, [reLoad])
@@ -34,7 +31,6 @@ export const RejectBill = () => {
 
 
     const handleRejectBill = (id) => {
-        console.log('this is id chekc', id);
 
         fetch(`http://localhost:5000/api/deleteConveyance/${id}`, {
             method: 'DELETE',

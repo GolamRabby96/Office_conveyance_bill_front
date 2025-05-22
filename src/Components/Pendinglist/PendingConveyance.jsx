@@ -15,8 +15,6 @@ export const PendingConveyance = () => {
     const [rejectNote, setRejectionNote] = useState('');
     const [rejectId, setRejectId] = useState('');
 
-    // console.log(rejectNote, rejectId);
-
 
     useEffect(() => {
         handlePendingData()
@@ -56,7 +54,6 @@ export const PendingConveyance = () => {
     }
 
     const handleAllSelectData = (condition) => {
-        console.log(condition);
         if (condition) {
             setApprovedId(totalID);
             setIschecked(condition);

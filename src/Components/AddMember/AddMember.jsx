@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import TeamMember from '../TeamMember/TeamMember';
 
-export const AddMember = () => {
+const AddMember = () => {
     const navigate = useNavigate();
     const [flag, SetFlag] = useState(true);
     const [formData, SetFormData] = useState({});
@@ -10,8 +10,6 @@ export const AddMember = () => {
     const [infoMessage, SetInfoMessage] = useState("");
     const [checkResponce, setCheckResponce] = useState(false);
     const [checkResponceButton, setCheckResponceButton] = useState(false);
-
-    console.log('-----------------------', checkResponce);
 
     const handleFormData = (e) => {
         const newData = { ...formData };
@@ -111,11 +109,11 @@ export const AddMember = () => {
                     <input type="text" name="user_name" className="form-control" id="user_name" placeholder='Team member name' onBlur={handleFormData} required />
                 </div>
                 <div className="col-md-3 col-sm-12 mb-2">
-                    <label for="inputPassword4" className="form-label">User Id</label>
-                    <input type="text" name="user_id" className={`form-control idCurrection${flag}`} id="inputPassword4" placeholder='EX-1010822' onChange={(e) => { handleFormData(e); checkMemberId(e) }} required />
+                    <label for="user_id" className="form-label">User Id</label>
+                    <input type="text" name="user_id" className={`form-control idCurrection${flag}`} id="user_id" placeholder='EX-1010822' onChange={(e) => { handleFormData(e); checkMemberId(e) }} required />
                 </div>
                 <div className="col-md-3 col-sm-12 mb-2">
-                    <label for="inputPassword4" className="form-label">Designation</label>
+                    <label for="user_designation" className="form-label">Designation</label>
                     <select id="user_designation" name="user_designation" className="form-select" onChange={handleFormData} required>
                         <option value="">Choose...</option>
                         <option value="Cable_Man" >Cable_Man</option>
@@ -131,8 +129,8 @@ export const AddMember = () => {
                 </div>
 
                 <div className="col-md-3 col-sm-12 mb-2">
-                    <label for="inputStatezone" className="form-label">Zone</label>
-                    <select id="inputStatezone" name="user_zone" className="form-select" onChange={(e) => { handleFormData(e); handleZoneData(e.target.value) }} required="true">
+                    <label for="user_zone" className="form-label">Zone</label>
+                    <select id="user_zone" name="user_zone" className="form-select" onChange={(e) => { handleFormData(e); handleZoneData(e.target.value) }} required>
                         <option value="">Choose...</option>
                         <option value="Dhaka" >Dhaka</option>
                         <option value="Khulna" >Khulna</option>
@@ -145,8 +143,8 @@ export const AddMember = () => {
                     </select>
                 </div>
                 <div className="col-md-3 col-sm-12 mb-2">
-                    <label for="inputStatesubzone" className="form-label">Sub-Zone</label>
-                    <select id="inputStatesubzone" name="sub_zone" className="form-select" onBlur={handleFormData}>
+                    <label for="sub_zone" className="form-label">Sub-Zone</label>
+                    <select id="sub_zone" name="sub_zone" className="form-select" onBlur={handleFormData}>
                         <option value="">Choose...</option>
                         {zoneData.length > 0 && zoneData.map(z => <option value={z.sub_zone}>{z.sub_zone}</option>)}
                     </select>
@@ -155,8 +153,8 @@ export const AddMember = () => {
 
 
                 <div className="col-md-3 col-sm-12 mb-2">
-                    <label for="inputStateacess" className="form-label">Department</label>
-                    <select id="inputStateacess" name="user_department" className="form-select" onBlur={handleFormData} required="true">
+                    <label for="user_department" className="form-label">Department</label>
+                    <select id="user_department" name="user_department" className="form-select" onBlur={handleFormData} required>
                         <option value="">Choose...</option>
                         <option value="Architecture_&_Planning">Architecture & Planning</option>
                         <option value="Accounts">Accounts</option>
@@ -164,12 +162,12 @@ export const AddMember = () => {
                     </select>
                 </div>
                 <div className="col-md-3 col-sm-12 mb-2">
-                    <label for="user_name" className="form-label">Next Responsible Person</label>
-                    <input type="text" name="next_responsible_person_id" onBlur={handleCheckPerson} className="form-control" id="user_name" placeholder='Responsible Member Id' onChange={handleFormData} required />
+                    <label for="next_responsible_person_id" className="form-label">Next Responsible Person</label>
+                    <input type="text" name="next_responsible_person_id" onBlur={handleCheckPerson} className="form-control" id="next_responsible_person_id" placeholder='Responsible Member Id' onChange={handleFormData} required />
                 </div>
                 <div className="col-md-3 col-sm-12 mb-2">
-                    <label for="inputStateacess" className="form-label">Access Level ...</label>
-                    <select id="inputStateacess" name="user_access_level" className="form-select" onChange={handleFormData} required="true">
+                    <label for="user_access_level" className="form-label">Access Level ...</label>
+                    <select id="user_access_level" name="user_access_level" className="form-select" onChange={handleFormData} required>
                         <option value="">Choose...</option>
                         <option value="Team">Team</option>
                         <option value="Supervisor">Supervisor</option>
@@ -193,3 +191,4 @@ export const AddMember = () => {
     )
 }
 
+export default AddMember;

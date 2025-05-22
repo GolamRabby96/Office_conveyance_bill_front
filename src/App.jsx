@@ -5,21 +5,33 @@ import secureLocalStorage from 'react-secure-storage';
 import './App.css'
 import { SideNavBar } from './Components/SideNavBar/SideNavBar';
 import { LandingPage } from './Components/LandingPage/LandingPage';
+
 import { HolidayBill } from './Components/HolidayBill/HolidayBill';
-import { AddConveyance } from './Components/AddConveyance/AddConveyance';
 import { AddHoliday } from './Components/AddHoliday/AddHoliday';
-import ConveyanceBill from './Components/ConveyanceBill/ConveyanceBill';
-import AddZone from './Components/AddZone/AddZone';
-import { AddMember } from './Components/AddMember/AddMember';
-import TeamMember from './Components/TeamMember/TeamMember';
+
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import Login from './Components/Login/Login';
-import { Pendinglist } from './Components/Pendinglist/Pendinglist';
+
 import { RejectBill } from './Components/RejectBill/RejectBill';
-import { CommonReject } from './Components/RejectBill/CommonReject';
-import { EditConveyanceBill } from './Components/RejectBill/EditConvenyanceBill';
-import { CompleteView } from './Components/CompleteView/CompleteView';
-import { CombinedApproved } from './Components/CombinedApproved/CombinedApproved';
+
+
+
+
+
+
+
+
+const AddConveyance = lazy(() => import('./Components/AddConveyance/AddConveyance'));
+const ConveyanceBill = lazy(() => import('./Components/ConveyanceBill/ConveyanceBill'));
+const TeamMember = lazy(() => import('./Components/TeamMember/TeamMember'));
+const CombinedApproved = lazy(() => import('./Components/CombinedApproved/CombinedApproved'));
+const CompleteView = lazy(() => import('./Components/CompleteView/CompleteView'));
+const EditConveyanceBill = lazy(() => import('./Components/RejectBill/EditConvenyanceBill'));
+const Pendinglist = lazy(() => import('./Components/Pendinglist/Pendinglist'));
+const AddMember = lazy(() => import('./Components/AddMember/AddMember'));
+const AddZone = lazy(() => import('./Components/AddZone/AddZone'));
+const CommonReject = lazy(() => import('./Components/RejectBill/CommonReject'));
+
 
 export const UserContext = createContext();
 
@@ -49,29 +61,34 @@ function App() {
       >
         <Router>
           {loggedInUser.isLoggedIn && <SideNavBar />}
-          <Routes>
+          <Suspense fallback={
+            <div class="spinner-grow loderComponent" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>}>
+            <Routes>
 
-            {/* ------------------------------------------------------------------------------------------------- */}
-            <Route element={<PrivateRoute />}>
-              <Route exact path="/" element={<LandingPage />} />
-              <Route exact path="/conveyance" element={<ConveyanceBill />} />
-              <Route exact path="/holiday" element={<HolidayBill />} />
-              <Route exact path="/add-conveyance" element={<AddConveyance />} />
-              <Route exact path="/add-holiday" element={<AddHoliday />} />
-              <Route exact path="/addZone" element={<AddZone />} />
-              <Route exact path="/addMember" element={<AddMember />} />
-              <Route exact path="/teamMember" element={<TeamMember />} />
-              <Route exact path="/pendingList" element={<Pendinglist />} />
-              <Route exact path="/rejectBill" element={<CommonReject />} />
-              <Route exact path="/editConveyance/:id" element={<EditConveyanceBill />} />
-              <Route exact path="/details-view" element={<CompleteView />} />
-              <Route exact path="/combinedView" element={<CombinedApproved />} />
-            </Route>
-            {/* ------------------------------------------------------------------------------------------------- */}
+              {/* ------------------------------------------------------------------------------------------------- */}
+              <Route element={<PrivateRoute />}>
+                <Route exact path="/" element={<LandingPage />} />
+                <Route exact path="/conveyance" element={<ConveyanceBill />} />
+                <Route exact path="/holiday" element={<HolidayBill />} />
+                <Route exact path="/add-conveyance" element={<AddConveyance />} />
+                <Route exact path="/add-holiday" element={<AddHoliday />} />
+                <Route exact path="/addZone" element={<AddZone />} />
+                <Route exact path="/addMember" element={<AddMember />} />
+                <Route exact path="/teamMember" element={<TeamMember />} />
+                <Route exact path="/pendingList" element={<Pendinglist />} />
+                <Route exact path="/rejectBill" element={<CommonReject />} />
+                <Route exact path="/editConveyance/:id" element={<EditConveyanceBill />} />
+                <Route exact path="/details-view" element={<CompleteView />} />
+                <Route exact path="/combinedView" element={<CombinedApproved />} />
+              </Route>
+              {/* ------------------------------------------------------------------------------------------------- */}
 
-            <Route exact path="/login" element={<Login />} />
-            <Route path="*" element={<div className='page404'></div>} />
-          </Routes>
+              <Route exact path="/login" element={<Login />} />
+              <Route path="*" element={<div className='page404'></div>} />
+            </Routes>
+          </Suspense>
         </Router>
       </UserContext.Provider>
     </div>
