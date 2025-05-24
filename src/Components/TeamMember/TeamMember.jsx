@@ -6,10 +6,11 @@ const TeamMember = () => {
 
     const [rowData, setRowData] = useState([]);
     const [userBoxVisible, setUserBoxVisible] = useState(true);
+    const [loadComponent, setLoadComponent] = useState(false);
 
     useEffect(() => {
         teamMemberApi();
-    }, [])
+    }, [loadComponent])
 
     const teamMemberApi = async () => {
         const response = await fetch('http://localhost:5000/api/getAllUser', {
@@ -28,7 +29,7 @@ const TeamMember = () => {
                         {
                             rowData?.map(team => {
                                 return (
-                                    <PropTeamMember team={team} />
+                                    <PropTeamMember team={team} loadComponent={loadComponent} setLoadComponent={setLoadComponent} />
                                 )
                             })
                         }

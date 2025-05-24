@@ -114,18 +114,7 @@ const AddMember = () => {
                 </div>
                 <div className="col-md-3 col-sm-12 mb-2">
                     <label for="user_designation" className="form-label">Designation</label>
-                    <select id="user_designation" name="user_designation" className="form-select" onChange={handleFormData} required>
-                        <option value="">Choose...</option>
-                        <option value="Cable_Man" >Cable_Man</option>
-                        <option value="Technician" >Technician</option>
-                        <option value="Asst_Manager" >Asst Manager</option>
-                        <option value="Engineer" >Engineer</option>
-                        <option value="Sr_Engineer" >Sr. Engineer</option>
-                        <option value="Asst_Manager" >Asst Manager</option>
-                        <option value="Manager" >Manager</option>
-                        <option value="Sr_Manager" >Sr. Manager</option>
-                        <option value="CTO" >CTO</option>
-                    </select>
+                    <input type="text" name="user_designation" className="form-control" id="user_designation" placeholder='Your Designation' onBlur={handleFormData} required />
                 </div>
 
                 <div className="col-md-3 col-sm-12 mb-2">
@@ -169,11 +158,30 @@ const AddMember = () => {
                     <label for="user_access_level" className="form-label">Access Level ...</label>
                     <select id="user_access_level" name="user_access_level" className="form-select" onChange={handleFormData} required>
                         <option value="">Choose...</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Moderator">Moderator</option>
+                        <option value="Team">Team</option>
+                    </select>
+                </div>
+                <div className="col-md-3 col-sm-12 mb-2">
+                    <label for="user_priority" className="form-label">Priority</label>
+                    <select id="user_priority" name="user_priority" className="form-select" onChange={handleFormData} required>
+                        <option value="">Choose...</option>
                         <option value="Team">Team</option>
                         <option value="Supervisor">Supervisor</option>
-                        <option value="Unit_Head">Unit Head</option>
-                        <option value="Admin">Admin</option>
-                        <option value="Accounts_Audit">Accounts_Audit</option>
+                        <option value="Unit_Head">Unit_Head</option>
+                        <option value="Section_Head">Section_Head</option>
+                        <option value="Department_Head">Department_Head</option>
+                        <option value="Account_Audit">Account_Audit</option>
+                    </select>
+                </div>
+                <div className="col-md-2 col-sm-12 mb-2">
+                    <label for="amount_limit" className="form-label">Amount Limit</label>
+                    <select id="amount_limit" name="amount_limit" className="form-select" onChange={handleFormData} required>
+                        <option value="">Choose...</option>
+                        <option value={1800}>1800</option>
+                        <option value={3000}>3000</option>
+                        <option value={0}>Not Applicable</option>
                     </select>
                 </div>
 

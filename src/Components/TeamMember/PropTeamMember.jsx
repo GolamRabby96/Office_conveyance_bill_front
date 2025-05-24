@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 import { RiEditCircleFill } from 'react-icons/ri'
-import { Link, useNavigate } from 'react-router-dom'
+import { data, Link, useNavigate } from 'react-router-dom'
 import secureLocalStorage from 'react-secure-storage'
 
-export const PropTeamMember = ({ team }) => {
+export const PropTeamMember = ({ team ,loadComponent, setLoadComponent}) => {
     const userdata = JSON.parse(secureLocalStorage.getItem('user') || '[]')
     const navigate = useNavigate();
     const [flag, SetFlag] = useState(true);
     const [formData, SetFormData] = useState({});
     const [zoneData, setZoneData] = useState({});
     const [infoMessage, SetInfoMessage] = useState("");
-    const [checkResponce, setCheckResponce] = useState(false);
-    const [checkResponceButton, setCheckResponceButton] = useState(false);
+    const [checkResponceButton, setCheckResponceButton] = useState(true);
+    const [userCurrentId, setCurrentID]= useState("");
 
 
 
@@ -20,6 +20,20 @@ export const PropTeamMember = ({ team }) => {
         newData[e.target.name] = e.target.value;
         SetFormData(newData);
     }
+
+    // Click edit button and get user data
+    const handleUpdateData = async (id) => {
+        setCurrentID(id);
+        const response = await fetch(`http://localhost:5000/api/getUser/${id}`, {
+            credentials: 'include'
+        })
+        if (!response) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        SetFormData(data.data);
+    }
+
 
     const checkMemberId = async (e) => {
         let id = e.target.value;
@@ -47,74 +61,63 @@ export const PropTeamMember = ({ team }) => {
         setZoneData(data.data);
     }
 
+    // Paisi..................
 
-    const handleCheckPerson = async (e) => {
-        const response = await fetch(`http://localhost:5000/api/getUser/${e.target.value}`, {
-            credentials: 'include'
-        });
-        if (!response.ok) {
-            setCheckResponce(false);
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        if (data.data == false) {
-            setCheckResponceButton(false);
-        }
 
-        if (data.data) {
-            const nameData = data.data;
-            const next_responsible_person = nameData.user_name;
-            const newData = { ...formData, next_responsible_person: next_responsible_person };
-            SetFormData(newData);
-            setCheckResponce(true);
-            setCheckResponceButton(true);
-        }
-    }
+    // Paisi..................
+    const handleCheckPerson = async (value) => {
+        if (value.length == 7) {
+            const response = await fetch(`http://localhost:5000/api/getUser/${value}`, {
+                credentials: 'include'
+            });
+            if (!response.ok) {
+                setCheckResponceButton(false);
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            console.log(data.data);
+            if (data.data == false) {
+                setCheckResponceButton(false);
+            }
 
-    const handleUpdateData = async (id) => {
-        const response = await fetch(`http://localhost:5000/api/getUser/${id}`, {
-            credentials: 'include'
-        })
-        if (!response) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        SetFormData(data.data);
-    }
-
-    const handleAddUserSubmit = (e) => {
-        e.preventDefault();
-        if (formData.user_id.length == 7) {
-
-            if (flag) {
-                fetch('http://localhost:5000/api/addUser', {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(formData),
-                    credentials: 'include'
-                })
-                    .then((res) => res.json())
-                    .then((data) => {
-                        SetInfoMessage(data.message);
-                        SetFormData({});
-                        navigate('/teamMember');
-                    })
-                    .catch((error) => {
-                        console.log(error.message);
-                    });
-                e.target.reset();
-            } else {
-                SetInfoMessage("Already Tacken");
+            if (data.data) {
+                const nameData = data.data;
+                const next_responsible_person = nameData.user_name;
+                SetFormData(formData.next_responsible_person_id = value);
+                const newData = { ...formData, next_responsible_person: next_responsible_person };
+                SetFormData(newData);
+                setCheckResponceButton(true);
             }
         } else {
-            SetInfoMessage("ID length must be 7");
-
+            setCheckResponceButton(false);
         }
     }
+    
+    // Update user
+    const updateUserInfo = async(req, res)=>{
+        fetch(`http://localhost:5000/api/updateUser/${userCurrentId}`,{
+            method:"PUT",
+            headers:{"Content-Type" : "application/json"},
+            body:JSON.stringify(formData),
+            credentials:'include'
+        })
+        .then((res)=> res.json)
+        .then((data)=>{
+            window.alert("User Updated");
+            setLoadComponent(!loadComponent)
+        })
+    }
 
-    setTimeout(function () {
-        SetInfoMessage("");
-    }, 6000);
+    // Delete user from the data base
+    const deleteUserInfo = async(req, res)=>{
+        const deleteUser = await fetch(`http://localhost:5000/api/deleteUser/${userCurrentId}`, {
+                credentials: 'include'
+            });
+    }
+
+    // setTimeout(function () {
+    //     SetInfoMessage("");
+    // }, 6000);
     return (
 
         <div key={team._id} className='col-md-4 col-sm-12'>
@@ -131,13 +134,15 @@ export const PropTeamMember = ({ team }) => {
                     <li className="list-group-item">Next Name: {team.next_responsible_person}</li>
                     <li className="list-group-item">Next Id: {team.next_responsible_person_id}</li>
                     <li className="list-group-item">Access level: {team.user_access_level}</li>
+
+                    <li className="list-group-item">User Priority: {team.user_priority}</li>
+                    <li className="list-group-item">Amount limit: {team.amount_limit}</li>
+
                 </ul>
                 <div className="card-footer ">
                     <div className="col-md-12 col-sm-12 ">
                         <div className="silimaButton">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#${team.user_id}`}>
-                                <button onClick={()=>handleUpdateData(team.user_id)} >Update Info</button>
-                            </button>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#${team.user_id}`} onClick={() => handleUpdateData(team.user_id)} >Modify</button>
                         </div>
                     </div>
                 </div>
@@ -151,15 +156,15 @@ export const PropTeamMember = ({ team }) => {
                         </div>
                         <div class="modal-body">
                             <div className='container'>
-                                <form onSubmit={handleAddUserSubmit} className="row g-3 pb-2">
+                                <div className="row g-3 pb-2">
 
                                     <div className="col-md-6 col-sm-12 mb-2">
                                         <label for={team.user_name} className="form-label">Name</label>
-                                        <input type="text" name="user_name" value={formData.user_name} className="form-control" id={team.user_name} placeholder='Team member name' onChange={handleFormData} required />
+                                        <input type="text" name="user_name" value={formData.user_name} className="form-control" id={team.user_name} placeholder='Team member name' onChange={handleFormData} disabled />
                                     </div>
                                     <div className="col-md-6 col-sm-12 mb-2">
                                         <label for={team.user_id} className="form-label">User Id</label>
-                                        <input type="text" name="user_id" value={formData.user_id} className={`form-control idCurrection${flag}`} id={team.user_id} placeholder='EX-1010822' onChange={(e) => { handleFormData(e); checkMemberId(e) }} required />
+                                        <input type="text" name="user_id" value={formData.user_id} className={`form-control idCurrection${flag}`} id={team.user_id} placeholder='EX-1010822' onChange={(e) => { handleFormData(e); checkMemberId(e) }} disabled />
                                     </div>
                                     <div className="col-md-6 col-sm-12 mb-2">
                                         <label for={team.user_designation} className="form-label">Designation</label>
@@ -216,58 +221,59 @@ export const PropTeamMember = ({ team }) => {
                                     </div>
                                     <div className="col-md-6 col-sm-12 mb-2">
                                         <label for="next_responsible_person_id" className="form-label">Next Responsible Person</label>
-                                        <input type="text" name="next_responsible_person_id" onChange={(e) => { handleCheckPerson(e.target.value), handleFormData(e) }} value={team.next_responsible_person_id} className="form-control" id="next_responsible_person_id" placeholder='Responsible Member Id' required />
+                                        <input type="text" name="next_responsible_person_id" onChange={(e) => { handleCheckPerson(e.target.value), handleFormData(e) }} value={formData.next_responsible_person_id} className="form-control" id="next_responsible_person_id" placeholder='Responsible Member Id' required />
                                     </div>
                                     <div className="col-md-6 col-sm-12 mb-2">
                                         <label for="user_access_level" className="form-label">Access Level ...</label>
                                         <select id="user_access_level" name="user_access_level" className="form-select" onChange={handleFormData} required>
                                             <option value={formData.user_access_level} className='text-info'>{formData.user_access_level}</option>
                                             <option value="">Choose...</option>
-                                            <option value="Team">Team</option>
-                                            <option value="Supervisor">Supervisor</option>
-                                            <option value="Unit_Head">Unit Head</option>
                                             <option value="Admin">Admin</option>
-                                            <option value="Accounts_Audit">Accounts_Audit</option>
+                                            <option value="Moderator">Moderator</option>
+                                            <option value="Team">Team</option>
                                         </select>
                                     </div>
                                     <div className="col-md-6 col-sm-12 mb-2">
-                                        <label for="inputStateacess" className="form-label">Access Level ...</label>
-                                        <select id="inputStateacess" name="user_access_level" className="form-select" onChange={handleFormData} required>
-                                            <option value={formData.user_access_level} className='text-info'>{formData.user_access_level}</option>
+                                        <label for="user_priority" className="form-label">Priority</label>
+                                        <select id="user_priority" name="user_priority" className="form-select" onChange={handleFormData} required>
+                                            <option value={formData.user_priority} className='text-info'>{formData.user_priority}</option>
                                             <option value="">Choose...</option>
                                             <option value="Team">Team</option>
                                             <option value="Supervisor">Supervisor</option>
-                                            <option value="Unit_Head">Unit Head</option>
-                                            <option value="Admin">Admin</option>
-                                            <option value="Accounts_Audit">Accounts_Audit</option>
+                                            <option value="Unit_Head">Unit_Head</option>
+                                            <option value="Section_Head">Section_Head</option>
+                                            <option value="Department_Head">Department_Head</option>
+                                            <option value="Account_Audit">Account_Audit</option>
                                         </select>
                                     </div>
-
-                                    {checkResponceButton ? <div className="col-md-12 col-sm-12 mb-3 mt-5">
-                                        <div className="submitButton">
-                                            <button type="submit" >Add Member</button>
-                                        </div>
-                                    </div> :
-                                        <div className="submitButton">
-                                            <h6>Fill-Up the Form First ! </h6>
-                                        </div>
-                                    }
-                                </form>
+                                    <div className="col-md-6 col-sm-12 mb-2">
+                                        <label for="amount_limit" className="form-label">Amount Limit</label>
+                                        <select id="amount_limit" name="amount_limit" className="form-select" onChange={handleFormData} required>
+                                            <option value={formData.amount_limit} className='text-info'>{formData.amount_limit}</option>
+                                            <option value="">Choose...</option>
+                                            <option value="1800">1800</option>
+                                            <option value="3000">3000</option>
+                                            <option value="0">Not Applicable</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
+                        {checkResponceButton ?
+                            <div class="modal-footer">
+                                <button  class="btn btn-danger" data-bs-dismiss="modal" onClick={deleteUserInfo}>Delete-{formData.user_name}</button>
+                                <button  class="btn btn-primary" data-bs-dismiss="modal" onClick={updateUserInfo}>Updated changes</button>
+                            </div>
+                            :
+                            <div class="modal-footer">
+                                <button class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+                                <button class="btn btn-danger">Next id not found</button>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-
-
 
     )
 }
