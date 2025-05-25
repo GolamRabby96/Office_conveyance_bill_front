@@ -15,16 +15,10 @@ import Login from './Components/Login/Login';
 import { RejectBill } from './Components/RejectBill/RejectBill';
 
 
-
-
-
-
-
-
 const AddConveyance = lazy(() => import('./Components/AddConveyance/AddConveyance'));
 const ConveyanceBill = lazy(() => import('./Components/ConveyanceBill/ConveyanceBill'));
 const TeamMember = lazy(() => import('./Components/TeamMember/TeamMember'));
-const CombinedApproved = lazy(() => import('./Components/CombinedApproved/CombinedApproved'));
+const SummaryView = lazy(() => import('./Components/CombinedApproved/SummaryView'));
 const CompleteView = lazy(() => import('./Components/CompleteView/CompleteView'));
 const EditConveyanceBill = lazy(() => import('./Components/RejectBill/EditConvenyanceBill'));
 const Pendinglist = lazy(() => import('./Components/Pendinglist/Pendinglist'));
@@ -81,7 +75,7 @@ function App() {
                 <Route exact path="/rejectBill" element={<CommonReject />} />
                 <Route exact path="/editConveyance/:id" element={<EditConveyanceBill />} />
                 <Route exact path="/details-view" element={<CompleteView />} />
-                <Route exact path="/combinedView" element={<CombinedApproved />} />
+                <Route exact path="/SummaryView" element={<SummaryView />} />
               </Route>
               {/* ------------------------------------------------------------------------------------------------- */}
 

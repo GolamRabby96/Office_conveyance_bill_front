@@ -1,13 +1,9 @@
 import React, { useState } from 'react'
 import { BsPlusCircleDotted } from "react-icons/bs";
-import { FaEdit } from "react-icons/fa";
-import moment from 'moment';
 import secureLocalStorage from 'react-secure-storage';
-import { IoExitSharp } from "react-icons/io5";
-import { CgLayoutGrid } from "react-icons/cg";
 
 
-const CombinedApproved = () => {
+const SummaryView = () => {
     const userData = JSON.parse(secureLocalStorage.getItem('userInfo') || '[]');
     const [conveyanceData, SetConveyanceBill] = useState([]);
     const [formData, SetFormData] = useState({});
@@ -41,7 +37,7 @@ const CombinedApproved = () => {
         <>
             <div className='container-fluid headerCover'>
                 <div className="row">
-                    <div className="col-md-12">
+                    <div className="col-md-12 no-print">
                         <form onSubmit={handleConveyanceData} className="bill-history-bar shadow rounded">
                             <h5 className='mx-3 '>Chosee Month and Year</h5>
                             <div className='billing-month-select'>
@@ -71,8 +67,8 @@ const CombinedApproved = () => {
                         </form>
                     </div>
 
-                    <div className="col-md-12 mt-5 rounded">
-                        <table className="table table-bordered shadow">
+                    <div className="col-md-12">
+                        <table className="table table-bordered">
                             <thead>
                                 <tr>
                                     <th scope="col" colSpan="18" className='p-3 text-center'>
@@ -118,7 +114,7 @@ const CombinedApproved = () => {
                                             <td>{con.holiday}</td>
                                             <td>{con.overtime}</td>
                                             <td>{con.holiday + con.overtime }</td>
-                                            <td>3000</td>
+                                            <td>{con.limit[0]}</td>
                                             <td>{con.holiday + con.overtime > 3000 ? 3000 : con.holiday + con.overtime}</td>
                                             <td>{con.holiday + con.overtime > 3000 ? con.holiday + con.overtime - con.limit[0]  : 0}</td>
 
@@ -144,5 +140,5 @@ const CombinedApproved = () => {
     )
 }
 
-export default CombinedApproved;
+export default SummaryView;
 

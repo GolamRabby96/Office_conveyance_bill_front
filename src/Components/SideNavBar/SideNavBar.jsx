@@ -30,7 +30,7 @@ export const SideNavBar = () => {
 
     return (
         <>
-            <aside id={`sidebar${menubarVisible}`}>
+            <aside id={`sidebar${menubarVisible}`} className='no-print'>
                 <nav className="navbar bg-body-tertiary fixed-top">
                     <div className="container-fluid">
                         <a className="navbar-brand" href="#">ADN HCB</a>
@@ -50,7 +50,7 @@ export const SideNavBar = () => {
                                         </a>
                                         <ul className="dropdown-menu">
                                             <Link className="dropdown-item"  to="/details-view">Split View</Link>
-                                            <Link className="dropdown-item" to="/combinedView">Summary View</Link>
+                                            <Link className="dropdown-item" to="/SummaryView">Summary View</Link>
                                             <Link className="dropdown-item"  to="/pendingList">Pending List</Link>
                                         </ul>
                                     </li>

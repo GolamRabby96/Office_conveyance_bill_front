@@ -126,6 +126,13 @@ i {
   background-color: rgba(255, 255, 255, 0.849);
   border-radius: 4px;
   box-shadow: 0px 9px 9px rgba(0, 0, 0, 0.5);
+  transition: all 1s ease;
+}
+
+.boxDesign:hover {
+  background-color: rgba(207, 207, 207, 0.849);
+  border-radius: 4px;
+  box-shadow: 0px 9px 9px rgba(3, 253, 57, 0.575);
 }
 
 .headingBar {
@@ -568,10 +575,12 @@ i {
   box-shadow: 0px 2px 5px rgba(4, 18, 214, 0.678) !important;
   font-size: 11px;
 }
-.complete-user-list > p{
+
+.complete-user-list>p {
   line-height: 22px;
 }
-.complete-user-list > span{
+
+.complete-user-list>span {
   background-color: tomato;
   width: 20px;
   height: 20px;
@@ -646,20 +655,25 @@ i {
 .complete-user-block {
   overflow: scroll;
   height: 100vh;
-scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
 }
 
 .complete-user-block::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none;
+  /* Chrome, Safari, Opera */
 }
-.navbar-nav svg{
+
+.navbar-nav svg {
   color: rgb(0, 38, 255);
   font-weight: bolder;
   font-size: 14px;
   margin-right: 10px;
 }
-.navbar-nav svg:hover{
+
+.navbar-nav svg:hover {
   color: rgb(0, 0, 0);
   font-weight: bolder;
   font-size: 14px;
@@ -670,9 +684,9 @@ scrollbar-width: none; /* Firefox */
 /* ------------------------------------------------------------------------------------------------------ Complete View css End ------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------------ TeamMember Start ------------------------------------------------------------------------ */
 .team-member-name-box {
-  background-color: rgba(27, 123, 187, 0.719);
+  background-color: rgba(174, 219, 10, 0.719);
   color: rgb(0, 0, 0);
-  font-size: 13px;
+  font-size: 16px;
   font-weight: bolder;
   font-family: 'Courier New', Courier, monospace;
 }
@@ -694,7 +708,7 @@ scrollbar-width: none; /* Firefox */
   background: linear-gradient(to top, #d1d2d3e6, #30cfe4, #4bb8e3, #d6dcdde6);
   cursor: pointer;
   text-align: center;
-    z-index: -999;
+  z-index: -999;
 }
 
 .combined-button-bottom:hover {
@@ -772,4 +786,45 @@ scrollbar-width: none; /* Firefox */
     border-top-right-radius: .3rem;
     border-bottom-right-radius: .3rem;
   }
+}
+
+
+@media print {
+
+  .no-print,
+  header,
+  nav {
+    display: none !important;
+  }
+
+
+  @page {
+    margin: 0;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  .print-area,
+  .container,
+  .wrapper {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .headerCover {
+  margin-top: 0px;
+}
+.sidebartrue{
+  display: none;
+}
+.shadow{
+  box-shadow: 0px 0px 0px white;
+}
+
 }
