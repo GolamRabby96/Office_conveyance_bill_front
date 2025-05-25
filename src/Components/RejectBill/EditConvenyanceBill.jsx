@@ -13,7 +13,7 @@ const EditConveyanceBill = () => {
     const [dateValue, setDate] = useState(new Date());
     const [collectData, SetData] = useState({});
 
-    
+
     useEffect(() => {
         handleConveyanceBill();
     }, [])
@@ -29,7 +29,7 @@ const EditConveyanceBill = () => {
         const data = await responce.json();
         const editData = data.data[0];
         editData.reject_note = "",
-        editData.reject_condition = false;
+            editData.reject_condition = false;
         setDate(editData.date);
 
 
@@ -184,4 +184,4 @@ const EditConveyanceBill = () => {
     )
 }
 
-export default EditConveyanceBill ;
+export default EditConveyanceBill;

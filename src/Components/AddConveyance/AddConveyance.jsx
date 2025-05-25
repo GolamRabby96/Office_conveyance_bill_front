@@ -33,8 +33,12 @@ const AddConveyance = () => {
         let month = moment(dateValue).format('MMMM');
         let year = moment(dateValue).year();
         const totalData = {
-            ...collectData, date: date, month: month, year: year, preparer_by: userData.user_name, preparer_id: userData.user_id, preparer_Zone: userData.sub_zone, next_responsible_person: userData.next_responsible_person,
-            next_responsible_person_id: userData.next_responsible_person_id
+            ...collectData, date: date, month: month, year: year, preparer_by: userData.user_name,
+            preparer_id: userData.user_id, preparer_Zone: userData.sub_zone,
+            next_responsible_person: userData.next_responsible_person,
+            next_responsible_person_id: userData.next_responsible_person_id,
+            amount_limit: userData.amount_limit
+
         };
 
         fetch('http://localhost:5000/api/addConveyance', {

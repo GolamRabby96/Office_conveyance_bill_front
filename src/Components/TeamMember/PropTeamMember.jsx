@@ -3,7 +3,7 @@ import { RiEditCircleFill } from 'react-icons/ri'
 import { data, Link, useNavigate } from 'react-router-dom'
 import secureLocalStorage from 'react-secure-storage'
 
-export const PropTeamMember = ({ team ,loadComponent, setLoadComponent}) => {
+export const PropTeamMember = ({ team, loadComponent, setLoadComponent }) => {
     const userdata = JSON.parse(secureLocalStorage.getItem('user') || '[]')
     const navigate = useNavigate();
     const [flag, SetFlag] = useState(true);
@@ -11,7 +11,7 @@ export const PropTeamMember = ({ team ,loadComponent, setLoadComponent}) => {
     const [zoneData, setZoneData] = useState({});
     const [infoMessage, SetInfoMessage] = useState("");
     const [checkResponceButton, setCheckResponceButton] = useState(true);
-    const [userCurrentId, setCurrentID]= useState("");
+    const [userCurrentId, setCurrentID] = useState("");
 
 
 
@@ -75,7 +75,6 @@ export const PropTeamMember = ({ team ,loadComponent, setLoadComponent}) => {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const data = await response.json();
-            console.log(data.data);
             if (data.data == false) {
                 setCheckResponceButton(false);
             }
@@ -92,27 +91,36 @@ export const PropTeamMember = ({ team ,loadComponent, setLoadComponent}) => {
             setCheckResponceButton(false);
         }
     }
-    
+
     // Update user
-    const updateUserInfo = async(req, res)=>{
-        fetch(`http://localhost:5000/api/updateUser/${userCurrentId}`,{
-            method:"PUT",
-            headers:{"Content-Type" : "application/json"},
-            body:JSON.stringify(formData),
-            credentials:'include'
+    const updateUserInfo = async (req, res) => {
+        fetch(`http://localhost:5000/api/updateUser/${userCurrentId}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+            credentials: 'include'
         })
-        .then((res)=> res.json)
-        .then((data)=>{
-            window.alert("User Updated");
-            setLoadComponent(!loadComponent)
-        })
+            .then((res) => res.json)
+            .then((data) => {
+                window.alert("User Updated");
+                setLoadComponent(!loadComponent)
+            })
     }
 
     // Delete user from the data base
-    const deleteUserInfo = async(req, res)=>{
-        const deleteUser = await fetch(`http://localhost:5000/api/deleteUser/${userCurrentId}`, {
-                credentials: 'include'
-            });
+    const deleteUserInfo = async (req, res) => {
+        const response = await fetch(`http://localhost:5000/api/deleteUser/${userCurrentId}`, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            credentials: 'include'
+        });
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const data = await response.json();
+        console.log(data);
+        if (data?.operations) {
+            window.alert("User Updated");
+            setLoadComponent(!loadComponent)
+        }
     }
 
     // setTimeout(function () {
@@ -142,12 +150,12 @@ export const PropTeamMember = ({ team ,loadComponent, setLoadComponent}) => {
                 <div className="card-footer ">
                     <div className="col-md-12 col-sm-12 ">
                         <div className="silimaButton">
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#${team.user_id}`} onClick={() => handleUpdateData(team.user_id)} >Modify</button>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#${team._id}`} onClick={() => handleUpdateData(team.user_id)} >Modify</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="modal fade " key={team._id} id={team.user_id} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade " key={team._id} id={team._id} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -261,8 +269,8 @@ export const PropTeamMember = ({ team ,loadComponent, setLoadComponent}) => {
                         </div>
                         {checkResponceButton ?
                             <div class="modal-footer">
-                                <button  class="btn btn-danger" data-bs-dismiss="modal" onClick={deleteUserInfo}>Delete-{formData.user_name}</button>
-                                <button  class="btn btn-primary" data-bs-dismiss="modal" onClick={updateUserInfo}>Updated changes</button>
+                                <button class="btn btn-danger" data-bs-dismiss="modal" onClick={deleteUserInfo}>Delete-{formData.user_name}</button>
+                                <button class="btn btn-primary" data-bs-dismiss="modal" onClick={updateUserInfo}>Updated changes</button>
                             </div>
                             :
                             <div class="modal-footer">

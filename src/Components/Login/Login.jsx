@@ -40,7 +40,8 @@ const Login = () => {
                         next_responsible_person_id: apiData.next_responsible_person_id,
                         next_responsible_person: apiData.next_responsible_person,
                         user_designation: apiData.user_designation,
-                        user_access_level: apiData.user_access_level
+                        user_access_level: apiData.user_access_level,
+                        amount_limit: apiData.amount_limit
                     })
                     secureLocalStorage.setItem("userInfo", JSON.stringify({
                         isLoggedIn: true,
@@ -50,7 +51,8 @@ const Login = () => {
                         next_responsible_person_id: apiData.next_responsible_person_id,
                         next_responsible_person: apiData.next_responsible_person,
                         user_designation: apiData.user_designation,
-                        user_access_level: apiData.user_access_level
+                        user_access_level: apiData.user_access_level,
+                        amount_limit: apiData.amount_limit
                     }));
                     SetMessageInfo(data.message);
                     navigate('/');

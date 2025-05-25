@@ -12,7 +12,6 @@ const CombinedApproved = () => {
     const [conveyanceData, SetConveyanceBill] = useState([]);
     const [formData, SetFormData] = useState({});
 
-
     const handleFormData = (e) => {
         const newData = { ...formData };
         newData[e.target.name] = e.target.value;
@@ -121,11 +120,11 @@ const CombinedApproved = () => {
                                             <td>{con.holiday + con.overtime }</td>
                                             <td>3000</td>
                                             <td>{con.holiday + con.overtime > 3000 ? 3000 : con.holiday + con.overtime}</td>
-                                            <td>{con.holiday + con.overtime > 3000 ? con.holiday + con.overtime -3000  : 0}</td>
+                                            <td>{con.holiday + con.overtime > 3000 ? con.holiday + con.overtime - con.limit[0]  : 0}</td>
 
                                             <td>{con.DinnerBill}</td>
                                             <td>{con.conveyance}</td>
-                                            <td>{con.holiday + con.overtime > 3000 ? 3000 + con.DinnerBill + con.conveyance : con.holiday + con.overtime  + con.DinnerBill + con.conveyance}</td>
+                                            <td>{con.holiday + con.overtime > 3000 ? con.limit[0] + con.DinnerBill + con.conveyance : con.holiday + con.overtime  + con.DinnerBill + con.conveyance}</td>
 
                                         </tr>
                                     ))
