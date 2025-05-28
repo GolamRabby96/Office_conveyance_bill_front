@@ -121,18 +121,11 @@ const SummaryView = () => {
                                             <td>{con.DinnerBill}</td>
                                             <td>{con.conveyance}</td>
                                             <td>{con.holiday + con.overtime > 3000 ? con.limit[0] + con.DinnerBill + con.conveyance : con.holiday + con.overtime  + con.DinnerBill + con.conveyance}</td>
-
                                         </tr>
                                     ))
                                 }
                             </tbody>
                         </table>
-                    </div>
-
-
-                    {/* ------------------------------------------- */}
-                    <div className="add-button-bottom" >
-                        <BsPlusCircleDotted />
                     </div>
                 </div>
             </div>
