@@ -219,8 +219,6 @@ export const PendingConveyance = () => {
                         </div>
                     ))}
             </>
-            <CombinedButton />
-
         </>
     )
 }
