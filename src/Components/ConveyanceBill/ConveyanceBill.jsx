@@ -139,9 +139,8 @@ const ConveyanceBill = () => {
 
 
                                             <td className="text-start">{con.remarks} </td>
-                                            <td className="text-start">{con.conveyance_amount + con.holiday_amount + con.overtime_amount + con.Dinner_amount}/=</td>
-                                            {/* <td className='rejectButton'>{con.next_responsible_person}</td> */}
-                                            he;loo{`${con.conveyance_amount} , ${con.holiday_amount} , ${con.overtime_amount} , ${con.Dinner_amount}`}
+                                            <td className="text-start">{Number(con.conveyance_amount) + Number(con.holiday_amount) + Number(con.overtime_amount) + Number(con.Dinner_amount)}/=</td>
+                                            <td className='rejectButton'>{con.next_responsible_person}</td>
                                         </tr>
 
                                     ))

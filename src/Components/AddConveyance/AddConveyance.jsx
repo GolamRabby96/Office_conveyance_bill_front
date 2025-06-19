@@ -1,5 +1,5 @@
 import moment from "moment";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useNavigate } from "react-router-dom";
@@ -22,6 +22,7 @@ import { useEffect } from "react";
 
 const AddConveyance = () => {
     const navigate = useNavigate();
+    const [myCondition, setMyCondition] = useState(false);
     const userData = JSON.parse(secureLocalStorage.getItem('userInfo') || "[]");
 
 
@@ -31,6 +32,7 @@ const AddConveyance = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [blockRapidCall, setRapidCall] = useState(true);
     const [isHoliday, setHoliday] = useState(false);
+    const firstRender = useRef(true);
 
     const [collectData, SetData] = useState({
         date: "", month: "", year: "", start_time: "", end_time: "",
@@ -43,12 +45,18 @@ const AddConveyance = () => {
     console.log('----', collectData);
 
     useEffect(() => {
+        if (firstRender.current) {
+            firstRender.current = false; // Skip the first run
+            console.log('call inside');
+            return;
+        }
+        
         if (conStart && conEnd) {
             compareReturnTime("18:00", conEnd.format('HH:mm'), collectData);
             if (blockRapidCall) {
                 handleHolidayBillPopUp();
             }
-
+            console.log('call inside 2');
         }
     }, [conStart, conEnd])
 
