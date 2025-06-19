@@ -75,8 +75,8 @@ const EditConveyanceBill = () => {
                         <h6 className="text-success bold shadow px-5 py-2 h5 rounded"> Selected Date : <span className="text-danger bolder ">{moment(dateValue).format("Do MMM YY")}</span></h6>
                     </div>
                     <div className="col-md-3 col-sm-12 mt-5">
-                        <label for="start_Time" className="form-label">Start Time</label>
-                        <input onChange={handleData} value={collectData?.start_Time} name="start_Time" type="text" className="form-control" id="start_Time" placeholder='Start Time - 9.30 AM' required />
+                        <label for="start_time" className="form-label">Start Time</label>
+                        <input onChange={handleData} value={collectData?.start_time} name="start_time" type="text" className="form-control" id="start_time" placeholder='Start Time - 9.30 AM' required />
                     </div>
 
                     <div className="col-md-3 col-sm-12 mt-5">

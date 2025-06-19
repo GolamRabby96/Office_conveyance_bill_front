@@ -100,7 +100,7 @@ export const RejectBill = () => {
                                             <td className="text-center">{i + 1}</td>
                                             <td >{moment(con.date).format('L')}</td>
                                             <td>{con.preparer_by}-({con.preparer_Zone})</td>
-                                            <td>{con.start_Time}-{con.end_time}</td>
+                                            <td>{con.start_time}-{con.end_time}</td>
                                             <td>{con.from_location}-{con.to_location}</td>
                                             <td>{con.ticket_id}</td>
                                             <td className="text-start">{con.pop_or_customer_name}</td>

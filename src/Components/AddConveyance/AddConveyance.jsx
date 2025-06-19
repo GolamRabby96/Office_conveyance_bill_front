@@ -5,48 +5,65 @@ import 'react-calendar/dist/Calendar.css';
 import { useNavigate } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
 
-import TimePicker from 'react-time-picker';
+// import TimePicker from 'react-time-picker';
 import 'react-time-picker/dist/TimePicker.css';
 import 'react-clock/dist/Clock.css';
+
+
+import { TextField } from '@mui/material';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs from 'dayjs';
+
 
 
 
 const AddConveyance = () => {
     const navigate = useNavigate();
     const userData = JSON.parse(secureLocalStorage.getItem('userInfo') || "[]");
-    const [dateValue, setDate] = useState(new Date());
-    const [collectData, SetData] = useState({});
-    const [conStart, setConStart] = useState('9:30');
-    const [conEnd, setConEnd] = useState('18:00');
-    const [overStart, setOverStart] = useState('18:00');
-    const [overEnd, setOverEnd] = useState('20:00');
 
-    // console.log(conStart, conEnd);
-    console.log(collectData);
+
+    const [dateValue, setDate] = useState(new Date());
+    const [conStart, setConStart] = useState(dayjs('2022-04-17T9:30'));
+    const [conEnd, setConEnd] = useState(dayjs('2022-04-17T18:00'));
+
+    const [collectData, SetData] = useState({
+        date: "", month: "", year: "", start_time: "", end_time: "",
+        from_location: "", to_location: "", ticket_id: "", pop_or_customer_name: "", transport: "",
+        conveyance_amount: "", remarks: "", preparer_by: "", preparer_id: "", preparer_Zone: "",
+        next_approver: "", next_responsible_person: "", next_responsible_person_id: "", holiday_hour: "",
+        holiday_amount: 0, overtime_from: "", overtime_to: "", overtime_hour: "", overtime_amount: "",
+        Dinner_amount: 0, reject_note: "", reject_condition: false, amount_limit: 0
+    });
+
+    console.log('-------------***', collectData);
 
     const handleData = (e) => {
         const totalData = { ...collectData };
         totalData[e.target.name] = e.target.value;
         SetData(totalData);
+        console.log('-------------##', collectData);
 
         if (conStart && conEnd) {
-            compareReturnTime("18:00", conEnd);
+            compareReturnTime("18:00", conEnd.format('HH:mm'), totalData);
         }
     }
 
     const compare24HourTimes = (t1, t2) => {
+
         const [h1, m1] = t1.split(":").map(Number);
         const [h2, m2] = t2.split(":").map(Number);
         const minutes1 = h1 * 60 + m1;
         const minutes2 = h2 * 60 + m2;
-
+        console.log(t1,t2,minutes1, minutes2, minutes1 > minutes2)
         return minutes1 > minutes2;
     }
 
-    const compareReturnTime = (t1, t2) => {
-        let timesection;
-        const [h1, m1] = t1.split(":").map(Number);
-        const [h2, m2] = t2.split(":").map(Number);
+    const compareReturnTime = (t1, t2, addedData) => {
+        const [h1, m1] = t1?.split(":").map(Number);
+        const [h2, m2] = t2?.split(":").map(Number);
+
         const minutes1 = h1 * 60 + m1;
         const minutes2 = h2 * 60 + m2;
 
@@ -55,20 +72,22 @@ const AddConveyance = () => {
 
         const amountCal = ((hours * 60) + minutes) / 60;
 
-        console.log('amountCal', amountCal);
-
-        if (compare24HourTimes(conEnd, '20:00')) {
-            timesection = { ...collectData, start_time: conStart, end_time: conEnd, overtime_hour: `${hours}:${minutes}`, overtime_amount: amountCal * (userData.amount_limit == 3000 ? 90 : 60) };
-            SetData(timesection);
+        if (compare24HourTimes(conEnd.format('HH:mm'), '20:00')) {
+            addedData.start_time = conStart.format('hh:mm A');
+            addedData.end_time = conEnd.format('hh:mm A');
+            addedData.overtime_hour = `${hours}:${minutes}`;
+            addedData.overtime_amount = amountCal * (userData.amount_limit == 3000 ? 90 : 60);
         } else {
-            timesection = { ...collectData, start_time: conStart, end_time: conEnd };
-            SetData(timesection);
+            addedData.start_time = conStart.format('hh:mm A');
+            addedData.end_time = conEnd.format('hh:mm A');
+
         }
-        if (compare24HourTimes(conEnd, '21.59')) {
-            timesection = { ...collectData, Dinner_amount: userData.amount_limit == 3000 ? 0 : 200 };
-            SetData(timesection);
+        if (compare24HourTimes(conEnd.format('HH:mm'), '21:59')) {
+            addedData.Dinner_amount = userData.amount_limit == 3000 ? 0 : 200;
         }
+        SetData(addedData);
     }
+
 
     const handleConveyance = (e) => {
         e.preventDefault();
@@ -117,8 +136,8 @@ const AddConveyance = () => {
                     </div>
                     <div className="col-md-2 col-sm-12 mt-5">
 
-                        <label for="start_Time" className="form-label">Start Time</label>
-                        <div style={{ height: 'auto', overflow: 'visible' }}>
+                        {/* <label for="start_time" className="form-label">Start Time</label> */}
+                        {/* <div style={{ height: 'auto', overflow: 'visible' }}>
                             <TimePicker
                                 onChange={setConStart}
                                 value={conStart}
@@ -127,23 +146,46 @@ const AddConveyance = () => {
                                 format='h:mm a'
                                 amPmAriaLabel="Select AM/PM"
                             />
-                        </div>
+                        </div> */}
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <div>
+                                <label style={{ display: 'block', paddingBottom: 5 }}>
+                                    Start Time
+                                </label>
+                                <TimePicker
+                                    value={conStart}
+                                    onChange={setConStart}
+                                />
+                            </div>
+                        </LocalizationProvider>
 
-                        {/* <input onBlur={handleData} name="start_Time" type="text" className="form-control" id="start_Time" placeholder='Start Time - 9.30 AM' required /> */}
+
+                        {/* <input onBlur={handleData} name="start_time" type="text" className="form-control" id="start_time" placeholder='Start Time - 9.30 AM' required /> */}
                     </div>
 
                     <div className="col-md-2 col-sm-12 mt-5">
-                        <label for="end_time" className="form-label">End Time</label>
-                        <div style={{ height: 'auto', overflow: 'visible' }}>
-                            <TimePicker
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <div>
+                                <label style={{ display: 'block', paddingBottom: 5 }}>
+                                    End Time
+                                </label>
+                                <TimePicker
+                                    value={conEnd}
+                                    onChange={setConEnd}
+                                />
+                            </div>
+                        </LocalizationProvider>
+                        {/* <label for="end_time" className="form-label">End Time</label> */}
+                        {/* <div style={{ height: 'auto', overflow: 'visible' }}> */}
+                        {/* <TimePicker
                                 onChange={setConEnd}
                                 value={conEnd}
                                 disableClock={false} // set to true if you don't want the analog clock
                                 className="form-control"
                                 format='h:mm a'
                                 amPmAriaLabel="Select AM/PM"
-                            />
-                        </div>
+                            /> */}
+                        {/* </div> */}
                     </div>
 
                     <div className="col-md-3 col-sm-12 mt-5">
@@ -249,10 +291,10 @@ const AddConveyance = () => {
 
 
 
-                    {collectData.Dinner_amount && <div className="col-md-2 col-sm-12">
+                    <div className="col-md-2 col-sm-12">
                         <label for="Dinner_amount" className="form-label">Dinner Amount</label>
-                        <input onBlur={handleData} name="Dinner_amount" type="text" className="form-control" id="Dinner_amount" placeholder='Dinner Amaout' />
-                    </div>}
+                        <input onBlur={handleData} value={collectData.Dinner_amount} name="Dinner_amount" type="text" className="form-control" id="Dinner_amount" placeholder='Dinner Amaout' disabled/>
+                    </div>
 
                     <div className="col-md-5 col-sm-12">
                         <label for="remarks" className="form-label">Remarks</label>
