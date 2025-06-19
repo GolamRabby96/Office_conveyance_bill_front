@@ -15,6 +15,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
+import { useEffect } from "react";
 
 
 
@@ -27,36 +28,77 @@ const AddConveyance = () => {
     const [dateValue, setDate] = useState(new Date());
     const [conStart, setConStart] = useState(dayjs('2022-04-17T9:30'));
     const [conEnd, setConEnd] = useState(dayjs('2022-04-17T18:00'));
+    const [showPopup, setShowPopup] = useState(false);
+    const [blockRapidCall, setRapidCall] = useState(true);
+    const [isHoliday, setHoliday] = useState(false);
 
     const [collectData, SetData] = useState({
         date: "", month: "", year: "", start_time: "", end_time: "",
         from_location: "", to_location: "", ticket_id: "", pop_or_customer_name: "", transport: "",
-        conveyance_amount: "", remarks: "", preparer_by: "", preparer_id: "", preparer_Zone: "",
-        next_approver: "", next_responsible_person: "", next_responsible_person_id: "", holiday_hour: "",
-        holiday_amount: 0, overtime_from: "", overtime_to: "", overtime_hour: "", overtime_amount: "",
+        conveyance_amount: 0, remarks: "", preparer_by: "", preparer_id: "", preparer_Zone: "", holiday_hour: "",
+        holiday_amount: 0, overtime_from: "", overtime_to: "", overtime_hour: "", overtime_amount: 0,
         Dinner_amount: 0, reject_note: "", reject_condition: false, amount_limit: 0
     });
 
-    console.log('-------------***', collectData);
+    console.log('----', collectData);
+
+    useEffect(() => {
+        if (conStart && conEnd) {
+            compareReturnTime("18:00", conEnd.format('HH:mm'), collectData);
+            if (blockRapidCall) {
+                handleHolidayBillPopUp();
+            }
+
+        }
+    }, [conStart, conEnd])
+
 
     const handleData = (e) => {
         const totalData = { ...collectData };
         totalData[e.target.name] = e.target.value;
         SetData(totalData);
-        console.log('-------------##', collectData);
+    }
 
-        if (conStart && conEnd) {
-            compareReturnTime("18:00", conEnd.format('HH:mm'), totalData);
+    const handleHolidayBillPopUp = () => {
+        if (blockRapidCall) {
+            setShowPopup(true);
+            setRapidCall(false);
         }
     }
 
-    const compare24HourTimes = (t1, t2) => {
+    const handleHolidayBlock = () => {
+        const totalData = { ...collectData };
+        console.log('called holiday block');
 
+        setHoliday(true);
+        const [h1, m1] = conStart.format('HH:mm').split(":").map(Number);
+        const [h2, m2] = conEnd.format('HH:mm').split(":").map(Number);
+
+        const minutes1 = h1 * 60 + m1;
+        const minutes2 = h2 * 60 + m2;
+        const hours = Math.floor((minutes2 - minutes1) / 60);
+        const minutes = (minutes2 - minutes1) % 60;
+
+        const amountCal = ((hours * 60) + minutes) / 60;
+
+        totalData.holiday_hour = `${hours}:${minutes}`;
+
+        if (hours >= 4) {
+            totalData.holiday_amount = userData.amount_limit == 3000 ? 400 : 260;
+        } else {
+            totalData.overtime_amount = amountCal * (userData.amount_limit == 3000 ? 90 : 60);
+        }
+        console.log('called holiday block', totalData.holiday_amount);
+        SetData(totalData);
+    }
+
+
+
+    const compare24HourTimes = (t1, t2) => {
         const [h1, m1] = t1.split(":").map(Number);
         const [h2, m2] = t2.split(":").map(Number);
         const minutes1 = h1 * 60 + m1;
         const minutes2 = h2 * 60 + m2;
-        console.log(t1,t2,minutes1, minutes2, minutes1 > minutes2)
         return minutes1 > minutes2;
     }
 
@@ -86,6 +128,10 @@ const AddConveyance = () => {
             addedData.Dinner_amount = userData.amount_limit == 3000 ? 0 : 200;
         }
         SetData(addedData);
+
+        if (isHoliday) {
+            handleHolidayBlock();
+        }
     }
 
 
@@ -187,23 +233,24 @@ const AddConveyance = () => {
                             /> */}
                         {/* </div> */}
                     </div>
+                    <hr />
 
-                    <div className="col-md-3 col-sm-12 mt-5">
+                    <div className="col-md-3 col-sm-12 mt-2">
                         <label for="from_location" className="form-label">From Location</label>
                         <input onBlur={handleData} name="from_location" type="text" className="form-control" id="from_location" placeholder='From Location' required />
                     </div>
 
-                    <div className="col-md-3 col-sm-12 mt-5">
+                    <div className="col-md-3 col-sm-12 mt-2">
                         <label for="to_location" className="form-label">To Location</label>
                         <input onBlur={handleData} name="to_location" type="text" className="form-control" id="to_location" placeholder='To Location' required />
                     </div>
 
-                    <div className="col-md-2 col-sm-12 mt-5">
+                    <div className="col-md-2 col-sm-12 mt-2">
                         <label for="ticket_id" className="form-label">Ticket Id</label>
                         <input onBlur={handleData} name="ticket_id" type="text" className="form-control" id="ticket_id" placeholder='Ticket Id' required />
                     </div>
 
-                    <div className="col-md-3 col-sm-12 mt-5">
+                    <div className="col-md-3 col-sm-12 mt-2">
                         <label for="pop_or_customer_name" className="form-label">Distination</label>
                         <input onBlur={handleData} name="pop_or_customer_name" type="text" className="form-control" id="pop_or_customer_name" placeholder='Purposes' required />
                     </div>
@@ -229,7 +276,7 @@ const AddConveyance = () => {
 
                     {/* Customer section -------------------------------- */}
 
-                    <div className="row fromMiddleSeparetion mt-3 ">
+                    {isHoliday && <div className="row fromMiddleSeparetion mt-3 ">
                         <div className="fromMidleSeparetionHeder">
                             <h6>Holiday Section</h6>
                         </div>
@@ -243,13 +290,13 @@ const AddConveyance = () => {
                         </div> */}
                         <div className="col-md-3 col-sm-12">
                             <label for="holiday_hour" className="form-label">Hour</label>
-                            <input onBlur={handleData} name="holiday_hour" type="text" className="form-control" id="holiday_hour" placeholder='Total Hour' />
+                            <input value={collectData.holiday_hour} onBlur={handleData} name="holiday_hour" type="text" className="form-control" id="holiday_hour" placeholder='Total Hour' disabled />
                         </div>
                         <div className="col-md-3 col-sm-12">
                             <label for="holiday_amount" className="form-label">Amount</label>
-                            <input onBlur={handleData} name="holiday_amount" type="number" className="form-control" id="holiday_amount" placeholder='Holiday Amount' />
+                            <input value={collectData.holiday_amount} onBlur={handleData} name="holiday_amount" type="number" className="form-control" id="holiday_amount" placeholder='Holiday Amount' disabled />
                         </div>
-                    </div>
+                    </div>}
 
                     <div className="row fromMiddleSeparetion">
                         <div className="fromMidleSeparetionHeder">
@@ -293,7 +340,7 @@ const AddConveyance = () => {
 
                     <div className="col-md-2 col-sm-12">
                         <label for="Dinner_amount" className="form-label">Dinner Amount</label>
-                        <input onBlur={handleData} value={collectData.Dinner_amount} name="Dinner_amount" type="text" className="form-control" id="Dinner_amount" placeholder='Dinner Amaout' disabled/>
+                        <input onBlur={handleData} value={collectData.Dinner_amount} name="Dinner_amount" type="text" className="form-control" id="Dinner_amount" placeholder='Dinner Amaout' disabled />
                     </div>
 
                     <div className="col-md-5 col-sm-12">
@@ -308,6 +355,29 @@ const AddConveyance = () => {
                         </div>
                     </div>
                 </form>
+
+                {showPopup && (
+                    <div className="popup-overlay">
+                        <div className="popup-box">
+                            <div className="col-md-12 mb-4 ">
+                                <h6 className="text-success bold shadow px-5 py-2 h5 rounded text-center"> <span className="text-info bolder">{moment(dateValue).format('L')} is holiday ?</span></h6>
+                            </div>
+
+                            <div className="twoButtonBetween">
+                                <div>
+                                    <div className="silimaButton">
+                                        <button type="submit" onClick={() => setShowPopup(false)} >No</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className="silimaButton">
+                                        <button type="submit" onClick={() => { setShowPopup(false), handleHolidayBlock() }}>Yes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         </>
     )

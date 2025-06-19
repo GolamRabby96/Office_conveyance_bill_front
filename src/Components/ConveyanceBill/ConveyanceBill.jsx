@@ -125,23 +125,25 @@ const ConveyanceBill = () => {
                                             <td>{con.ticket_id}</td>
                                             <td className="text-start">{con.pop_or_customer_name}</td>
                                             <td>{con.transport}</td>
-                                            <td className="conveyanceAmount">{con.conveyance_amount > 0 ? con.conveyance_amount+"/=" : "-"}</td>
+                                            <td className="conveyanceAmount">{con.conveyance_amount > 0 ? con.conveyance_amount + "/=" : "-"}</td>
 
-                                            <td>{con.holiday_hour ? con.holiday_hour+"H":"-"}</td>
-                                            <td className="holidayAmount">{con.holiday_amount >0 ? con.holiday_amount +"/=" : "-"}</td>
+                                            <td>{con.holiday_hour ? con.holiday_hour + "H" : "-"}</td>
+                                            <td className="holidayAmount">{con.holiday_amount > 0 ? con.holiday_amount + "/=" : "-"}</td>
 
                                             <td>{con.overtime_from}-{con.overtime_to}</td>
-                                            <td>{con.overtime_hour? con.overtime_hour+"H":"-"}</td>
-                                            <td className="overtimeAmount">{con.overtime_amount >0 ? con.overtime_amount+"/=":"-"}</td>
+                                            <td>{con.overtime_hour ? con.overtime_hour + "H" : "-"}</td>
+                                            <td className="overtimeAmount">{con.overtime_amount > 0 ? con.overtime_amount + "/=" : "-"}</td>
 
 
-                                            <td className="dinnerAmount">{con.Dinner_amount>0? con.Dinner_amount+"/=":"-"}</td>
+                                            <td className="dinnerAmount">{con.Dinner_amount > 0 ? con.Dinner_amount + "/=" : "-"}</td>
 
 
                                             <td className="text-start">{con.remarks} </td>
                                             <td className="text-start">{con.conveyance_amount + con.holiday_amount + con.overtime_amount + con.Dinner_amount}/=</td>
-                                            <td className='rejectButton'>{con.next_responsible_person}</td>
+                                            {/* <td className='rejectButton'>{con.next_responsible_person}</td> */}
+                                            he;loo{`${con.conveyance_amount} , ${con.holiday_amount} , ${con.overtime_amount} , ${con.Dinner_amount}`}
                                         </tr>
+
                                     ))
                                 }
                             </tbody>

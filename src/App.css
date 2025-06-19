@@ -259,7 +259,36 @@ i {
   background-color: rgba(230, 209, 92, 0.781) !important;
 }
 
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.popup-box {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transform: scale(0.8);
+  animation: fadeInScale 0.5s forwards;
+}
+
+@keyframes fadeInScale {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 
 
 /* --------------------------------------------------------------------------------------------------- Common css ------------------------------------------------------------------------ */
@@ -432,7 +461,10 @@ i {
   color: rgb(255, 0, 200);
 }
 
-
+.twoButtonBetween{
+  display: flex;
+  justify-content: space-between;
+}
 /* ---------------------------------------------------------------------------------------------------------------------Add Zone Section--------------------------- */
 
 
