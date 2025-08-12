@@ -3,9 +3,6 @@ import secureLocalStorage from 'react-secure-storage';
 
 export const LandingPage = () => {
     const userdata = JSON.parse(secureLocalStorage.getItem("userInfo") || "[]");
-
-    console.log(userdata);
-
     return (
         <>
             <div className='container headerCover'>

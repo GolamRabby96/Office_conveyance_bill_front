@@ -22,17 +22,17 @@ import { useEffect } from "react";
 
 const AddConveyance = () => {
     const navigate = useNavigate();
-    const [myCondition, setMyCondition] = useState(false);
     const userData = JSON.parse(secureLocalStorage.getItem('userInfo') || "[]");
 
 
     const [dateValue, setDate] = useState(new Date());
-    const [conStart, setConStart] = useState(dayjs('2022-04-17T9:30'));
-    const [conEnd, setConEnd] = useState(dayjs('2022-04-17T18:00'));
+    const [conStart, setConStart] = useState(dayjs('2022-04-17T03:00'));
+    const [conEnd, setConEnd] = useState(dayjs('2022-04-17T03:00'));
     const [showPopup, setShowPopup] = useState(false);
     const [blockRapidCall, setRapidCall] = useState(true);
     const [isHoliday, setHoliday] = useState(false);
     const firstRender = useRef(true);
+    const [totalMinutesCount, setTotalMinutes] = useState(0);
 
     const [collectData, SetData] = useState({
         date: "", month: "", year: "", start_time: "", end_time: "",
@@ -42,22 +42,18 @@ const AddConveyance = () => {
         Dinner_amount: 0, reject_note: "", reject_condition: false, amount_limit: 0
     });
 
-    console.log('----', collectData);
 
     useEffect(() => {
-        if (firstRender.current) {
-            firstRender.current = false; // Skip the first run
-            console.log('call inside');
-            return;
+        if (blockRapidCall == false) {
+            handleRemoveHolidaData();
+            setRapidCall(!blockRapidCall);
+
         }
-        
-        if (conStart && conEnd) {
-            compareReturnTime("18:00", conEnd.format('HH:mm'), collectData);
-            if (blockRapidCall) {
-                handleHolidayBillPopUp();
-            }
-            console.log('call inside 2');
-        }
+    }, [dateValue])
+
+    useEffect(() => {
+        compareReturnTime(collectData);
+
     }, [conStart, conEnd])
 
 
@@ -103,37 +99,64 @@ const AddConveyance = () => {
 
 
     const compare24HourTimes = (t1, t2) => {
+        console.log(t1, t2);
         const [h1, m1] = t1.split(":").map(Number);
         const [h2, m2] = t2.split(":").map(Number);
         const minutes1 = h1 * 60 + m1;
         const minutes2 = h2 * 60 + m2;
+        console.log(minutes1, minutes2, minutes1 > minutes2);
         return minutes1 > minutes2;
     }
 
-    const compareReturnTime = (t1, t2, addedData) => {
-        const [h1, m1] = t1?.split(":").map(Number);
-        const [h2, m2] = t2?.split(":").map(Number);
-
+    const overtimeCount = (A, B) => {
+        const [h1, m1] = A.split(":").map(Number);
+        const [h2, m2] = B.split(":").map(Number);
         const minutes1 = h1 * 60 + m1;
         const minutes2 = h2 * 60 + m2;
+        const totalMinutes = minutes2 - minutes1;
+        setTotalMinutes(totalMinutes);
+        console.log('-__totalminutes', minutes2, minutes1, totalMinutes);
 
-        const hours = Math.floor((minutes2 - minutes1) / 60);
-        const minutes = (minutes2 - minutes1) % 60;
+        return {
+            checkcondition: totalMinutes > 510,
+            totalMinutes: totalMinutes
+        }
 
-        const amountCal = ((hours * 60) + minutes) / 60;
+    }
 
-        if (compare24HourTimes(conEnd.format('HH:mm'), '20:00')) {
-            addedData.start_time = conStart.format('hh:mm A');
-            addedData.end_time = conEnd.format('hh:mm A');
-            addedData.overtime_hour = `${hours}:${minutes}`;
-            addedData.overtime_amount = amountCal * (userData.amount_limit == 3000 ? 90 : 60);
+    const compareReturnTime = (addedData) => {
+        const getResult = overtimeCount(conStart.format('HH:mm'), conEnd.format('HH:mm'));
+
+        if (getResult.totalMinutes > 629) {
+            if (getResult.checkcondition) {
+                addedData.start_time = conStart.format('hh:mm A');
+                addedData.end_time = conEnd.format('hh:mm A');
+                const hours = Math.floor((getResult.totalMinutes - 510) / 60);
+                const minutes = (getResult.totalMinutes - 510) % 60;
+                const amountCal = ((hours * 60) + minutes) / 60;
+
+                addedData.overtime_hour = `${hours}:${minutes}`;
+                addedData.overtime_amount = amountCal * (userData.amount_limit == 3000 ? 90 : 60);
+                SetData(addedData);
+            } else {
+                addedData.start_time = conStart.format('hh:mm A');
+                addedData.end_time = conEnd.format('hh:mm A');
+                addedData.overtime_hour = "";
+                addedData.overtime_amount = "";
+                SetData(addedData);
+            }
         } else {
             addedData.start_time = conStart.format('hh:mm A');
             addedData.end_time = conEnd.format('hh:mm A');
-
+            addedData.overtime_hour = "";
+            addedData.overtime_amount = "";
+            SetData(addedData);
         }
+
         if (compare24HourTimes(conEnd.format('HH:mm'), '21:59')) {
             addedData.Dinner_amount = userData.amount_limit == 3000 ? 0 : 200;
+        } else {
+            addedData.Dinner_amount = "";
         }
         SetData(addedData);
 
@@ -141,39 +164,57 @@ const AddConveyance = () => {
             handleHolidayBlock();
         }
     }
+    const handleRemoveHolidaData = () => {
+        const totalData = { ...collectData };
 
+        totalData.holiday_hour = "";
+        totalData.holiday_amount = "";
+        setHoliday(false);
+        SetData(totalData);
+    }
+
+//  preparer_Zone: userData.sub_zone,
+//                 next_responsible_person: userData.next_responsible_person,
+//                 next_responsible_person_id: userData.next_responsible_person_id,
+//                 amount_limit: userData.amount_limit
 
     const handleConveyance = (e) => {
         e.preventDefault();
 
-        let date = moment(dateValue).format('L');
-        let month = moment(dateValue).format('MMMM');
-        let year = moment(dateValue).year();
-        const totalData = {
-            ...collectData, date: date, month: month, year: year, preparer_by: userData.user_name,
-            preparer_id: userData.user_id, preparer_Zone: userData.sub_zone,
-            next_responsible_person: userData.next_responsible_person,
-            next_responsible_person_id: userData.next_responsible_person_id,
-            amount_limit: userData.amount_limit
+        if (conEnd.format('HH:mm') == '03:00' || conStart.format('HH:mm') == '03:00') {
+            if (conStart.format('HH:mm') == '03:00') {
+                alert("Start time is missing")
+            } else {
+                alert("End time is missing")
+            }
 
-        };
+        } else {
+            let date = moment(dateValue).format('L');
+            let month = moment(dateValue).format('MMMM');
+            let year = moment(dateValue).year();
+            const totalData = {
+                ...collectData, date: date, month: month, year: year, preparer_by: userData.user_name,
+                preparer_id: userData.user_id, preparer_info:userData.user_objectID
 
-        fetch('http://localhost:5000/api/addConveyance', {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(totalData),
-            credentials: 'include'
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                SetData({});
-                alert(data.message)
-                navigate('/conveyance')
+            };
+
+            fetch('http://localhost:5000/api/addConveyance', {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(totalData),
+                credentials: 'include'
             })
-            .catch((error) => {
-                console.log(error.message);
-            });
-        e.target.reset();
+                .then((res) => res.json())
+                .then((data) => {
+                    SetData({});
+                    alert(data.message)
+                    navigate('/conveyance')
+                })
+                .catch((error) => {
+                    console.log(error.message);
+                });
+            e.target.reset();
+        }
 
     }
 
@@ -185,22 +226,16 @@ const AddConveyance = () => {
                     <div className="col-md-6 mb-4">
                         <Calendar onChange={setDate} value={dateValue} />
                     </div>
-                    <div className="col-md-6 mb-4 selectedDate ">
-                        <h6 className="text-success bold shadow px-5 py-2 h5 rounded"> Selected date : <span className="text-danger bolder">{moment(dateValue).format('L')}</span></h6>
+                    <div className="col-md-6 mb-4 selectedDate">
+                        <h6 className="text-success bold shadow px-5 py-2 h5 rounded"> Selected date :
+                            <span className="text-danger bolder">{moment(dateValue).format('L')}</span>
+                            {blockRapidCall ? <div className="silimaButton p-2">
+                                <button type="button" onClick={() => handleHolidayBillPopUp()} className="py-2 text-bold">Apply For Holiday</button>
+                            </div> : ""}
+                        </h6>
                     </div>
-                    <div className="col-md-2 col-sm-12 mt-5">
 
-                        {/* <label for="start_time" className="form-label">Start Time</label> */}
-                        {/* <div style={{ height: 'auto', overflow: 'visible' }}>
-                            <TimePicker
-                                onChange={setConStart}
-                                value={conStart}
-                                disableClock={false} // set to true if you don't want the analog clock
-                                className="form-control"
-                                format='h:mm a'
-                                amPmAriaLabel="Select AM/PM"
-                            />
-                        </div> */}
+                    <div className="col-md-2 col-sm-12 mt-5">
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <div>
                                 <label style={{ display: 'block', paddingBottom: 5 }}>
@@ -212,9 +247,6 @@ const AddConveyance = () => {
                                 />
                             </div>
                         </LocalizationProvider>
-
-
-                        {/* <input onBlur={handleData} name="start_time" type="text" className="form-control" id="start_time" placeholder='Start Time - 9.30 AM' required /> */}
                     </div>
 
                     <div className="col-md-2 col-sm-12 mt-5">
@@ -229,17 +261,6 @@ const AddConveyance = () => {
                                 />
                             </div>
                         </LocalizationProvider>
-                        {/* <label for="end_time" className="form-label">End Time</label> */}
-                        {/* <div style={{ height: 'auto', overflow: 'visible' }}> */}
-                        {/* <TimePicker
-                                onChange={setConEnd}
-                                value={conEnd}
-                                disableClock={false} // set to true if you don't want the analog clock
-                                className="form-control"
-                                format='h:mm a'
-                                amPmAriaLabel="Select AM/PM"
-                            /> */}
-                        {/* </div> */}
                     </div>
                     <hr />
 
@@ -265,16 +286,6 @@ const AddConveyance = () => {
                     <div className="col-md-3 col-sm-12 mt-5">
                         <label for="transport" className="form-label">Transport</label>
                         <input onBlur={handleData} name="transport" type="text" className="form-control" id="transport" placeholder='Bus/CNG/Rickshaw/Office Vehicle' />
-                        {/* <select id="transport" name="transport" className="form-select" onBlur={handleData} required>
-                            <option value="">Choose...</option>
-                            <option value="Bus" >Bus</option>
-                            <option value="CNG" >CNG</option>
-                            <option value="Chittagong" >Rikshaw</option>
-                            <option value="Barishal" >Bike</option>
-                            <option value="Rajshahi" >Auto Rikshaw</option>
-                            <option value="Uber" >Uber</option>
-                            <option value="Office Vehicle" >Office Vehicle</option>
-                        </select> */}
                     </div>
                     <div className="col-md-3 col-sm-12 mt-5">
                         <label for="conveyance_amount" className="form-label">Conveyance Amount</label>
@@ -284,18 +295,10 @@ const AddConveyance = () => {
 
                     {/* Customer section -------------------------------- */}
 
-                    {isHoliday && <div className="row fromMiddleSeparetion mt-3 ">
+                    {isHoliday ? <div className="row fromMiddleSeparetion mt-3 ">
                         <div className="fromMidleSeparetionHeder">
                             <h6>Holiday Section</h6>
                         </div>
-                        {/* <div className="col-md-3 col-sm-12">
-                            <label for="service_oid" className="form-label">From</label>
-                            <input onBlur={handleData} name="service_oid" type="text" className="form-control" id="inpservice_oidutEmail4" placeholder='From Time' />cp
-                        </div>
-                        <div className="col-md-3 col-sm-12">
-                            <label for="service_oid" className="form-label">To</label>
-                            <input onBlur={handleData} name="service_oid" type="text" className="form-control" id="inpservice_oidutEmail4" placeholder='To Time' />
-                        </div> */}
                         <div className="col-md-3 col-sm-12">
                             <label for="holiday_hour" className="form-label">Hour</label>
                             <input value={collectData.holiday_hour} onBlur={handleData} name="holiday_hour" type="text" className="form-control" id="holiday_hour" placeholder='Total Hour' disabled />
@@ -304,52 +307,32 @@ const AddConveyance = () => {
                             <label for="holiday_amount" className="form-label">Amount</label>
                             <input value={collectData.holiday_amount} onBlur={handleData} name="holiday_amount" type="number" className="form-control" id="holiday_amount" placeholder='Holiday Amount' disabled />
                         </div>
-                    </div>}
+                    </div> : ""}
 
-                    <div className="row fromMiddleSeparetion">
-                        <div className="fromMidleSeparetionHeder">
-                            <h6>OverTime Section</h6>
-                        </div>
-                        {/* <div className="col-md-3 col-sm-12">
-                            <label for="overtime_from" className="form-label">From</label>
-                            <TimePicker
-                                onChange={setOverStart}
-                                value={overStart}
-                                disableClock={false} // set to true if you don't want the analog clock
-                                className="form-control"
-                                format='h:mm a'
-                                amPmAriaLabel="Select AM/PM"
-                            />
-                            <input onBlur={handleData} name="overtime_from" type="text" className="form-control" id="overtime_from" placeholder='From Time' />
-                        </div>
-                        <div className="col-md-3 col-sm-12">
-                            <label for="overtime_to" className="form-label">To</label>
-                            <TimePicker
-                                onChange={setOverEnd}
-                                value={overEnd}
-                                disableClock={false} // set to true if you don't want the analog clock
-                                className="form-control"
-                                format='h:mm a'
-                                amPmAriaLabel="Select AM/PM"
-                            />
-                            <input onBlur={handleData} name="overtime_to" type="text" className="form-control" id="overtime_to" placeholder='To Time' />
-                        </div> */}
-                        <div className="col-md-3 col-sm-12">
-                            <label for="overtime_hour" className="form-label">Hour</label>
-                            <input value={collectData.overtime_hour} name="overtime_hour" type="text" className="form-control" id="overtime_hour" placeholder='Total Hour' disabled />
-                        </div>
-                        <div className="col-md-3 col-sm-12">
-                            <label for="overtime_amount" className="form-label">Amount</label>
-                            <input value={collectData.overtime_amount} name="overtime_amount" type="text" className="form-control" id="overtime_amount" placeholder='Amount' disabled />
-                        </div>
-                    </div>
+                    {collectData.overtime_amount ?
+                        <div className="row fromMiddleSeparetion">
+                            <div className="fromMidleSeparetionHeder">
+                                <h6>OverTime Section</h6>
+                            </div>
+                            <div className="col-md-3 col-sm-12">
+                                <label for="overtime_hour" className="form-label">Hour</label>
+                                <input value={collectData.overtime_hour} name="overtime_hour" type="text" className="form-control" id="overtime_hour" placeholder='Total Hour' disabled />
+                            </div>
+                            <div className="col-md-3 col-sm-12">
+                                <label for="overtime_amount" className="form-label">Amount</label>
+                                <input value={collectData.overtime_amount} name="overtime_amount" type="text" className="form-control" id="overtime_amount" placeholder='Amount' disabled />
+                            </div>
+                        </div> : ""
+                    }
 
 
 
-                    <div className="col-md-2 col-sm-12">
-                        <label for="Dinner_amount" className="form-label">Dinner Amount</label>
-                        <input onBlur={handleData} value={collectData.Dinner_amount} name="Dinner_amount" type="text" className="form-control" id="Dinner_amount" placeholder='Dinner Amaout' disabled />
-                    </div>
+                    {collectData.Dinner_amount ?
+                        <div className="col-md-2 col-sm-12">
+                            <label for="Dinner_amount" className="form-label">Dinner Amount</label>
+                            <input onBlur={handleData} value={collectData.Dinner_amount} name="Dinner_amount" type="text" className="form-control" id="Dinner_amount" placeholder='Dinner Amaout' disabled />
+                        </div> : ""
+                    }
 
                     <div className="col-md-5 col-sm-12">
                         <label for="remarks" className="form-label">Remarks</label>
@@ -374,7 +357,7 @@ const AddConveyance = () => {
                             <div className="twoButtonBetween">
                                 <div>
                                     <div className="silimaButton">
-                                        <button type="submit" onClick={() => setShowPopup(false)} >No</button>
+                                        <button type="submit" onClick={() => { setShowPopup(false), handleRemoveHolidaData() }}>No</button>
                                     </div>
                                 </div>
                                 <div>

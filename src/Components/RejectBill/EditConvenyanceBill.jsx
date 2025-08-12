@@ -40,7 +40,6 @@ const EditConveyanceBill = () => {
     const handleData = (e) => {
         const totalData = { ...collectData };
         totalData[e.target.name] = e.target.value;
-        // totalData.createdBy = loggedInUser.userName;
         SetData(totalData);
     }
 
@@ -52,7 +51,7 @@ const EditConveyanceBill = () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(collectData),
             credentials: 'include'
-        })
+    })
             .then((res) => res.json())
             .then((data) => {
                 navigat('/rejectBill')

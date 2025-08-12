@@ -29,7 +29,7 @@ export const MainViewComponent = ({transferData, reLoadComponent, setReloadCompo
 
     return (
         <>
-            <div className="container-fluid headerCover">
+            {/* <div className="container-fluid headerCover">
                 <div className="row topRowDiv shadow">
                     <div className="col ">
                         <button onClick={() => handleCondition('Conveyance')} >Conveyance & Holiday</button>
@@ -46,14 +46,14 @@ export const MainViewComponent = ({transferData, reLoadComponent, setReloadCompo
                     </div>
                 </div>
 
-            </div>
-            <>
+            </div> */}
+            <div className="mt-5">
                 {conveyanceVisible && <CompleteConveyance transferData={transferData} cmpt={true} reLoadComponent={reLoadComponent} setReloadComponent={setReloadComponent} />}
                 {holidayVisible && <PendingHoliday />}
                 {TaBill && <PendingTaBill />}
                 {DaBill && <PendingDaBill />}
 
-            </>
+            </div>
 
         </>
     )

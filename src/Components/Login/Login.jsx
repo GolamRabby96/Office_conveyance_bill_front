@@ -36,24 +36,30 @@ const Login = () => {
                         isLoggedIn: true,
                         user_name: apiData.user_name,
                         user_id: apiData.user_id,
+                        user_objectID: apiData._id,
                         sub_zone: apiData.sub_zone,
                         next_responsible_person_id: apiData.next_responsible_person_id,
                         next_responsible_person: apiData.next_responsible_person,
                         user_designation: apiData.user_designation,
                         user_access_level: apiData.user_access_level,
-                        amount_limit: apiData.amount_limit
+                        amount_limit: apiData.amount_limit,
+                        user_priority: apiData.user_priority
                     })
+
                     secureLocalStorage.setItem("userInfo", JSON.stringify({
                         isLoggedIn: true,
                         user_name: apiData.user_name,
                         user_id: apiData.user_id,
+                        user_objectID: apiData._id,
                         sub_zone: apiData.sub_zone,
                         next_responsible_person_id: apiData.next_responsible_person_id,
                         next_responsible_person: apiData.next_responsible_person,
                         user_designation: apiData.user_designation,
                         user_access_level: apiData.user_access_level,
-                        amount_limit: apiData.amount_limit
+                        amount_limit: apiData.amount_limit,
+                        user_priority: apiData.user_priority
                     }));
+
                     SetMessageInfo(data.message);
                     navigate('/');
                     window.location.reload();

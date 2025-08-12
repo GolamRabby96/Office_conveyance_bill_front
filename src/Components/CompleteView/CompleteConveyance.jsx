@@ -68,7 +68,7 @@ export const CompleteConveyance = ({ transferData = [], cmpt, reLoadComponent, s
                                 <th scope="col"></th>
                                 <th scope="col" colSpan="5" className="conveyanceAmount">Conveyance</th>
                                 <th scope="col" colSpan="2" className="holidayAmount">Holiday</th>
-                                <th scope="col" colSpan="3" className="overtimeAmount">Overtime</th>
+                                <th scope="col" colSpan="2" className="overtimeAmount">Overtime</th>
                                 <th scope="col" className="dinnerAmount">Dinner Bill</th>
                                 <th scope="col"></th>
                                 <th scope="col">Total</th>
@@ -88,7 +88,6 @@ export const CompleteConveyance = ({ transferData = [], cmpt, reLoadComponent, s
                                 <th scope="col" className="text-center conveyanceAmount">Amount</th>
                                 <th scope="col" className="text-center">Hour</th>
                                 <th scope="col" className="text-center holidayAmount">Amount</th>
-                                <th scope="col">Time</th>
                                 <th scope="col" className="text-center">Hour</th>
                                 <th scope="col" className="text-center overtimeAmount">Amount</th>
                                 <th scope="col" className="text-center dinnerAmount">Amount</th>
@@ -114,7 +113,7 @@ export const CompleteConveyance = ({ transferData = [], cmpt, reLoadComponent, s
                                         <td>{con.holiday_hour ? con.holiday_hour + "H" : "-"}</td>
                                         <td className="text-center holidayAmount">{con.holiday_amount > 0 ? con.holiday_amount + "/=" : "-"}</td>
 
-                                        <td>{con.overtime_from}-{con.overtime_to}</td>
+                                        {/* <td>{con.overtime_from}-{con.overtime_to}</td> */}
                                         <td>{con.overtime_hour ? con.overtime_hour + "H" : "-"}</td>
                                         <td className="text-center overtimeAmount">{con.overtime_amount > 0 ? con.overtime_amount + "/=" : "-"}</td>
 
@@ -123,7 +122,7 @@ export const CompleteConveyance = ({ transferData = [], cmpt, reLoadComponent, s
 
 
                                         <td className="text-start">{con.remarks} </td>
-                                        <td className="text-start">{con.conveyance_amount + con.holiday_amount + con.overtime_amount + con.Dinner_amount}/=</td>
+                                        <td className="text-start">{Number(con.conveyance_amount) + Number(con.holiday_amount) + Number(con.overtime_amount) + Number(con.Dinner_amount)}/=</td>
                                         <td className='rejectButton' data-bs-toggle="modal" data-bs-target={`#modal-${con._id}`}><IoExitSharp type="button" onClick={() => setRejectId(con._id)} /></td>
                                     </tr>
                                 ))

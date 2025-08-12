@@ -66,7 +66,8 @@ export const PendingConveyance = () => {
 
     const handleSelectedData = async () => {
 
-        let totalData = { ...[approvedId], next_responsible_person: getUser.next_responsible_person, next_responsible_person_id: getUser.next_responsible_person_id, approver: { approver_name: getUser.user_name, approver_id: getUser.user_id, approver_designation: getUser.user_designation } };
+        let totalData = { ...[approvedId], next_responsible_person: getUser.next_responsible_person, next_responsible_person_id: getUser.next_responsible_person_id, approver: { approver_name: getUser.user_name, approver_id: getUser.user_id, approver_designation: getUser.user_designation, approver_priority: getUser.user_priority } };
+
         fetch('http://localhost:5000/api/updateMultipleId', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },

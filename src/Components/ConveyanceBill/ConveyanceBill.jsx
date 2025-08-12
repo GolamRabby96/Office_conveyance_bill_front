@@ -5,6 +5,7 @@ import moment from 'moment';
 import secureLocalStorage from 'react-secure-storage';
 import { IoExitSharp } from "react-icons/io5";
 import { CgLayoutGrid } from "react-icons/cg";
+import { Link } from 'react-router-dom';
 
 
 const ConveyanceBill = () => {
@@ -30,6 +31,7 @@ const ConveyanceBill = () => {
             .then((res) => res.json())
             .then((data) => {
                 SetConveyanceBill(data.data)
+                console.log(data.data);
             })
             .catch((error) => {
                 console.log(error.message);
@@ -82,7 +84,7 @@ const ConveyanceBill = () => {
                                     <th scope="col"></th>
                                     <th scope="col" colSpan="5" className="conveyanceAmount">Conveyance</th>
                                     <th scope="col" colSpan="2" className="holidayAmount">Holiday</th>
-                                    <th scope="col" colSpan="3" className="overtimeAmount">Overtime</th>
+                                    <th scope="col" colSpan="2" className="overtimeAmount">Overtime</th>
                                     <th scope="col" className="dinnerAmount">Dinner Bill</th>
                                     <th scope="col"></th>
                                     <th scope="col">Total</th>
@@ -100,13 +102,17 @@ const ConveyanceBill = () => {
                                     <th scope="col">Destination</th>
                                     <th scope="col">Transport</th>
                                     <th scope="col" className="text-center conveyanceAmount">Amount</th>
+
                                     <th scope="col" className="text-center">Hour</th>
                                     <th scope="col" className="text-center holidayAmount">Amount</th>
-                                    <th scope="col">Time</th>
+                                    {/* <th scope="col">Time</th> */}
+
                                     <th scope="col" >Hour</th>
                                     <th scope="col" className="text-center overtimeAmount">Amount</th>
+
                                     <th scope="col" className="dinnerAmount">Amount</th>
                                     <th scope="col" className="text-start">Remarks</th>
+
                                     <th scope="col" className="text-start">Amount</th>
                                     <th scope="col" className="text-start">Approver</th>
 
@@ -130,14 +136,10 @@ const ConveyanceBill = () => {
                                             <td>{con.holiday_hour ? con.holiday_hour + "H" : "-"}</td>
                                             <td className="holidayAmount">{con.holiday_amount > 0 ? con.holiday_amount + "/=" : "-"}</td>
 
-                                            <td>{con.overtime_from}-{con.overtime_to}</td>
+                                            {/* <td>{con.overtime_from}-{con.overtime_to}</td> */}
                                             <td>{con.overtime_hour ? con.overtime_hour + "H" : "-"}</td>
                                             <td className="overtimeAmount">{con.overtime_amount > 0 ? con.overtime_amount + "/=" : "-"}</td>
-
-
                                             <td className="dinnerAmount">{con.Dinner_amount > 0 ? con.Dinner_amount + "/=" : "-"}</td>
-
-
                                             <td className="text-start">{con.remarks} </td>
                                             <td className="text-start">{Number(con.conveyance_amount) + Number(con.holiday_amount) + Number(con.overtime_amount) + Number(con.Dinner_amount)}/=</td>
                                             <td className='rejectButton'>{con.next_responsible_person}</td>
@@ -152,7 +154,7 @@ const ConveyanceBill = () => {
 
                     {/* ------------------------------------------- */}
                     <div className="add-button-bottom" >
-                        <BsPlusCircleDotted />
+                        <Link to="/add-conveyance"><BsPlusCircleDotted /></Link>
                     </div>
                 </div>
             </div>

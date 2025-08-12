@@ -7,29 +7,29 @@ import { PendingTaBill } from "./pendingTaBill";
 
 const Pendinglist = () => {
     const [conveyanceVisible, setConveyance] = useState(true);
-    const [holidayVisible, setHoliday] = useState(false);
-    const [TaBill, setTa] = useState(false);
-    const [DaBill, setDa] = useState(false);
+    // const [holidayVisible, setHoliday] = useState(false);
+    // const [TaBill, setTa] = useState(false);
+    // const [DaBill, setDa] = useState(false);
 
-    const handleCondition = (condition) => {
-        if (condition == 'Conveyance') {
-            setConveyance(true); setHoliday(false); setTa(false); setDa(false);
-        }
-        if (condition == 'Holiday') {
-            setConveyance(false); setHoliday(true); setTa(false); setDa(false);
-        }
-        if (condition == 'TABILL') {
-            setConveyance(false); setHoliday(false); setTa(true); setDa(false);
-        }
-        if (condition == 'DABILL') {
-            setConveyance(false); setHoliday(false); setTa(false); setDa(true);
-        }
-    }
+    // const handleCondition = (condition) => {
+    //     if (condition == 'Conveyance') {
+    //         setConveyance(true); setHoliday(false); setTa(false); setDa(false);
+    //     }
+    //     if (condition == 'Holiday') {
+    //         setConveyance(false); setHoliday(true); setTa(false); setDa(false);
+    //     }
+    //     if (condition == 'TABILL') {
+    //         setConveyance(false); setHoliday(false); setTa(true); setDa(false);
+    //     }
+    //     if (condition == 'DABILL') {
+    //         setConveyance(false); setHoliday(false); setTa(false); setDa(true);
+    //     }
+    // }
 
     return (
         <>
-            <div className="container-fluid headerCover">
-                <div className="row topRowDiv shadow">
+            <div className="container-fluid  mt-5">
+                {/* <div className="row topRowDiv shadow">
                     <div className="col ">
                         <button onClick={() => handleCondition('Conveyance')} >Conveyance & Holiday</button>
                     </div>
@@ -42,12 +42,12 @@ const Pendinglist = () => {
                     <div className="col">
                         <button onClick={() => handleCondition('Holiday')}>Others Bills</button>
                     </div>
-                </div>
+                </div> */}
                 <>
                     {conveyanceVisible && <PendingConveyance />}
-                    {holidayVisible && <PendingHoliday />}
+                    {/* {holidayVisible && <PendingHoliday />}
                     {TaBill && <PendingTaBill />}
-                    {DaBill && <PendingDaBill />}
+                    {DaBill && <PendingDaBill />} */}
 
                 </>
             </div>
